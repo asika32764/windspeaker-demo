@@ -94,18 +94,21 @@ class WindspeakerInit extends AbstractMigration
 		$this->db->getTable('authors')
 			->addColumn(new Primary('id'))
 			->addColumn(new Integer('user'))
+			->addColumn(new Integer('blog'))
+			->addColumn(new Tinyint('admin'))
+			->addColumn(new Tinyint('owner'))
 			->addColumn(new Varchar('name'))
 			->addColumn(new Text('description'))
 			->addColumn(new Varchar('image'))
 			->addColumn(new Varchar('website'))
 			->create();
 
-		$this->db->getTable('blog_author_maps')
-			->addColumn(new Integer('blog'))
-			->addColumn(new Integer('author'))
-			->addColumn(new Tinyint('admin'))
-			->addColumn(new Tinyint('default'))
-			->create();
+//		$this->db->getTable('blog_author_maps')
+//			->addColumn(new Integer('blog'))
+//			->addColumn(new Integer('author'))
+//			->addColumn(new Tinyint('admin'))
+//			->addColumn(new Tinyint('default'))
+//			->create();
 
 		$this->db->getTable('category_post_maps')
 			->addColumn(new Integer('category'))
@@ -123,7 +126,7 @@ class WindspeakerInit extends AbstractMigration
 		$this->db->getTable('categories')->drop();
 		$this->db->getTable('users')->drop();
 		$this->db->getTable('authors')->drop();
-		$this->db->getTable('blog_author_maps')->drop();
+		// $this->db->getTable('blog_author_maps')->drop();
 		$this->db->getTable('category_post_maps')->drop();
 	}
 }

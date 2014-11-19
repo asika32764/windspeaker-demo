@@ -22,7 +22,13 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doExecute()
 	{
-		$this->command->out('Seeder executed.')->out();
+		$this->execute('UserSeeder');
+		$this->execute('BlogSeeder');
+		$this->execute('AuthorSeeder');
+		$this->execute('CategorySeeder');
+		$this->execute('PostSeeder');
+
+		$this->command->out('All Seeder executed.')->out();
 	}
 
 	/**
@@ -32,6 +38,13 @@ class DatabaseSeeder extends AbstractSeeder
 	 */
 	public function doClean()
 	{
+		$this->db->getTable('users')->truncate();
+		$this->db->getTable('blogs')->truncate();
+		$this->db->getTable('authors')->truncate();
+		$this->db->getTable('categories')->truncate();
+		$this->db->getTable('category_post_maps')->truncate();
+		$this->db->getTable('posts')->truncate();
+
 		$this->command->out('Database clean.')->out();
 	}
 }
