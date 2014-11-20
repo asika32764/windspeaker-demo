@@ -1,12 +1,10 @@
-home:
-  pattern: '/'
-  controller: 'Acme\Controller\Page\'
+admin:
+    pattern: '/'
+    package: admin
+
 page:
-  pattern: 'page'
-  controller: 'Acme\Controller\Page\'
+    pattern: 'page'
+    controller: 'Acme\Controller\Page\'
 cover:
-  pattern: 'cover'
-  controller: 'Acme\Controller\Cover\'
-user:
-  pattern: '/'
-  package: wwuser
+    pattern: 'cover'
+    controller: 'Acme\Controller\Cover\'

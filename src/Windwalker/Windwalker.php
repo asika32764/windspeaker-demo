@@ -8,6 +8,8 @@
 
 namespace Windwalker;
 
+use Admin\AdminPackage;
+use Front\FrontPackage;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Registry\Registry;
 use Windwalker\SystemPackage\SystemPackage;
@@ -27,7 +29,9 @@ class Windwalker
 	public static function loadPackages()
 	{
 		return array(
-			'system' => new SystemPackage
+			'system' => new SystemPackage,
+			'admin'  => new AdminPackage,
+			'front'  => new FrontPackage,
 		);
 	}
 

@@ -18,7 +18,7 @@
 		"robmorgan/phinx": "*@stable",
 		"fzaninotto/faker": "~1.0@stable",
 
-		"twig/twig" : "~1.0@stable"
+		"illuminate/view" : "4.*"
 	},
 	"require-dev": {
 	},

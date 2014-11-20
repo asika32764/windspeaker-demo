@@ -36,6 +36,7 @@ class BlogSeeder extends AbstractSeeder
 			$data['sub_title'] = $faker->sentence(8);
 			$data['description'] = $faker->text();
 			$data['image'] = 'https://unsplash.it/200/300';
+			$data['state'] = 1;
 			$data['timezone'] = $faker->timezone;
 			$data['disqus'] = 'asukademy';
 			$data['webmaster'] = md5(1234);

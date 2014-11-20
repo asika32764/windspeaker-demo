@@ -1,0 +1,3 @@
+dashborad:
+    pattern: dashboard
+    controller: 'Admin\Controller\Posts'
