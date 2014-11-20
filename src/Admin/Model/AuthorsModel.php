@@ -13,26 +13,12 @@ use Windwalker\Query\Query;
 use Windwalker\Query\QueryElement;
 
 /**
- * The ArticlesModel class.
+ * The AuthorsModel class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class PostsModel extends ListModel
+class AuthorsModel extends ListModel
 {
-	/**
-	 * Property allowFields.
-	 *
-	 * @var  array
-	 */
-	protected $allowFields = array();
-
-	/**
-	 * Property fieldMapping.
-	 *
-	 * @var  array
-	 */
-	protected $fieldMapping = array();
-
 	/**
 	 * getListQuery
 	 *
@@ -44,14 +30,12 @@ class PostsModel extends ListModel
 	{
 		$queryHelper = $this->getQueryHelper();
 
-		$queryHelper->addTable('post', 'posts')
-			->addTable('author', 'authors', 'post.author = author.id')
-			->addTable('user',   'users',   'user.id = author.user')
-			->addTable('blog',   'blogs',   'post.blog = blog.id');
+		$queryHelper->addTable('author', 'authors')
+			->addTable('user', 'users', 'user.id = author.user')
+			->addTable('blog', 'blogs', 'blog.id = author.blog');
 
 		$query->select($queryHelper->getSelectFields())
-			->where($query->format('%n = %q', 'blog.id', $this['blog.id']))
-			->where($query->format('%n = %q', 'type', $this['post.type']));
+			->where($query->format('%n = %q', 'blog.id', $this['blog.id']));
 
 		$query = $queryHelper->registerQueryTables($query);
 

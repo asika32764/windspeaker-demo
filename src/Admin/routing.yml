@@ -15,11 +15,23 @@ categories:
     variables:
         activeMenu: categories
 
+category:
+    pattern: category
+    controller: 'Admin\Controller\Category'
+    variables:
+        activeMenu: categories
+
 settings:
     pattern: settings
     controller: 'Admin\Controller\Settings'
     variables:
         activeMenu: settings
+
+authors:
+    pattern: authors
+    controller: 'Admin\Controller\Authors'
+    variables:
+        activeMenu: authors
 
 switchblog:
     pattern: switchblog/(id)
