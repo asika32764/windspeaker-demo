@@ -2,6 +2,25 @@ dashboard:
     pattern: '/'
     controller: 'Admin\Controller\Posts'
 
+static:
+    pattern: 'statics'
+    controller: 'Admin\Controller\Posts'
+    variables:
+        type: static
+        activeMenu: static
+
+categories:
+    pattern: categories
+    controller: 'Admin\Controller\Categories'
+    variables:
+        activeMenu: categories
+
+settings:
+    pattern: settings
+    controller: 'Admin\Controller\Settings'
+    variables:
+        activeMenu: settings
+
 switchblog:
     pattern: switchblog/(id)
     controller: 'Admin\Controller\Switchblog'

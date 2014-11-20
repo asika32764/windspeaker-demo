@@ -3,11 +3,7 @@
 @extends('admin-html')
 
 @section('page_title')
-    @if ($type == 'static')
-    Static Pages Manage
-    @else
-    Articles Manage
-    @endif
+Categories
 @stop
 
 @section('main_content')
@@ -24,18 +20,9 @@
                         {{{ $item->title  }}}
                     </a>
                 </h4>
-                <small>
-                    {{{ $item->alias  }}}
-                </small>
             </td>
             <td>
-                {{{ $item->created  }}}
-            </td>
-            <td>
-                {{{ $item->author_name }}}
-            </td>
-            <td>
-                VIEW
+                Delete
             </td>
         </tr>
         @endforeach

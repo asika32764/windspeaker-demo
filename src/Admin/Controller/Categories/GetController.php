@@ -6,11 +6,12 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\Posts;
+namespace Admin\Controller\Categories;
 
+use Admin\Blog\Blog;
 use Admin\Controller\AbstractAdminController;
-use Admin\Model\PostsModel;
-use Admin\View\Posts\PostsHtmlView;
+use Admin\Model\CategoriesModel;
+use Admin\View\Categories\CategoriesHtmlView;
 
 /**
  * The GetController class.
@@ -26,20 +27,17 @@ class GetController extends AbstractAdminController
 	 */
 	protected function doExecute()
 	{
-		$type = $this->input->get('type', 'post');
+		$model = new CategoriesModel;
+		$view = new CategoriesHtmlView($this->data);
 
-		$view = new PostsHtmlView($this->data);
-
-		$model = new PostsModel;
-
-		$model['blog.id']     = $this->data['blog']->id;
-		$model['blog.type']   = $type;
+		$model['blog.id']     = Blog::getBlog()->id;
 		$model['list.start']  = $this->input->getInt('start');
 		$model['list.limit']  = 10;
 		$model['list.search'] = $this->input->getString('q');
 
-		$view->set('items', $model->getItems());
-		$view->set('type', $type);
+		$cats = $model->getItems();
+
+		$view['items'] = $cats;
 
 		return $view->render();
 	}

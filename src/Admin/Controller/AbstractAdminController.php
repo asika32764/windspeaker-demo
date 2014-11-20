@@ -53,6 +53,8 @@ abstract class AbstractAdminController extends Controller
 
 		$data['blog'] = Blog::getBlog();
 
+		$data['profiler'] = WINDWALKER_DEBUG ? Ioc::getProfiler() : null;
+
 		$this->data = $data;
 
 		return $this->doExecute();

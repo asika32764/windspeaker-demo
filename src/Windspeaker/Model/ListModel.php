@@ -11,6 +11,7 @@ namespace Windspeaker\Model;
 use Windwalker\Core\Model\DatabaseModel;
 use Windwalker\Data\DataSet;
 use Windwalker\Database\Query\QueryHelper;
+use Windwalker\Ioc;
 use Windwalker\Query\Query;
 
 /**
@@ -83,6 +84,13 @@ abstract class ListModel extends DatabaseModel
 	public function getList(Query $query, $start = null, $limit = null)
 	{
 		$query->limit($start, $limit);
+
+		if (WINDWALKER_DEBUG)
+		{
+			$profiler = Ioc::getProfiler();
+
+			$profiler->mark((string) $query->dump());
+		}
 
 		return $this->db->getReader($query)->loadObjectList();
 	}

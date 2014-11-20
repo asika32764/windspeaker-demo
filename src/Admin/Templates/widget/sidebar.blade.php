@@ -30,7 +30,7 @@ use Windwalker\Core\Router\Router;
 
             {{-- Articles --}}
             <li class="{{ $activeMenu == 'dashboard' ? 'active' : '' }}">
-                <a href="{{ $uri['base.path'] }}dashboard">
+                <a href="{{ $uri['base.path'] }}">
                     <i class="fa fa-tachometer fa-fw"></i>
                     <span class="menu-title">Articles</span>
                 </a>

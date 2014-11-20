@@ -9,6 +9,7 @@
 namespace Admin\Model;
 
 use Windwalker\Core\Model\DatabaseModel;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\DataMapper\RelationDataMapper;
 
 /**
@@ -45,6 +46,23 @@ class BlogModel extends DatabaseModel
 		// $conditions[] = 'user.id >= ' . $user;
 
 		return $mapper->findOne($conditions);
+	}
+
+	/**
+	 * getBlog
+	 *
+	 * @param integer $pk
+	 *
+	 * @return  mixed
+	 */
+	public function getBlog($pk = null)
+	{
+		return $this->fetch('blog', function() use ($pk)
+		{
+			$pk = $pk ? : $this['item.id'];
+
+			return (new DataMapper('blogs'))->findOne($pk);
+		});
 	}
 }
  

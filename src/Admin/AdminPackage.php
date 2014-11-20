@@ -8,6 +8,7 @@
 
 namespace Admin;
 
+use Admin\Listener\ProfilerListener;
 use Admin\Listener\UserListener;
 use Windwalker\Core\Package\AbstractPackage;
 use Windwalker\Event\Dispatcher;
@@ -38,6 +39,8 @@ class AdminPackage extends AbstractPackage
 		parent::registerListeners($dispatcher);
 
 		$dispatcher->addListener(new UserListener);
+
+		$dispatcher->addListener(new ProfilerListener);
 	}
 }
  

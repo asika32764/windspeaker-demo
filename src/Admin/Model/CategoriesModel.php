@@ -13,11 +13,11 @@ use Windwalker\Query\Query;
 use Windwalker\Query\QueryElement;
 
 /**
- * The ArticlesModel class.
+ * The CategoriesModel class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class PostsModel extends ListModel
+class CategoriesModel extends ListModel
 {
 	/**
 	 * Property allowFields.
@@ -44,14 +44,11 @@ class PostsModel extends ListModel
 	{
 		$queryHelper = $this->getQueryHelper();
 
-		$queryHelper->addTable('post', 'posts')
-			->addTable('author', 'authors', 'post.author = author.id')
-			->addTable('user',   'users',   'user.id = author.user')
-			->addTable('blog',   'blogs',   'post.blog = blog.id');
+		$queryHelper->addTable('cat', 'categories')
+			->addTable('blog', 'blogs', 'blog.id = cat.blog');
 
 		$query->select($queryHelper->getSelectFields())
-			->where($query->format('%n = %q', 'blog.id', $this['blog.id']))
-			->where($query->format('%n = %q', 'type', $this['blog.type']));
+			->where($query->format('%n = %q', 'blog.id', $this['blog.id']));
 
 		$query = $queryHelper->registerQueryTables($query);
 
