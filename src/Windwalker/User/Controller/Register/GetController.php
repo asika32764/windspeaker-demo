@@ -30,7 +30,7 @@ class GetController extends Controller
 	 */
 	public function execute()
 	{
-		show($_SESSION);
+
 
 		$model = new RegistrationModel;
 

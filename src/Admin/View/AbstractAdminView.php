@@ -6,27 +6,16 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\View\Posts;
+namespace Admin\View;
 
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
- * The PostsHtmlView class.
+ * The AbstractAdminView class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class PostsHtmlView extends BladeHtmlView
+abstract class AbstractAdminView extends BladeHtmlView
 {
-	/**
-	 * Property name.
-	 *
-	 * @var  string
-	 */
-	protected $name = 'posts';
-
-	protected function prepareData($data)
-	{
-		$data->activeMenu = 'dashboard';
-	}
 }
  

@@ -26,7 +26,6 @@ class UserListener
 	 */
 	public function onUserAfterLogin(Event $event)
 	{
-		show($event);
 	}
 
 	public function onAfterInitialise(Event $event)

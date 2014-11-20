@@ -2,6 +2,10 @@ admin:
     pattern: '/'
     package: admin
 
+user:
+    pattern: '/'
+    package: user
+
 page:
     pattern: 'page'
     controller: 'Acme\Controller\Page\'

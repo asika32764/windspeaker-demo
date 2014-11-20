@@ -28,7 +28,7 @@ class BlogModel extends DatabaseModel
 	 */
 	public function getCurrentBlog($user, $pk = null)
 	{
-		$pk = $pk = $this['item.id'];
+		$pk = $pk ? : $this['item.id'];
 
 		$mapper = (new RelationDataMapper('blog', 'blogs'))
 			->addTable('author', 'authors', 'author.blog = blog.id')

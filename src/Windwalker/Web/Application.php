@@ -9,6 +9,7 @@
 namespace Windwalker\Web;
 
 use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Provider\AuthenticateProvider;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
@@ -103,7 +104,7 @@ class Application extends WebApplication
 		 */
 
 		// Your packages here...
-		$packages['wwuser'] = new UserPackage;
+		$packages['user'] = new UserPackage;
 
 		return $packages;
 	}

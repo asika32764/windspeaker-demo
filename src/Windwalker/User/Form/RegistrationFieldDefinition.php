@@ -31,21 +31,18 @@ class RegistrationFieldDefinition implements FieldDefinitionInterface
 	 */
 	public function define(Form $form)
 	{
-		$faker = Factory::create();
+		// $faker = Factory::create();
 
 		$form->addField(new TextField('username'))
 			->label('Username')
-			->set('default', $faker->userName)
 			->required();
 
 		$form->addField(new TextField('name'))
 			->label('Name')
-			->set('default', $faker->name)
 			->required();
 
 		$form->addField(new PasswordField('password'))
 			->label('Password')
-			->set('default', 1234)
 			->required();
 
 		$form->addField(new PasswordField('password2'))
@@ -54,7 +51,6 @@ class RegistrationFieldDefinition implements FieldDefinitionInterface
 
 		$form->addField(new EmailField('email'))
 			->label('Email')
-			->set('default', $faker->email)
 			->required();
 	}
 }

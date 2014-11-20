@@ -1,3 +1,7 @@
-dashborad:
-    pattern: dashboard
+dashboard:
+    pattern: '/'
     controller: 'Admin\Controller\Posts'
+
+switchblog:
+    pattern: switchblog/(id)
+    controller: 'Admin\Controller\Switchblog'

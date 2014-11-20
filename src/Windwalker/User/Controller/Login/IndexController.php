@@ -8,7 +8,10 @@
 
 namespace Windwalker\User\Controller\Login;
 
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Router\Router;
+use Windwalker\Ioc;
 use Windwalker\User\Model\LoginModel;
 use Windwalker\User\View\Login\LoginHtmlView;
 
@@ -29,6 +32,13 @@ class IndexController extends Controller
 	 */
 	public function execute()
 	{
+		$user = User::get();
+
+		if (!$user->isNull())
+		{
+			Ioc::getApplication()->redirect(Router::build('admin:dashboard'));
+		}
+
 		$model = new LoginModel;
 
 		$view = new LoginHtmlView;
