@@ -21,7 +21,7 @@ Authors & Team
 </div>
 
 
-<table class="table table-striped">
+<table class="table table-striped table-hover">
     <tbody>
         @foreach ($items as $k => $item)
         <tr>

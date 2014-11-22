@@ -73,11 +73,6 @@ class SaveController extends AbstractAdminController
 		}
 		catch (ValidFailException $e)
 		{
-			if (WINDWALKER_DEBUG)
-			{
-				throw $e;
-			}
-
 			$this->setRedirect(Router::buildHttp('admin:authors'), $e->getMessage(), 'danger');
 
 			return false;
@@ -101,6 +96,7 @@ class SaveController extends AbstractAdminController
 	 * @param string $username
 	 *
 	 * @throws  ValidFailException
+	 * @throws  \Exception
 	 * @return  boolean
 	 */
 	protected function createUser($username)
@@ -115,9 +111,16 @@ class SaveController extends AbstractAdminController
 		$blog = Blog::get();
 		$user = User::get(['username' => $username]);
 
+		if ($user->isNull())
+		{
+			throw new ValidFailException('User not exists');
+		}
+
 		if (!$authorMapper->findOne(['user' => $user->id, 'blog' => $blog->id])->isNull())
 		{
-			throw new ValidFailException('Author already exists');
+			$this->setRedirect(Router::buildHttp('admin:authors'), 'Author already exists', 'success');
+
+			return true;
 		}
 
 		$data['user'] = $user->id;
@@ -146,7 +149,6 @@ class SaveController extends AbstractAdminController
 			throw new ValidFailException('Name should not be empty.');
 		}
 
-		$data->admin = $data->admin ? : 0;
 		$data->blog = Blog::get()->id;
 
 		$authorMapper = new DataMapper('authors');

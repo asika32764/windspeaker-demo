@@ -42,13 +42,13 @@ class AuthorDefinition implements FieldDefinitionInterface
 			->set('rows', 5)
 			->set('labelClass', 'col-sm-3 control-label');
 
-		$form->addField(new RadioField('admin', 'Is Admin'), 'author')
-			->setOptions([
-				new Option('Yes', 1),
-				new Option('No', 0)
-			])
-			->set('class', 'form-control')
-			->set('labelClass', 'col-sm-3 control-label');
+//		$form->addField(new RadioField('admin', 'Is Admin'), 'author')
+//			->setOptions([
+//				new Option('Yes', 1),
+//				new Option('No', 0)
+//			])
+//			->set('class', 'form-control')
+//			->set('labelClass', 'col-sm-3 control-label');
 	}
 }
  

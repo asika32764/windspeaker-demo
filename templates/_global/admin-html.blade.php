@@ -163,14 +163,14 @@
 
                     @if (WINDWALKER_DEBUG)
                     <hr/>
-                    <div class="panel panel-grey">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">Debug Information</div>
                         <div class="panel-body">
                             {{ $profiler->render(); }}
                         </div>
                     </div>
                     <hr/>
-                    <div class="panel panel-grey">
+                    <div class="panel panel-success">
                         <div class="panel-heading">Session Information</div>
                         <div class="panel-body">
                             {{ show($_SESSION); }}
