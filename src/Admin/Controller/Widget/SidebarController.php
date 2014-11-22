@@ -36,7 +36,7 @@ class SidebarController extends Controller
 
 		$model['user.id'] = User::get()->id;
 
-		$view['blog'] = Blog::getBlog();;
+		$view['blog'] = Blog::get();;
 		$view['blogs'] = $model->getItems();
 		$view['activeMenu'] = $this->input->get('activeMenu', 'dashboard');
 

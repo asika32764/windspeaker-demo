@@ -30,7 +30,7 @@ class GetController extends AbstractAdminController
 		$model = new CategoriesModel;
 		$view = new CategoriesHtmlView($this->data);
 
-		$model['blog.id']     = Blog::getBlog()->id;
+		$model['blog.id']     = Blog::get()->id;
 		$model['list.start']  = $this->input->getInt('start');
 		$model['list.limit']  = 10;
 		$model['list.search'] = $this->input->getString('q');

@@ -51,7 +51,7 @@ abstract class AbstractAdminController extends Controller
 		$data['widget'] = new Data;
 		$data['widget']['sidebar'] = (new SidebarController($this->input, $this->app))->execute();
 
-		$data['blog'] = Blog::getBlog();
+		$data['blog'] = Blog::get();
 
 		$data['profiler'] = WINDWALKER_DEBUG ? Ioc::getProfiler() : null;
 

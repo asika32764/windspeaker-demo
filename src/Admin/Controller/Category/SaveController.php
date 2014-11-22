@@ -41,7 +41,7 @@ class SaveController extends AbstractAdminController
 
 		if (!$data['blog'])
 		{
-			$data['blog'] = Blog::getBlog()->id;
+			$data['blog'] = Blog::get()->id;
 		}
 
 		$data['alias'] = OutputFilter::stringURLSafe(trim($data['title']));

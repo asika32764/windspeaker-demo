@@ -31,7 +31,7 @@ class UserSeeder extends AbstractSeeder
 
 		foreach (range(1, 100) as $row)
 		{
-			$data['username'] = $row == 1 ? 'asika' : $faker->name;
+			$data['username'] = $row == 1 ? 'asika' : $faker->userName;
 			$data['fullname'] = $row == 1 ? 'Simon Asika' : $faker->name;
 			$data['email'] = $faker->email;
 			$data['password'] = $pass;

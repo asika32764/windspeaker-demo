@@ -32,7 +32,7 @@ class Blog
 	 *
 	 * @return  Data
 	 */
-	public static function getBlog()
+	public static function get()
 	{
 		if (static::$blog)
 		{

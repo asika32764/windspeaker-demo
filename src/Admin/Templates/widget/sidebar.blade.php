@@ -1,32 +1,53 @@
 {{-- Part of windspeaker project. --}}
 <?php
 use Windwalker\Core\Router\Router;
+
+$return = base64_encode($uri['current']);
 ?>
 
-<nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
-    data-position="right" class="navbar-default navbar-static-side">
-    <div class="sidebar-collapse menu-scroll">
-        <div class="btn-group">
-            <button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                <span class="current-blog-inner">{{{ $blog->title }}}</span>
-                &nbsp;<i class="fa fa-angle-down"></i>
-            </button>
-            <ul role="menu" class="dropdown-menu">
-                @if ($blogs)
-                    @foreach ($blogs as $item)
-                    <li class="">
-                        <a href="{{{ $uri['base.path'] }}}{{{ Router::build('admin:switchblog', ['id' => $item->id]) }}}">{{{ $item->title }}}</a>
-                    </li>
-                    @endforeach
-                    <li class="divider"></li>
-                @endif
-                <li><a href="#">Add New Blog</a></li>
-            </ul>
-        </div>
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
 
-        <ul id="side-menu" class="nav">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element"> <span>
+                    <img alt="image" class="img-circle" src="{{ $uri['media.path'] }}img/profile_small.jpg" />
+                     </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="{{ $uri['media.path'] }}#">
+                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
+                     </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="{{ $uri['media.path'] }}profile.html">Profile</a></li>
+                        <li><a href="{{ $uri['media.path'] }}contacts.html">Contacts</a></li>
+                        <li><a href="{{ $uri['media.path'] }}mailbox.html">Mailbox</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ $uri['media.path'] }}login.html">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    IN+
+                </div>
+            </li>
 
-            <div class="clearfix"></div>
+            <li>
+                <div class="btn-group">
+                    <button type="button" data-toggle="dropdown"  style="max-width: 200px;" class="btn btn-primary dropdown-toggle">
+                        <span class="current-blog-inner">{{{ $blog->title }}}</span>
+                        &nbsp;<i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul role="menu" class="dropdown-menu">
+                        @if ($blogs)
+                            @foreach ($blogs as $item)
+                            <li class="">
+                                <a href="{{{ Router::buildHtml('admin:switchblog', ['id' => $item->id, 'return' => $return]) }}}">{{{ $item->title }}}</a>
+                            </li>
+                            @endforeach
+                            <li class="divider"></li>
+                        @endif
+                        <li><a href="#">Add New Blog</a></li>
+                    </ul>
+                </div>
+            </li>
 
             {{-- Articles --}}
             <li class="{{ $activeMenu == 'dashboard' ? 'active' : '' }}">
@@ -67,60 +88,7 @@ use Windwalker\Core\Router\Router;
                     <span class="menu-title">Authors & Team</span>
                 </a>
             </li>
-
-            {{--<li><a href="Layout.html"><i class="fa fa-desktop fa-fw">--}}
-                {{--<div class="icon-bg bg-pink"></div>--}}
-            {{--</i><span class="menu-title">Layouts</span></a>--}}
-               {{----}}
-            {{--</li>--}}
-            {{--<li><a href="UIElements.html"><i class="fa fa-send-o fa-fw">--}}
-                {{--<div class="icon-bg bg-green"></div>--}}
-            {{--</i><span class="menu-title">UI Elements</span></a>--}}
-               {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Forms.html"><i class="fa fa-edit fa-fw">--}}
-                {{--<div class="icon-bg bg-violet"></div>--}}
-            {{--</i><span class="menu-title">Forms</span></a>--}}
-              {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Tables.html"><i class="fa fa-th-list fa-fw">--}}
-                {{--<div class="icon-bg bg-blue"></div>--}}
-            {{--</i><span class="menu-title">Tables</span></a>--}}
-                  {{----}}
-            {{--</li>--}}
-            {{--<li><a href="DataGrid.html"><i class="fa fa-database fa-fw">--}}
-                {{--<div class="icon-bg bg-red"></div>--}}
-            {{--</i><span class="menu-title">Data Grids</span></a>--}}
-              {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Pages.html"><i class="fa fa-file-o fa-fw">--}}
-                {{--<div class="icon-bg bg-yellow"></div>--}}
-            {{--</i><span class="menu-title">Pages</span></a>--}}
-               {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Extras.html"><i class="fa fa-gift fa-fw">--}}
-                {{--<div class="icon-bg bg-grey"></div>--}}
-            {{--</i><span class="menu-title">Extras</span></a>--}}
-              {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Dropdown.html"><i class="fa fa-sitemap fa-fw">--}}
-                {{--<div class="icon-bg bg-dark"></div>--}}
-            {{--</i><span class="menu-title">Multi-Level Dropdown</span></a>--}}
-              {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Email.html"><i class="fa fa-envelope-o">--}}
-                {{--<div class="icon-bg bg-primary"></div>--}}
-            {{--</i><span class="menu-title">Email</span></a>--}}
-              {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Charts.html"><i class="fa fa-bar-chart-o fa-fw">--}}
-                {{--<div class="icon-bg bg-orange"></div>--}}
-            {{--</i><span class="menu-title">Charts</span></a>--}}
-               {{----}}
-            {{--</li>--}}
-            {{--<li><a href="Animation.html"><i class="fa fa-slack fa-fw">--}}
-                {{--<div class="icon-bg bg-green"></div>--}}
-            {{--</i><span class="menu-title">Animations</span></a></li>--}}
         </ul>
+
     </div>
 </nav>

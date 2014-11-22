@@ -2,6 +2,7 @@ dashboard:
     pattern: '/'
     controller: 'Admin\Controller\Posts'
 
+# Statics
 static:
     pattern: 'statics'
     controller: 'Admin\Controller\Posts'
@@ -9,6 +10,7 @@ static:
         type: static
         activeMenu: static
 
+# Categories
 categories:
     pattern: categories
     controller: 'Admin\Controller\Categories'
@@ -21,15 +23,23 @@ category:
     variables:
         activeMenu: categories
 
+# Settings
 settings:
     pattern: settings
     controller: 'Admin\Controller\Settings'
     variables:
         activeMenu: settings
 
+# Authors & Author
 authors:
     pattern: authors
     controller: 'Admin\Controller\Authors'
+    variables:
+        activeMenu: authors
+
+author:
+    pattern: author(/id)
+    controller: 'Admin\Controller\Author'
     variables:
         activeMenu: authors
 

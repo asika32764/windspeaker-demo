@@ -42,7 +42,7 @@ class AuthorSeeder extends AbstractSeeder
 
 				$data['user'] = $user->id;
 				$data['blog'] = $blog->id;
-				$data['admin'] = rand(0, 1);
+				$data['admin'] = $hasOwner ? rand(0, 1) : 1;
 				$data['owner'] = $hasOwner ? 0 : 1;
 
 				$authorMapper->createOne($data);
