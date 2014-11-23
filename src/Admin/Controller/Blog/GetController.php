@@ -6,11 +6,13 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\Settings;
+namespace Admin\Controller\Blog;
 
 use Admin\Controller\AbstractAdminController;
 use Admin\Form\BlogDefinition;
 use Admin\View\Settings\SettingsHtmlView;
+use Windwalker\Data\Data;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\Form\Form;
 
 /**
@@ -23,19 +25,23 @@ class GetController extends AbstractAdminController
 	/**
 	 * doExecute
 	 *
-	 * @return  string
+	 * @return  mixed
 	 */
 	protected function doExecute()
 	{
+		$id = $this->input->get('id');
+
+		$blog = $id ? (new DataMapper('blogs'))->findOne($id) : new Data;
+
 		$view = new SettingsHtmlView($this->data);
 
 		$form = new Form('blog');
 		$form->defineFormFields(new BlogDefinition);
 
-		$form->bind($view['blog']);
+		$form->bind($blog);
 
 		$view['form'] = $form;
-		$view['item'] = $view['blog'];
+		$view['item'] = $blog;
 
 		return $view->setLayout('edit')->render();
 	}

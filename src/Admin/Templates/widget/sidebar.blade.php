@@ -52,7 +52,7 @@ $return = base64_encode($uri['current']);
             {{-- Articles --}}
             <li class="{{ $activeMenu == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ $uri['base.path'] }}">
-                    <i class="fa fa-tachometer fa-fw"></i>
+                    <i class="fa fa-file-text fa-fw"></i>
                     <span class="menu-title">Articles</span>
                 </a>
             </li>
@@ -60,7 +60,7 @@ $return = base64_encode($uri['current']);
             {{-- Static Pages --}}
             <li class="{{ $activeMenu == 'static' ? 'active' : '' }}">
                 <a href="{{ $uri['base.path'] }}statics">
-                    <i class="fa fa-tachometer fa-fw"></i>
+                    <i class="fa fa-file fa-fw"></i>
                     <span class="menu-title">Static Pages</span>
                 </a>
             </li>
@@ -68,7 +68,7 @@ $return = base64_encode($uri['current']);
             {{-- Categories --}}
             <li class="{{ $activeMenu == 'categories' ? 'active' : '' }}">
                 <a href="{{ $uri['base.path'] }}categories">
-                    <i class="fa fa-tachometer fa-fw"></i>
+                    <i class="fa fa-folder fa-fw"></i>
                     <span class="menu-title">Categories</span>
                 </a>
             </li>
@@ -76,16 +76,24 @@ $return = base64_encode($uri['current']);
             {{-- Settings --}}
             <li class="{{ $activeMenu == 'settings' ? 'active' : '' }}">
                 <a href="{{ $uri['base.path'] }}settings">
-                    <i class="fa fa-tachometer fa-fw"></i>
+                    <i class="fa fa-gear fa-fw"></i>
                     <span class="menu-title">Settings</span>
                 </a>
             </li>
 
-            {{-- Settings --}}
+            {{-- Authors --}}
             <li class="{{ $activeMenu == 'authors' ? 'active' : '' }}">
                 <a href="{{ $uri['base.path'] }}authors">
-                    <i class="fa fa-tachometer fa-fw"></i>
+                    <i class="fa fa-group fa-fw"></i>
                     <span class="menu-title">Authors & Team</span>
+                </a>
+            </li>
+
+            {{-- Blogs --}}
+            <li class="{{ $activeMenu == 'blogs' ? 'active' : '' }}">
+                <a href="{{ $uri['base.path'] }}blogs">
+                    <i class="fa fa-book fa-fw"></i>
+                    <span class="menu-title">Blogs</span>
                 </a>
             </li>
         </ul>

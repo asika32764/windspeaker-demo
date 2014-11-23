@@ -39,6 +39,8 @@ class GetController extends Controller
 
 		$blogModel = new BlogModel;
 
+		$blogModel['user.isAdmin'] = false;
+
 		$blog = $blogModel->getCurrentBlog($user->id, $id);
 
 		$session = Ioc::getSession();

@@ -23,13 +23,6 @@ category:
     variables:
         activeMenu: categories
 
-# Settings
-settings:
-    pattern: settings
-    controller: 'Admin\Controller\Settings'
-    variables:
-        activeMenu: settings
-
 # Authors & Author
 authors:
     pattern: authors
@@ -42,6 +35,26 @@ author:
     controller: 'Admin\Controller\Author'
     variables:
         activeMenu: authors
+
+# Blogs
+blogs:
+    pattern: blogs
+    controller: 'Admin\Controller\Blogs'
+    variables:
+        activeMenu: blogs
+
+blog:
+    pattern: blog(/id)
+    controller: 'Admin\Controller\Blog'
+    variables:
+        activeMenu: blogs
+
+# Settings
+settings:
+    pattern: settings
+    controller: 'Admin\Controller\Settings'
+    variables:
+        activeMenu: settings
 
 switchblog:
     pattern: switchblog/(id)

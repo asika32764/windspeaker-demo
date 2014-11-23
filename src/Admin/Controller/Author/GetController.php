@@ -40,7 +40,7 @@ class GetController extends AbstractAdminController
 		$view['form'] = $model->getForm($author);
 		$view['item'] = $author;
 
-		return $view->render();
+		return $view->setLayout('edit')->render();
 	}
 }
  

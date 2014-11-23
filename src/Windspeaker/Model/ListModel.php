@@ -58,13 +58,15 @@ abstract class ListModel extends DatabaseModel
 	 */
 	public function getItems()
 	{
-		return $this->fetch('items', function()
+		$cid = $this['cache.id'] ? : 'items';
+
+		return $this->fetch($cid, function()
 		{
 			$this->prepareState();
 
 			$query = $this->getListQuery($this->db->getQuery(true));
 
-			$items = $this->getList($query, $this['list.start'], $this->get('list.limit', 10));
+			$items = $this->getList($query, $this['list.start'], $this->get('list.limit'));
 
 			return new DataSet($items);
 		});
@@ -89,7 +91,7 @@ abstract class ListModel extends DatabaseModel
 		{
 			$profiler = Ioc::getProfiler();
 
-			$profiler->mark((string) $query->dump());
+			$profiler->mark(uniqid() . ' - ' . (string) $query->dump());
 		}
 
 		return $this->db->getReader($query)->loadObjectList();

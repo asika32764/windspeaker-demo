@@ -6,7 +6,7 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\Author;
+namespace Admin\Controller\Blog;
 
 use Admin\Blog\Blog;
 use Windwalker\Core\Authenticate\User;
@@ -32,11 +32,7 @@ class DeleteController extends Controller
 	{
 		$id = $this->input->get('id');
 
-		$authorMapper = new DataMapper('authors');
-
-		$return = $this->input->getBase64('return');
-
-		$return = $return ? base64_decode($return) : Router::buildHttp('admin:authors');
+		$blogMapper = new DataMapper('blogs');
 
 		try
 		{
@@ -45,21 +41,18 @@ class DeleteController extends Controller
 				throw new \Exception('Delete fail');
 			}
 
-			$author = $authorMapper->findOne($id);
+			$author = (new DataMapper('authors'))->findOne(['blog' => $id, 'user' => User::get()->id]);
 
-			$blog = Blog::get();
-			$user = User::get();
-
-			if ($user->id != $author->user && $blog->id != $author->blog)
+			if (!$author->owner)
 			{
-				throw new ValidFailException('You cannot delete authors of other blog.');
+				throw new ValidFailException('Only owner can remove blog.');
 			}
 
-			$authorMapper->delete(['id' => $id]);
+			$blogMapper->delete(['id' => $id]);
 		}
 		catch (ValidFailException $e)
 		{
-			$this->setRedirect($return, $e->getMessage(), 'danger');
+			$this->setRedirect(Router::buildHttp('admin:blogs'), $e->getMessage(), 'danger');
 
 			return false;
 		}
@@ -70,13 +63,14 @@ class DeleteController extends Controller
 				throw $e;
 			}
 
-			$this->setRedirect($return, 'Delete fail', 'danger');
+			$this->setRedirect(Router::buildHttp('admin:blogs'), 'Delete fail', 'danger');
 
 			return false;
 		}
 
-		$this->setRedirect($return, 'Remove Author success', 'success');
+		$this->setRedirect(Router::buildHttp('admin:blogs'), 'Delete Blog success', 'success');
 
 		return true;
 	}
 }
+ 

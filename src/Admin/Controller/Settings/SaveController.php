@@ -11,6 +11,7 @@ namespace Admin\Controller\Settings;
 use Admin\Form\BlogDefinition;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Router\Router;
+use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Form\Form;
 use Windwalker\Ioc;
@@ -32,30 +33,20 @@ class SaveController extends Controller
 	 */
 	public function execute()
 	{
-		$blog = $this->input->getVar('blog');
+		$ctrl = new \Admin\Controller\Blog\SaveController($this->input, $this->app);
 
-		$form = new Form('blog');
-		$form->defineFormFields(new BlogDefinition);
-
-		$form->bind($blog);
-
-		if (!$form->validate())
+		if (!$ctrl->execute())
 		{
-			$errors = $form->getErrors();
+			list($url, $msg, $type) = $ctrl->getRedirect(true);
 
-			foreach ($errors as $error)
-			{
-				$this->addFlash($error->getMessage(), 'danger');
-			}
-
-			$this->setRedirect(Router::build('admin:settings'));
+			$this->setRedirect($url, $msg, $type);
 
 			return false;
 		}
 
-		$blog = (new DataMapper('blogs'))->updateOne($blog, 'id');
+		list($url, $msg, $type) = $ctrl->getRedirect(true);
 
-		$this->setRedirect(Router::build('admin:settings'), 'Save Success', 'success');
+		$this->setRedirect(Router::buildHttp('admin:settings'), $msg, $type);
 
 		return true;
 	}

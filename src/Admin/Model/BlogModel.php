@@ -44,7 +44,11 @@ class BlogModel extends DatabaseModel
 
 		$conditions[] = 'blog.state >= 1';
 		$conditions[] = 'user.id = ' . $user;
-		$conditions[] = '(author.admin >= 1 OR author.owner >= 1)';
+
+		if ($this->get('user.isAdmin', true))
+		{
+			$conditions[] = '(author.admin >= 1 OR author.owner >= 1)';
+		}
 
 		return $mapper->findOne($conditions);
 	}
