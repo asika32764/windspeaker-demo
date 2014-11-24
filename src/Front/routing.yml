@@ -1,0 +1,7 @@
+post_default:
+    pattern: (id)-(alias)
+    controller: 'Front\Controller\Post'
+
+static:
+    pattern: page/(id)-(alias)
+    controller: 'Front\Controller\Static'

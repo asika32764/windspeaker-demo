@@ -19,6 +19,7 @@
 
     <link href="{{ $uri['media.path'] }}css/animate.css" rel="stylesheet">
     <link href="{{ $uri['media.path'] }}css/style.css" rel="stylesheet">
+    <link href="{{ $uri['media.path'] }}css/main.css" rel="stylesheet">
 
 </head>
 
@@ -231,7 +232,7 @@
     {{--<!-- ChartJS-->--}}
     {{--<script src="{{ $uri['media.path'] }}js/plugins/chartJs/Chart.min.js"></script>--}}
 
-
+    <script src="{{ $uri['media.path'] }}js/windspeaker.js"></script>
 
     <script>
         $(document).ready(function() {

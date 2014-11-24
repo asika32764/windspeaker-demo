@@ -24,31 +24,37 @@ var Category = {
 };
 </script>
 
-<div class="toolbar">
-    <a class="btn btn-success" href="javascript:void(0);" onclick="Category.edit('', '');">New</a>
-</div>
+<form action="{{{ $uri['current'] }}}" method="post" id="adminForm">
+    <div class="toolbar">
+        <a class="btn btn-success" href="javascript:void(0);" onclick="Category.edit('', '');">New</a>
+    </div>
 
-<table class="table table-striped">
-    <tbody>
-        @foreach ($items as $k => $item)
-        <tr>
-            <td>
-                <input type="checkbox">
-            </td>
-            <td>
-                <h4>
-                    <a href="javascript:void(0);" onclick="Category.edit('{{{ $item->title }}}', {{{ $item->id }}});">
-                        {{{ $item->title  }}}
-                    </a>
-                </h4>
-            </td>
-            <td>
-                Delete
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <tbody>
+            @foreach ($items as $k => $item)
+            <tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>
+                    <h4>
+                        <a href="javascript:void(0);" onclick="Category.edit('{{{ $item->title }}}', {{{ $item->id }}});">
+                            {{{ $item->title  }}}
+                        </a>
+                    </h4>
+                </td>
+                <td width="5%">
+                    <button type="button" class="btn btn-default"
+                        onclick="Windspeaker.deleteItem('{{{ \Windwalker\Core\Router\Router::buildHtml('admin:category', ['id' => $item->id]) }}}')">
+                        <span class="fa fa-trash"></span>
+                    </button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</form>
+
 
 <div class="modal category-modal" id="newModal">
 	<div class="modal-dialog">

@@ -17,7 +17,7 @@ $return = base64_encode($uri['current']);
                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
                      </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="{{ $uri['media.path'] }}profile.html">Profile</a></li>
+                        <li><a href="{{ Router::buildHttp('admin:profile'); }}">Profile</a></li>
                         <li><a href="{{ $uri['media.path'] }}contacts.html">Contacts</a></li>
                         <li><a href="{{ $uri['media.path'] }}mailbox.html">Mailbox</a></li>
                         <li class="divider"></li>

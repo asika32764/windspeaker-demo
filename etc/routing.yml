@@ -2,6 +2,10 @@ admin:
     pattern: '/'
     package: admin
 
+front:
+    pattern: '/'
+    package: front
+
 user:
     pattern: '/'
     package: user

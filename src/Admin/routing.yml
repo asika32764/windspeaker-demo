@@ -1,6 +1,34 @@
 dashboard:
     pattern: '/'
     controller: 'Admin\Controller\Posts'
+    variables:
+        activeMenu: dashboard
+
+posts:
+    pattern: '/'
+    controller: 'Admin\Controller\Posts'
+    variables:
+        activeMenu: dashboard
+
+post:
+    pattern: 'post'
+    controller: 'Admin\Controller\Post'
+
+post_state_up:
+    pattern: post/state/up/(id)
+    controller: 'Admin\Controller\Post'
+    action:
+        '*': StateController
+    variables:
+        state: 1
+
+post_state_down:
+    pattern: post/state/down/(id)
+    controller: 'Admin\Controller\Post'
+    action:
+        '*': StateController
+    variables:
+        state: 0
 
 # Statics
 static:
@@ -18,7 +46,7 @@ categories:
         activeMenu: categories
 
 category:
-    pattern: category
+    pattern: category(/id)
     controller: 'Admin\Controller\Category'
     variables:
         activeMenu: categories
@@ -59,3 +87,8 @@ settings:
 switchblog:
     pattern: switchblog/(id)
     controller: 'Admin\Controller\Switchblog'
+
+#Profile
+profile:
+    pattern: profile
+    controller: 'Admin\Controller\Profile'
