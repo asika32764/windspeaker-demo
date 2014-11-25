@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Dashboard</title>
+    <title>@yield('page_title', 'Dashboard') | Windspeaker</title>
 
     <link href="{{ $uri['media.path'] }}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ $uri['media.path'] }}font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -142,7 +142,7 @@
 
 
                 <li>
-                    <a href="{{ $uri['media.path'] }}login.html">
+                    <a href="{{{ \Windwalker\Core\Router\Router::buildHtml('user:logout') }}}">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>

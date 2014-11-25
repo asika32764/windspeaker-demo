@@ -11,7 +11,7 @@ posts:
         activeMenu: dashboard
 
 post:
-    pattern: 'post'
+    pattern: post(/id)
     controller: 'Admin\Controller\Post'
 
 post_state_up:

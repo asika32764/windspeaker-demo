@@ -50,6 +50,11 @@ class DeleteController extends Controller
 			$blog = Blog::get();
 			$user = User::get();
 
+			if ($author->owner)
+			{
+				throw new ValidFailException('You cannot delete owner.');
+			}
+
 			if ($user->id != $author->user && $blog->id != $author->blog)
 			{
 				throw new ValidFailException('You cannot delete authors of other blog.');

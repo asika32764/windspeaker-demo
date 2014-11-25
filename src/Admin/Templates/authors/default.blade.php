@@ -69,9 +69,11 @@ Authors & Team
                 </h4>
             </td>
             <td style="width: 5%">
+                @if (!$item->owner)
                 <a class="btn btn-default" href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:author', ['id' => $item->id, '_method' => 'delete']) }}}">
                     <span class="fa fa-trash"></span>
                 </a>
+                @endif
             </td>
         </tr>
         @endforeach

@@ -1,0 +1,14 @@
+login:
+    pattern: login
+    controller: 'User\Controller\Login'
+    action:
+        'get': 'IndexController'
+        'post': 'LoginController'
+logout:
+    pattern: logout
+    controller: 'User\Controller\Logout'
+    variables: {}
+registration:
+    pattern: registration
+    controller: 'User\Controller\Register'
+    variables: {}

@@ -9,7 +9,6 @@
 namespace Windwalker\Web;
 
 use Windwalker\Core\Application\WebApplication;
-use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Provider\AuthenticateProvider;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
@@ -21,8 +20,8 @@ use Windwalker\Core\Provider\WhoopsProvider;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Ioc;
 use Windwalker\Registry\Registry;
-use Windwalker\User\UserPackage;
 use Windwalker\Windwalker;
+use User\UserPackage;
 
 /**
  * Class Application

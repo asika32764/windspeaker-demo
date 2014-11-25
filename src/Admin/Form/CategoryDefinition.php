@@ -32,8 +32,6 @@ class CategoryDefinition implements FieldDefinitionInterface
 			->set('class', 'form-control')
 			->set('labelClass', 'col-sm-3 control-label')
 			->required();
-
-
 	}
 }
  

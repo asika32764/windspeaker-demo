@@ -12,6 +12,11 @@
 
 @section('main_content')
 <form action="{{{ $uri['current'] }}}" method="post" id="adminForm">
+
+    <div class="toolabr">
+        <a class="btn btn-primary" href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:post') }}}">New</a>
+    </div>
+
     <table class="table table-striped">
         <tbody>
             @foreach ($items as $k => $item)
@@ -51,7 +56,7 @@
                 </td>
                 <td>
                     <h4>
-                        <a href="#">
+                        <a href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:post', ['id' => $item->id]) }}}">
                             {{{ $item->title  }}}
                         </a>
                     </h4>

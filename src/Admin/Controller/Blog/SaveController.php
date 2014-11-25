@@ -32,6 +32,13 @@ class SaveController extends Controller
 	protected $blog;
 
 	/**
+	 * Property author.
+	 *
+	 * @var Data
+	 */
+	protected $author;
+
+	/**
 	 * Execute the controller.
 	 *
 	 * @throws \Exception
@@ -39,7 +46,7 @@ class SaveController extends Controller
 	 */
 	public function execute()
 	{
-		$user = User::get();
+		$user = User::get($this->input->get('user_id'));
 
 		$blog = $this->input->getVar('blog');
 
@@ -47,7 +54,7 @@ class SaveController extends Controller
 
 		$isNew = !$blog->id;
 
-		$blog->state =1;
+		$blog->state = 1;
 
 		if (!$this->validate($blog))
 		{
@@ -67,7 +74,7 @@ class SaveController extends Controller
 				$author['owner'] = 1;
 				$author['admin'] = 1;
 
-				(new DataMapper('authors'))->createOne($author);
+				$this->author = (new DataMapper('authors'))->createOne($author);
 			}
 
 			$trans->commit();
@@ -120,7 +127,14 @@ class SaveController extends Controller
 		}
 
 		// Check exists
-		$blog = (new DataMapper('blogs'))->findOne(['alias' => $data['alias'], 'id != ' . $data->id]);
+		$conditions['alias'] = $data['alias'];
+
+		if ($data->id)
+		{
+			$conditions['id'] = $data->id;
+		}
+
+		$blog = (new DataMapper('blogs'))->findOne($conditions);
 
 		if ($blog->notNull())
 		{
@@ -143,63 +157,13 @@ class SaveController extends Controller
 	}
 
 	/**
-	 * Execute the controller.
+	 * Method to get property Author
 	 *
-	 * @throws \Exception
-	 * @return  mixed Return executed result.
+	 * @return  Data
 	 */
-	public function execute2()
+	public function getAuthor()
 	{
-		$user = User::get();
-
-		$isNew = !$this->input->getByPath('blog.id');
-
-		$this->input->setByPath('blog.owner', $user->id);
-
-		$ctrl = new \Admin\Controller\Settings\SaveController($this->input, $this->app);
-
-		$trans = Ioc::getDatabase()->getTransaction()->start();
-
-		try
-		{
-			$result = $ctrl->execute();
-
-			if (!$result)
-			{
-				$ctrl->redirect();
-
-				return false;
-			}
-
-			if ($isNew)
-			{
-				$author['user'] = $user->id;
-				$author['blog'] = $ctrl->getBlog()->id;
-				$author['owner'] = 1;
-				$author['admin'] = 1;
-
-				(new DataMapper('authors'))->createOne($author);
-			}
-
-			$trans->commit();
-		}
-		catch (\Exception $e)
-		{
-			$trans->rollback();
-
-			if (WINDWALKER_DEBUG)
-			{
-				throw $e;
-			}
-
-			$this->setRedirect(Router::buildHttp('admin:blogs'), 'Save fail', 'danger');
-
-			return true;
-		}
-
-		$this->setRedirect(Router::buildHttp('admin:blogs'), 'Save Success', 'success');
-
-		return true;
+		return $this->author;
 	}
 }
  
