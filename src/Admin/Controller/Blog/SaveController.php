@@ -14,6 +14,7 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
+use Windwalker\Filter\OutputFilter;
 use Windwalker\Form\Form;
 use Windwalker\Ioc;
 
@@ -55,6 +56,7 @@ class SaveController extends Controller
 		$isNew = !$blog->id;
 
 		$blog->state = 1;
+		$blog->alias = OutputFilter::stringURLSafe($blog->alias);
 
 		if (!$this->validate($blog))
 		{

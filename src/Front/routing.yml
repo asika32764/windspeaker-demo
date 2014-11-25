@@ -1,3 +1,7 @@
+posts:
+    pattern: '/'
+    controller: 'Front\Controller\Posts'
+
 post_default:
     pattern: (id)-(alias)
     controller: 'Front\Controller\Post'

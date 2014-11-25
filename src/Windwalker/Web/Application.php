@@ -8,7 +8,10 @@
 
 namespace Windwalker\Web;
 
+use Admin\AdminPackage;
+use Front\FrontPackage;
 use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Package\PackageHelper;
 use Windwalker\Core\Provider\AuthenticateProvider;
 use Windwalker\Core\Provider\CacheProvider;
 use Windwalker\Core\Provider\DatabaseProvider;
@@ -17,9 +20,11 @@ use Windwalker\Core\Provider\LanguageProvider;
 use Windwalker\Core\Provider\RouterProvider;
 use Windwalker\Core\Provider\SessionProvider;
 use Windwalker\Core\Provider\WhoopsProvider;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\DI\ServiceProviderInterface;
 use Windwalker\Ioc;
 use Windwalker\Registry\Registry;
+use Windwalker\Uri\Uri;
 use Windwalker\Windwalker;
 use User\UserPackage;
 

@@ -17,6 +17,7 @@
 		"filp/whoops": "1.*@stable",
 		"robmorgan/phinx": "*@stable",
 		"fzaninotto/faker": "~1.0@stable",
+		"michelf/php-markdown": "1.*",
 
 		"illuminate/view" : "4.*"
 	},

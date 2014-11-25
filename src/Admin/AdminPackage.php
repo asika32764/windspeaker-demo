@@ -10,6 +10,7 @@ namespace Admin;
 
 use Admin\Listener\ProfilerListener;
 use Admin\Listener\UserListener;
+use Windwalker\Core\Ioc;
 use Windwalker\Core\Package\AbstractPackage;
 use Windwalker\Event\Dispatcher;
 
@@ -41,6 +42,23 @@ class AdminPackage extends AbstractPackage
 		$dispatcher->addListener(new UserListener);
 
 		$dispatcher->addListener(new ProfilerListener);
+	}
+
+	/**
+	 * loadRouting
+	 *
+	 * @return  mixed
+	 */
+	public static function loadRouting()
+	{
+		$app = Ioc::getApplication();
+
+		if ($app->get('client') == 'admin')
+		{
+			return parent::loadRouting();
+		}
+
+		return [];
 	}
 }
  
