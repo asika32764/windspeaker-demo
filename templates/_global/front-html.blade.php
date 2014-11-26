@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('page_title') | @yield('blog_title')</title>
+    <title>@yield('page_title')</title>
 
 @if ($blog['webmaster'])
     <meta name="google-site-verification" content="{{{ $blog['webmaster'] }}}" />
@@ -45,16 +45,19 @@
     	<div class="uk-container uk-container-center">
 
     		<h1 id="blog-title">
-    		    <a id="big-logo" class="uk-navbar-brand uk-hidden-small" href="http://asukademy.com">
+    		    <a id="big-logo" class="uk-navbar-brand uk-hidden-small" href="{{{ $blog->link }}}">
                     {{{ $blog->title }}}
                 </a>
+                <small class="ul-text-mute">
+                {{{ $blog->sub_title }}}
+                </small>
     		</h1>
-
 
     		<a href="#" class="uk-navbar-toggle uk-visible-small" data-uk-toggle="{target:'#mainmenu', cls: 'uk-hidden-small'}"></a>
 
-    		<a id="small-logo" class="uk-navbar-brand uk-navbar-center uk-visible-small" href="http://asukademy.com">
-    			<img class="uk-margin uk-margin-remove" style="max-width: 95%;" src="http://asukademy.com/media/img/asukademy-logo-horz.png" title="Asukademy" alt="Asukademy"></a>
+    		<a id="small-logo" class="uk-navbar-brand uk-navbar-center uk-visible-small" href="{{{ $blog->link }}}">
+    			{{{ $blog->title }}}
+    	    </a>
 
     		<ul id="mainmenu" class="uk-navbar-nav uk-float-right uk-hidden-small">
     			@foreach($statics as $k => $static)

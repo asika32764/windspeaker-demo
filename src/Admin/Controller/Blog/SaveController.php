@@ -133,7 +133,7 @@ class SaveController extends Controller
 
 		if ($data->id)
 		{
-			$conditions['id'] = $data->id;
+			$conditions[] = 'id != ' . $data->id;
 		}
 
 		$blog = (new DataMapper('blogs'))->findOne($conditions);

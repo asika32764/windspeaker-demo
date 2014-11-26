@@ -8,6 +8,7 @@
 
 namespace Front\Controller;
 
+use Admin\Author\Author;
 use Front\Model\PostsModel;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
@@ -49,7 +50,7 @@ abstract class AbstractFrontController extends Controller
 		$this->data['ownerUser']   = $user;
 		$this->data['ownerAuthor'] = $author;
 		$this->data['user']        = User::get();
-		$this->data['author'] = $this->data['user'] ? (new DataMapper('authors'))->findOne(['user' => $this->data['user']->id]) : new Data;
+		$this->data['author']      = Author::get($user->id, $blog->id);
 
 		// Statics
 		$model['blog.id']        = $blog->id;
@@ -59,6 +60,7 @@ abstract class AbstractFrontController extends Controller
 		$model['post.type']      = 'static';
 
 		$this->data['statics'] = $model->getItems();
+		$this->data['blog']->link = 'http://' . $this->data['blog']->alias . '.windspeaker.co';
 
 		return $this->doExecute();
 	}

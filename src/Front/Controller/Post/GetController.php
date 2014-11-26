@@ -8,6 +8,7 @@
 
 namespace Front\Controller\Post;
 
+use Admin\Author\Author;
 use Front\Controller\AbstractFrontController;
 use Front\Model\PostModel;
 use Front\View\Post\PostHtmlView;
@@ -35,6 +36,7 @@ class GetController extends AbstractFrontController
 		$alias = $this->input->get('alias');
 
 		$view['post'] = $post = $model->getItem($id);
+		$view['postAuthor'] = Author::getPostAuthor($post->author);
 
 		if ($post->isNull())
 		{

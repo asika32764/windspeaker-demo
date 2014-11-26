@@ -39,12 +39,14 @@ class GetController extends AbstractFrontController
 
 		$model['blog.id']        = $view['blog']->id;
 		$model['blog.published'] = $view['user']->isNull();
-		$model['list.page']      = $this->input->getInt('page', 1);
+		$model['list.page']      = $page = $this->input->getInt('page', 1);
 		$model['list.limit']     = 10;
 		$model['list.start']     = ($model['list.page'] - 1) * $model['list.limit'];
 
-		$view['posts'] = $model->getItems();
+		$view['posts']      = $model->getItems();
 		$view['pagination'] = $model->getPagination()->build();
+		$view['page']       = $page;
+		$view['type']       = $this->input->get('type', 'home');
 
 		return $view->render();
 	}

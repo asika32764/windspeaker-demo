@@ -11,10 +11,10 @@
     <link href="{{ $uri['media.path'] }}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ $uri['media.path'] }}font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <!-- Morris -->
+    {{--<!-- Morris -->--}}
     {{--<link href="{{ $uri['media.path'] }}css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">--}}
 
-    <!-- Gritter -->
+    {{--<!-- Gritter -->--}}
     {{--<link href="{{ $uri['media.path'] }}js/plugins/gritter/jquery.gritter.css" rel="stylesheet">--}}
 
     <link href="{{ $uri['media.path'] }}css/animate.css" rel="stylesheet">
@@ -33,7 +33,10 @@
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="{{ $uri['media.path'] }}#"><i class="fa fa-bars"></i> </a>
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                <i class="fa fa-bars"></i>
+            </a>
+
             <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                 <div class="form-group">
                     <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
@@ -212,7 +215,7 @@
 
     <!-- Custom and plugin javascript -->
     <script src="{{ $uri['media.path'] }}js/inspinia.js"></script>
-    {{--<script src="{{ $uri['media.path'] }}js/plugins/pace/pace.min.js"></script>--}}
+    <script src="{{ $uri['media.path'] }}js/plugins/pace/pace.min.js"></script>
 
     <!-- jQuery UI -->
     <script src="{{ $uri['media.path'] }}js/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -231,6 +234,8 @@
 
     {{--<!-- ChartJS-->--}}
     {{--<script src="{{ $uri['media.path'] }}js/plugins/chartJs/Chart.min.js"></script>--}}
+
+    @yield('script')
 
     <script src="{{ $uri['media.path'] }}js/windspeaker.js"></script>
 

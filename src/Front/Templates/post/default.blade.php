@@ -1,6 +1,10 @@
 {{-- Part of windspeaker project. --}}
 @extends('front-html')
 
+@section('page_title')
+{{{ $post->title }}} | {{{ $blog->title }}}
+@stop
+
 @section('main_content')
 
     <h1 class="page-title">
@@ -9,7 +13,7 @@
         </a>
     </h1>
     <h2 class="sub-title">
-        Written by <span class="fn">{{{ $post->author_name ? : $post->user_fullname }}}</span> on
+        Written by <span class="fn">{{{ $postAuthor->name }}}</span> on
         <time datetime="{{{ $post->created }}} UTC" pubdate data-updated="true">
             {{{ $post->created }}}
         </time>

@@ -4,13 +4,11 @@
  * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
  * @license    GNU General Public License version 2 or later;
  */
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-	/*padding-top: 50px;*/
-	/*padding-bottom: 20px;*/
+  /*padding-top: 50px;*/
+  /*padding-bottom: 20px;*/
 }
-
 /* Table */
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -18,5 +16,32 @@ body {
 .table > thead > tr > td,
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
-	vertical-align: middle;
+  vertical-align: middle;
+}
+/* Editor */
+.editor-toolbar {
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
+  margin: 0;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #E7EAEC;
+  z-index: 2000;
+}
+.editor-toolbar .btn-group {
+  margin-top: 5px;
+}
+.editor-toolbar .btn-white:hover {
+  color: #333333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.editor-inner {
+  padding: 10px 15px;
+}
+.editor-inner .preview-col {
+  border-left: 1px solid #eee;
+}
+#windspeaker-editor {
+  min-height: 500px;
 }

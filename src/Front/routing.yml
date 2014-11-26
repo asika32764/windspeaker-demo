@@ -1,15 +1,25 @@
 home:
     pattern: '/'
     controller: 'Front\Controller\Posts'
+    variables:
+        type: home
 
 posts:
     pattern: 'page(/page)'
     controller: 'Front\Controller\Posts'
+    variables:
+        type: home
 
 post_default:
-    pattern: post/(id)(/alias)
+    pattern: post/(id)-(alias)
     controller: 'Front\Controller\Post'
+    requirements:
+            id: \d+
 
 static:
-    pattern: page/(id)(/alias)
+    pattern: page/(id)-(alias)
     controller: 'Front\Controller\Static'
+    variables:
+        type: static
+    requirements:
+            id: \d+
