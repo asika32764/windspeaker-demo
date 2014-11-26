@@ -1,5 +1,9 @@
-posts:
+home:
     pattern: '/'
+    controller: 'Front\Controller\Posts'
+
+posts:
+    pattern: 'page(/page)'
     controller: 'Front\Controller\Posts'
 
 post_default:

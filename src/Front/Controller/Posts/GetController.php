@@ -9,6 +9,7 @@
 namespace Front\Controller\Posts;
 
 use Admin\Author\Author;
+use Front\Controller\AbstractFrontController;
 use Front\Model\PostsModel;
 use Front\View\Posts\PostsHtmlView;
 use Windwalker\Core\Authenticate\User;
@@ -21,7 +22,7 @@ use Windwalker\Ioc;
  * 
  * @since  {DEPLOY_VERSION}
  */
-class GetController extends Controller
+class GetController extends AbstractFrontController
 {
 	/**
 	 * Execute the controller.
@@ -31,37 +32,26 @@ class GetController extends Controller
 	 * @throws  \LogicException
 	 * @throws  \RuntimeException
 	 */
-	public function execute()
+	public function doExecute()
 	{
-		$blog = Ioc::get('current.blog', 'front');
-		$author = (new DataMapper('authors'))->findOne(['blog' => $blog->id, 'owner' => 1]);
-		$user = (new DataMapper('users'))->findOne(['id' => $author->user]);
-
-		$currentUser = User::get();
-		$currentAuthor = (new DataMapper('authors'))->findOne(['user' => $currentUser->id]);
-
 		$model = new PostsModel;
-		$view = new PostsHtmlView;
+		$view  = new PostsHtmlView($this->data);
 
-		$model['blog.id'] = $blog->id;
-		$model['blog.published'] = $currentAuthor->isNull();
-		$model['list.start'] = $this->input->getInt('start');
-		$model['list.limit'] = 10;
+		$model['blog.id']        = $view['blog']->id;
+		$model['blog.published'] = $view['user']->isNull();
+		$model['list.page']      = $this->input->getInt('page', 1);
+		$model['list.limit']     = 10;
+		$model['list.start']     = ($model['list.page'] - 1) * $model['list.limit'];
 
 		$view['posts'] = $model->getItems();
+		$view['pagination'] = $model->getPagination()->build();
 
-		$model['list.start'] = null;
-		$model['list.limit'] = null;
+		$model['list.start']     = null;
+		$model['list.limit']     = null;
 		$model['blog.published'] = true;
-		$model['post.type'] = 'static';
+		$model['post.type']      = 'static';
 
 		$view['statics'] = $model->getItems();
-
-		$view['ownerUser']   = $user;
-		$view['ownerAuthor'] = $author;
-		$view['user']   = $currentUser;
-		$view['author'] = $currentAuthor;
-		$view['blog'] = $blog;
 
 		return $view->render();
 	}

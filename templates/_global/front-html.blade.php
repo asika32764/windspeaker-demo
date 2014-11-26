@@ -42,23 +42,7 @@
     		<div class="uk-container uk-container-center">
     			<div class="uk-width-medium-4-6 uk-container-center">
 
-                    @foreach($posts as $k => $post)
-    				<h1 class="page-title">
-    					<a href="{{{ $post->link }}}">
-    						{{{ $post->title }}}
-    					</a>
-    				</h1>
-    				<h2 class="sub-title">
-    					Written by <span class="fn">{{{ $post->author_name ? : $post->user_fullname }}}</span> on
-    					<time datetime="{{{ $post->created }}} UTC" pubdate data-updated="true">
-    					    {{{ $post->created }}}
-    					</time>
-    				</h2>
-
-    				<article class="article-content">
-    				    {{ $post->introtext }}
-    				</article>
-    				@endforeach
+                    @yield('main_content')
 
     			</div>
     		</div>
@@ -73,16 +57,19 @@
     				<img src="http://asukademy.com/media/img/asukademy-logo-hex.png" width="150" alt="Footer LOGO"></a>
     		</div>
 
-    		<p class="uk-text-center social-buttons">
-    			<a target="_blank" class="uk-icon-button uk-icon-facebook" href="https://fb.me/asukademy"></a>
+    		{{--<p class="uk-text-center social-buttons">--}}
+    			{{--<a target="_blank" class="uk-icon-button uk-icon-facebook" href="https://fb.me/asukademy"></a>--}}
 
-    			<a target="_blank" class="uk-icon-button uk-icon-github" href="https://github.com/asukademy"></a>
+    			{{--<a target="_blank" class="uk-icon-button uk-icon-github" href="https://github.com/asukademy"></a>--}}
 
-    			<a class="uk-icon-button uk-icon-envelope-o" href="mailto:asika32764@gmail.com"></a>
-    		</p>
+    			{{--<a class="uk-icon-button uk-icon-envelope-o" href="mailto:asika32764@gmail.com"></a>--}}
+    		{{--</p>--}}
 
     		<p>
-    			Copyright © 2014 Asukademy. All Rights Reserved.
+    			Copyright © 2014 {{{ $ownerUser->fullname }}}. All Rights Reserved.
+    		</p>
+    		<p>
+    		    Powered by <a href="http://windspeaker.co">WindSpeaker</a>
     		</p>
     		<p class="back">
     			<a href="#" data-uk-smooth-scroll><span class="uk-icon-chevron-up"></span> Back to Top</a>

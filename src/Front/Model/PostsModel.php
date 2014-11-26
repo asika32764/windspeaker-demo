@@ -8,6 +8,7 @@
 
 namespace Front\Model;
 
+use Kilte\Pagination\Pagination;
 use Windspeaker\Model\ListModel;
 use Windwalker\Query\Query;
 use Windwalker\Query\QueryElement;
@@ -33,7 +34,9 @@ class PostsModel extends ListModel
 		$queryHelper->addTable('post', 'posts')
 			->addTable('author', 'authors', 'post.author = author.id')
 			->addTable('user',   'users',   'user.id = author.user')
-			->addTable('blog',   'blogs',   'post.blog = blog.id');
+			->addTable('blog',   'blogs',   'post.blog = blog.id')
+			->addTable('catmap', 'category_post_maps', 'catmap.post = post.id')
+			->addTable('category', 'categories', 'category.id = catmap.category');
 
 		$query->select($queryHelper->getSelectFields())
 			->where($query->format('%n = %q', 'blog.id', $this['blog.id']))
@@ -54,7 +57,35 @@ class PostsModel extends ListModel
 			$query->where(new QueryElement('()', $search, ' OR '));
 		}
 
+		$query->group('post.id');
+
 		return $query;
 	}
+
+	/**
+	 * getPagination
+	 *
+	 * @param integer $total
+	 *
+	 * @return  Pagination
+	 */
+	public function getPagination($total = null)
+	{
+		$total = $total ? : $this->getTotal();
+
+		return new Pagination($total, $this->get('list.page', 1), $this['list.limit']);
+	}
+
+	/**
+	 * getTotal
+	 *
+	 * @return  integer
+	 */
+	public function getTotal()
+	{
+		return $this->fetch('total', function()
+		{
+			return $this->db->setQuery('SELECT FOUND_ROWS();')->loadResult();
+		});
+	}
 }
- 

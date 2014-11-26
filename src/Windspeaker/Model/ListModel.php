@@ -94,6 +94,10 @@ abstract class ListModel extends DatabaseModel
 			$profiler->mark(uniqid() . ' - ' . (string) $query->dump());
 		}
 
+		$select = $query->select;
+		$select = str_replace('SELECT ', 'SQL_CALC_FOUND_ROWS ', $select);
+		$query->clear('select')->select($select);
+
 		return $this->db->getReader($query)->loadObjectList();
 	}
 
