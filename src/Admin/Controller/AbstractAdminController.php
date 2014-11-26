@@ -11,6 +11,7 @@ namespace Admin\Controller;
 use Admin\Blog\Blog;
 use Admin\Controller\Widget\SidebarController;
 use Admin\Model\BlogModel;
+use Admin\Model\BlogsModel;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Data\Data;
@@ -47,11 +48,17 @@ abstract class AbstractAdminController extends Controller
 	 */
 	public function execute()
 	{
+		$model = new BlogsModel;
+
+		$model['user.id'] = User::get()->id;
+
 		$data['activeMenu'] = $this->input->get('activeMenu', 'dashboard');
+		$data['hideMenu'] = $this->input->get('hideMenu', 0);
 		$data['widget'] = new Data;
 		$data['widget']['sidebar'] = (new SidebarController($this->input, $this->app))->execute();
 
 		$data['blog'] = Blog::get();
+		$data['blogs'] = $model->getItems();
 
 		$data['profiler'] = WINDWALKER_DEBUG ? Ioc::getProfiler() : null;
 

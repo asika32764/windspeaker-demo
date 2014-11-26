@@ -13,6 +13,9 @@ posts:
 post:
     pattern: post(/id)
     controller: 'Admin\Controller\Post'
+    variables:
+        activeMenu: dashboard
+        hideMenu: 1
 
 post_state_up:
     pattern: post/state/up/(id)

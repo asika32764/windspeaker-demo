@@ -19,7 +19,14 @@
                 return ace.getValue();
             },
             setValue: function(val) {
+				var pos = ace.getCursorPosition();
+
 	            ace.setValue(val);
+
+	            ace.getSelection().clearSelection();
+	            ace.getSelection().moveCursorTo(pos.row, pos.column);
+
+	            ace.focus();
             },
 	        insert: function(val) {
 		        ace.insert(val);

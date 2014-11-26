@@ -29,25 +29,6 @@ $return = base64_encode($uri['current']);
                 </div>
             </li>
 
-            <li>
-                <div class="btn-group">
-                    <button type="button" data-toggle="dropdown"  style="max-width: 200px;" class="btn btn-primary dropdown-toggle">
-                        <span class="current-blog-inner">{{{ $blog->title }}}</span>
-                        &nbsp;<i class="fa fa-angle-down"></i>
-                    </button>
-                    <ul role="menu" class="dropdown-menu">
-                        @if ($blogs)
-                            @foreach ($blogs as $item)
-                            <li class="">
-                                <a href="{{{ Router::buildHtml('admin:switchblog', ['id' => $item->id, 'return' => $return]) }}}">{{{ $item->title }}}</a>
-                            </li>
-                            @endforeach
-                            <li class="divider"></li>
-                        @endif
-                        <li><a href="#">Add New Blog</a></li>
-                    </ul>
-                </div>
-            </li>
 
             {{-- Articles --}}
             <li class="{{ $activeMenu == 'dashboard' ? 'active' : '' }}">

@@ -30,6 +30,7 @@ class GetController extends AbstractAdminController
 		$model = new PostModel;
 
 		$view['item'] = $model->getItem();
+		$view['type'] = $this->input->get('type', 'post');
 
 		return $view->setLayout('edit')->render();
 	}

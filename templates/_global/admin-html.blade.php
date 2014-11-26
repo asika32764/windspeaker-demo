@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body class="{{{ $hideMenu ? 'mini-navbar' : '' }}}">
     <div id="wrapper">
         <!--BEGIN SIDEBAR MENU-->
         {{ $widget->sidebar }}
@@ -37,11 +37,29 @@
                 <i class="fa fa-bars"></i>
             </a>
 
-            <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
-                <div class="form-group">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                </div>
-            </form>
+            <?php
+            use Windwalker\Core\Router\Router;
+
+            $return = base64_encode($uri['current']);
+            ?>
+
+            <div class="blog-selector btn-group pull-left">
+                <button type="button" data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle">
+                    <span class="current-blog-inner">{{{ $blog->title }}}</span>
+                    &nbsp;<i class="fa fa-angle-down"></i>
+                </button>
+                <ul role="menu" class="dropdown-menu">
+                    @if ($blogs)
+                        @foreach ($blogs as $item)
+                        <li class="{{{ $blog->id == $item->id ? 'active' : '' }}}">
+                            <a href="{{{ Router::buildHtml('admin:switchblog', ['id' => $item->id, 'return' => $return]) }}}">{{{ $item->title }}}</a>
+                        </li>
+                        @endforeach
+                        <li class="divider"></li>
+                    @endif
+                    <li><a href="#">Add New Blog</a></li>
+                </ul>
+            </div>
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>

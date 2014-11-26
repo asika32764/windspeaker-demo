@@ -2,6 +2,14 @@
 
 @extends('admin-html')
 
+@section('page_title')
+    @if ($type == 'static')
+    Static Pages Edit
+    @else
+    Articles Edit
+    @endif
+@stop
+
 @section('main_content')
 <div class="ibox float-e-margins">
 	<div class="ibox-content no-padding">
@@ -16,28 +24,51 @@
             </div>
 
             <div class="btn-group">
-                <button id="button-strong" class="btn btn-default btn-white  btn-sm">B</button>
-                <button id="button-italic" class="btn btn-default btn-white  btn-sm"><em>I</em></button>
+                <button id="button-strong" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-bold icon-bold"></i>
+                </button>
+                <button id="button-italic" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-italic icon-italic"></i>
+                </button>
             </div>
 
             <div class="btn-group">
-                <button id="button-ul" class="btn btn-default btn-white  btn-sm">ul</button>
-                <button id="button-ol" class="btn btn-default btn-white  btn-sm">ol</button>
+                <button id="button-ul" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-list-ul icon-list-ul"></i>
+                </button>
+                <button id="button-ol" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-list-ol icon-list-ol">  </i>
+                </button>
             </div>
 
             <div class="btn-group">
-                <button id="button-img" class="btn btn-default btn-white  btn-sm">Img</button>
-                <button id="button-link" class="btn btn-default btn-white  btn-sm">Link</button>
+                <button id="button-img" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-picture-o icon-picture"></i>
+                </button>
+                <button id="button-link" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-link icon-link"></i>
+                </button>
+                {{--<button id="button-video" class="btn btn-default btn-white  btn-sm">--}}
+                    {{--<i class="fa fa-youtube-play icon-play"></i>--}}
+                {{--</button>--}}
             </div>
 
             <div class="btn-group">
-                <button id="button-quote" class="btn btn-default btn-white  btn-sm">Quote</button>
-                <button id="button-codeblock" class="btn btn-default btn-white  btn-sm">Code Block</button>
-                <button id="button-code" class="btn btn-default btn-white  btn-sm">Code Inline</button>
+                <button id="button-quote" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-quote-right icon-quote-right"></i>
+                </button>
+                <button id="button-codeblock" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-file-code-o icon-file-code"></i>
+                </button>
+                <button id="button-code" class="btn btn-default btn-white  btn-sm">
+                    <i class="fa fa-code icon-code"></i>
+                </button>
             </div>
 
             <div class="btn-group">
-                <button id="button-preview" class="btn btn-success btn-sm">Preview</button>
+                <button id="button-preview" class="btn btn-success btn-sm">
+                    <i class="fa fa-eye icon-eye"></i>
+                </button>
             </div>
 	    </div>
 
@@ -63,6 +94,7 @@
 
 @section('script')
 <script src="{{{ $uri['media.path'] }}}js/ace/src-min/ace.js"></script>
+<script src="{{{ $uri['media.path'] }}}js/ace/src-min/ext-emmet.js"></script>
 <script src="{{{ $uri['media.path'] }}}js/fongshen/editor/ace-adapter.js"></script>
 <script src="{{{ $uri['media.path'] }}}js/fongshen/fongshen.js"></script>
 <script src="{{{ $uri['media.path'] }}}js/uikit.min.js"></script>
@@ -71,6 +103,8 @@
 <script src="{{{ $uri['media.path'] }}}js/markdown/marked.min.js"></script>
 <script src="{{{ $uri['media.path'] }}}js/inline-attachment/inline-attach.js"></script>
 <script src="{{{ $uri['media.path'] }}}js/inline-attachment/ace.inline-attach.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js"></script>
+<script src="{{{ $uri['media.path'] }}}js/emmet/emmet.js"></script>
 
 <script>
 jQuery(document).ready(function($)
@@ -89,14 +123,6 @@ jQuery(document).ready(function($)
             smartLists: true,
             smartypants: false
         });
-
-        console.log(string);
-
-        string = string.replace(/&amp;/g, "&").
-            replace(/&lt;/g, "<").
-            replace(/&gt;/g, ">").
-            replace(/&quot;/g, "\"").
-            replace(/&#39;/g, "'");
 
         $(this.previewContainer).html(marked(string));
     };
@@ -118,25 +144,32 @@ jQuery(document).ready(function($)
     };
 
     var Fongshen = editor.fongshen(new AceAdapter(aceOptions), options);
-    var ace = Fongshen.editor.ace;
+    var editor = Fongshen.editor.ace;
 
-    ace.renderer.setShowGutter(false);
-    ace.setShowPrintMargin(false);
+
+    editor.renderer.setShowGutter(false);
+    editor.setShowPrintMargin(false);
+
+    // Emmet
+    // editor.session.setMode("ace/mode/html");
+    editor.setOption("enableEmmet", true);
+
+    {{ WINDWALKER_DEBUG ? 'window.editor = ace;' : '' }}
 
     var heightUpdateFunction = function() {
 
         // http://stackoverflow.com/questions/11584061/
         var newHeight =
-                  ace.getSession().getScreenLength()
-                  * ace.renderer.lineHeight
-                  + ace.renderer.scrollBar.getWidth();
+                  editor.getSession().getScreenLength()
+                  * editor.renderer.lineHeight
+                  + editor.renderer.scrollBar.getWidth();
 
         $('#windspeaker-editor').height(newHeight.toString() + "px");
         $('#editor-section').height(newHeight.toString() + "px");
 
         // This call is required for the editor to fix all of
         // its inner structure for adapting to a change in size
-        ace.resize();
+        editor.resize();
     };
 
     // Set initial size to match initial content
@@ -144,7 +177,7 @@ jQuery(document).ready(function($)
 
     // Whenever a change happens inside the ACE editor, update
     // the size again
-    ace.getSession().on('change', heightUpdateFunction);
+    editor.getSession().on('change', heightUpdateFunction);
 
     // Attachment
     // -------------------------------------------------------------
@@ -186,7 +219,7 @@ jQuery(document).ready(function($)
         dataProcessor: function(data) { return data; }
     };
 
-    inlineAttach.attachToAce(ace, attachOptions);
+    inlineAttach.attachToAce(editor, attachOptions);
 
     // Buttons
     Fongshen.registerButton($('#button-h1'), {

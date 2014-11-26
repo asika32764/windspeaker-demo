@@ -18,6 +18,10 @@ body {
 .table > tfoot > tr > td {
   vertical-align: middle;
 }
+.blog-selector {
+  margin: 14px 5px 5px 20px;
+  padding: 0;
+}
 /* Editor */
 .editor-toolbar {
   padding-bottom: 5px;
@@ -78,6 +82,10 @@ body {
 }
 #preview-container p:first-child {
   margin-top: 0;
+}
+#preview-container p img:only-child {
+  display: block;
+  margin: 0 auto;
 }
 #preview-container img {
   max-width: 100%;
