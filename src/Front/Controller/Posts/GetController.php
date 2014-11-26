@@ -46,13 +46,6 @@ class GetController extends AbstractFrontController
 		$view['posts'] = $model->getItems();
 		$view['pagination'] = $model->getPagination()->build();
 
-		$model['list.start']     = null;
-		$model['list.limit']     = null;
-		$model['blog.published'] = true;
-		$model['post.type']      = 'static';
-
-		$view['statics'] = $model->getItems();
-
 		return $view->render();
 	}
 }

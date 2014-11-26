@@ -7,9 +7,9 @@ posts:
     controller: 'Front\Controller\Posts'
 
 post_default:
-    pattern: (id)-(alias)
+    pattern: post/(id)(/alias)
     controller: 'Front\Controller\Post'
 
 static:
-    pattern: page/(id)-(alias)
+    pattern: page/(id)(/alias)
     controller: 'Front\Controller\Static'

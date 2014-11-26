@@ -8,6 +8,7 @@
 
 namespace Front\Controller;
 
+use Front\Model\PostsModel;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Data\Data;
@@ -38,6 +39,8 @@ abstract class AbstractFrontController extends Controller
 	 */
 	public function execute()
 	{
+		$model = new PostsModel;
+
 		$blog   = Ioc::get('current.blog', 'front');
 		$author = (new DataMapper('authors'))->findOne(['blog' => $blog->id, 'owner' => 1]);
 		$user   = (new DataMapper('users'))->findOne(['id' => $author->user]);
@@ -47,6 +50,15 @@ abstract class AbstractFrontController extends Controller
 		$this->data['ownerAuthor'] = $author;
 		$this->data['user']        = User::get();
 		$this->data['author'] = $this->data['user'] ? (new DataMapper('authors'))->findOne(['user' => $this->data['user']->id]) : new Data;
+
+		// Statics
+		$model['blog.id']        = $blog->id;
+		$model['list.start']     = null;
+		$model['list.limit']     = null;
+		$model['blog.published'] = true;
+		$model['post.type']      = 'static';
+
+		$this->data['statics'] = $model->getItems();
 
 		return $this->doExecute();
 	}

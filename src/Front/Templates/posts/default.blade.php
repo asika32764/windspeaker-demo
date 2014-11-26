@@ -19,6 +19,10 @@
         {{ $post->introtext }}
     </article>
 
+    @if ($blog['disqus'])
+    <a href="{{{ $post->link }}}#disqus_thread">0 Comments</a>
+    @endif
+
     <hr/>
     @endforeach
 
