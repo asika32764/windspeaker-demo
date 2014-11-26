@@ -26,6 +26,6 @@ class PostHtmlView extends BladeHtmlView
 	 */
 	protected function prepareData($data)
 	{
-
+		$data['item']->text = $data['item']->introtext . "\n<!-- {READMORE} -->\n" . $data['item']->fulltext;
 	}
 }

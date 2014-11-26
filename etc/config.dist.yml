@@ -38,3 +38,7 @@ ioc:
         session: system.session
         cache: system.cache
         debugger: whoops
+amazon:
+    user:
+    access_key:
+    secret_key:

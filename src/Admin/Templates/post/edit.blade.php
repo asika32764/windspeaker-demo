@@ -45,18 +45,7 @@
             <div class="col-md-6 editor-col">
                 <fieldset>
                     <!-- Editor -->
-                    <div id="windspeaker-editor" class="" style="height: 500px;">drtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyudrtgery ertyeyrtyu
-
-# ABC
-
-``` php
-sdf;lmg
-tytruy
-```
-
-## CBA
-
-![img](23423.jpg)</div>
+                    <div id="windspeaker-editor" class="" style="height: 500px;">{{{ $item->text }}}</div>
                     <p align="center">Pull to resize</p>
                 </fieldset>
             </div>
@@ -80,11 +69,37 @@ tytruy
 <script src="{{{ $uri['media.path'] }}}js/components/sticky.min.js"></script>
 <script src="{{{ $uri['media.path'] }}}js/markdown/js-markdown-extra.js"></script>
 <script src="{{{ $uri['media.path'] }}}js/markdown/marked.min.js"></script>
+<script src="{{{ $uri['media.path'] }}}js/inline-attachment/inline-attach.js"></script>
+<script src="{{{ $uri['media.path'] }}}js/inline-attachment/ace.inline-attach.js"></script>
 
 <script>
 jQuery(document).ready(function($)
 {
     var editor = $('#windspeaker-editor');
+
+    var updatePreview = function(string)
+    {
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false
+        });
+
+        console.log(string);
+
+        string = string.replace(/&amp;/g, "&").
+            replace(/&lt;/g, "<").
+            replace(/&gt;/g, ">").
+            replace(/&quot;/g, "\"").
+            replace(/&#39;/g, "'");
+
+        $(this.previewContainer).html(marked(string));
+    };
 
     var options = {
         id: 'foo',
@@ -92,21 +107,7 @@ jQuery(document).ready(function($)
         previewAjaxPath: null,
         previewContainer: '#preview-container',
         autoPreviewDelay: 0,
-        previewHandler: function(string)
-        {
-            marked.setOptions({
-                renderer: new marked.Renderer(),
-                gfm: true,
-                tables: true,
-                breaks: false,
-                pedantic: false,
-                sanitize: true,
-                smartLists: true,
-                smartypants: false
-            });
-
-            $(this.previewContainer).html(marked(string));
-        }
+        previewHandler: updatePreview
         // buttons: FongshenMarkdownButtons
     };
 
@@ -130,8 +131,6 @@ jQuery(document).ready(function($)
                   * ace.renderer.lineHeight
                   + ace.renderer.scrollBar.getWidth();
 
-console.log(newHeight.toString());
-
         $('#windspeaker-editor').height(newHeight.toString() + "px");
         $('#editor-section').height(newHeight.toString() + "px");
 
@@ -146,6 +145,48 @@ console.log(newHeight.toString());
     // Whenever a change happens inside the ACE editor, update
     // the size again
     ace.getSession().on('change', heightUpdateFunction);
+
+    // Attachment
+    // -------------------------------------------------------------
+    var attachOptions = {
+        uploadUrl: '/upload',
+        uploadFieldName: 'file',
+        downloadFieldName: 'file',
+        allowedTypes: [
+            'image/jpeg',
+            'image/png',
+            'image/jpg',
+            'image/gif'
+        ],
+        progressText: '![Uploading file...]()',
+        urlText: "![file]({filename})",
+        errorText: "Error uploading file",
+        extraParams: {},
+        extraHeaders: {},
+
+        onReceivedFile: function(file) {},
+
+        onUploadedFile: function(response) {
+            setTimeout(function()
+            {
+                Fongshen.refreshPreview();
+            }, 200);
+        },
+
+        customErrorHandler: function() { return true; },
+
+        customUploadHandler: function(file) { return true; },
+
+        customReponseParser: function(xhr) {
+            return false;
+        },
+
+        uploadMethod: 'POST',
+
+        dataProcessor: function(data) { return data; }
+    };
+
+    inlineAttach.attachToAce(ace, attachOptions);
 
     // Buttons
     Fongshen.registerButton($('#button-h1'), {

@@ -46,10 +46,54 @@ body {
 	padding: 10px 15px;
 
 	.preview-col {
-		border-left: 1px solid #eee;
+		// border-left: 1px solid #eee;
+	}
+
+	.editor-col {
+		border-right: 1px solid #eee;
 	}
 }
 
 #windspeaker-editor {
 	min-height: 500px;
+	font-size: 15px;
+	line-height: 1.4;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+// preview-container
+#preview-container {
+	padding-top: 7px;
+	font-size: 15px;
+	line-height: 1.4;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+	h1, h2, h3, h4, h5, h6 {
+		margin-top: 1em;
+		margin-bottom: 1em;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	p {
+		margin-top: 1.2em;
+		margin-bottom: 1.2em;
+		font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	pre {
+		border: none;
+		padding: 15px 20px;
+	}
 }

@@ -39,9 +39,51 @@ body {
 .editor-inner {
   padding: 10px 15px;
 }
-.editor-inner .preview-col {
-  border-left: 1px solid #eee;
+.editor-inner .editor-col {
+  border-right: 1px solid #eee;
 }
 #windspeaker-editor {
   min-height: 500px;
+  font-size: 15px;
+  line-height: 1.4;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+#preview-container {
+  padding-top: 7px;
+  font-size: 15px;
+  line-height: 1.4;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+#preview-container h1,
+#preview-container h2,
+#preview-container h3,
+#preview-container h4,
+#preview-container h5,
+#preview-container h6 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+#preview-container h1:first-child,
+#preview-container h2:first-child,
+#preview-container h3:first-child,
+#preview-container h4:first-child,
+#preview-container h5:first-child,
+#preview-container h6:first-child {
+  margin-top: 0;
+}
+#preview-container p {
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+#preview-container p:first-child {
+  margin-top: 0;
+}
+#preview-container img {
+  max-width: 100%;
+  height: auto;
+}
+#preview-container pre {
+  border: none;
+  padding: 15px 20px;
 }

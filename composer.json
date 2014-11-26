@@ -19,6 +19,7 @@
 		"fzaninotto/faker": "~1.0@stable",
 		"michelf/php-markdown": "1.*",
 		"kilte/pagination": "1.1.1",
+		"tpyo/amazon-s3-php-class" : "*",
 
 		"illuminate/view" : "4.*"
 	},

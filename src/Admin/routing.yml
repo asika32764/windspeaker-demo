@@ -92,3 +92,8 @@ switchblog:
 profile:
     pattern: profile
     controller: 'Admin\Controller\Profile'
+
+# Upload
+upload:
+    pattern: upload
+    controller: 'Admin\Controller\Upload'
