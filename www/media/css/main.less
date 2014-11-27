@@ -5,6 +5,13 @@
  * @license    GNU General Public License version 2 or later;
  */
 
+// Mixins
+// ----------------------------------
+.transition(@dur) {
+	transition: all @dur;
+}
+
+
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
 	/*padding-top: 50px;*/
@@ -27,7 +34,96 @@ body {
 	padding: 0;
 }
 
-/* Editor */
+// Toolbar
+// -----------------------------------------------------------
+.banner-toolbar {
+	button.btn, a.btn {
+		font-size: 30px;
+		padding: 0px 10px;
+		background: transparent;
+		color: #999;
+		margin-left: 15px;
+		.transition(.5s);
+
+		&:hover {
+			color: #666;
+			.transition(.5s);
+		}
+	}
+}
+
+body.mini-navbar .navbar-default ul.nav.edit-menu {
+	 > li > a {
+		 font-size: 30px;
+		 padding: 15px;
+	}
+}
+
+// Editor
+.edit-post-information-section {
+	width : 700px;
+
+
+	.title-field {
+		margin-bottom: 10px;
+	}
+
+	.alias-field {
+		margin-bottom: 0;
+
+		input {
+			border: none;
+			padding: 3px 12px;
+			line-height: 120%;
+			height: 20px;
+
+			&:focus {
+				background-color: #eee;
+			}
+		}
+	}
+}
+
+.article-save-button a.changed {
+	color: rgb(250, 241, 217);
+	text-shadow: 0 0 4px rgba(250, 241, 217, .4);
+	-webkit-animation-name: blinker;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+	-webkit-animation-duration: 1.7s;
+}
+@-webkit-keyframes blinker {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: .7;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.article-save-button {
+	&,
+	&:focus,
+	&:hover {
+		a {
+			.transition(.2s);
+		}
+
+		a.light {
+			color: rgb(209, 253, 167) !important;
+			text-shadow: 0 0 4px rgba(209, 253, 167, 0.7) !important;
+			.transition(.2s);
+		}
+	}
+}
+
+.article-setting .popover {
+	visibility: hidden;
+}
+
 .editor-toolbar {
 	padding-bottom: 5px;
 	padding-left: 10px;
@@ -107,4 +203,20 @@ body {
 		border: none;
 		padding: 15px 20px;
 	}
+
+	hr.system-readmore {
+		background: #eee;
+		height: 20px;
+
+		&::after {
+			content: "READMORE";
+			display: block;
+			font-size: 12px;
+			line-height: 20px;
+			text-align: center;
+			color: #aaa;
+		}
+	}
 }
+
+

@@ -10,12 +10,47 @@
     @endif
 @stop
 
-@section('main_content')
-<form action="{{{ $uri['current'] }}}" method="post" id="adminForm">
+@section('toolbar')
+<a href="#" class="btn" data-toggle="modal" data-target="#newModal"><i class="fa fa-pencil-square-o"></i></a>
+@stop
 
-    <div class="toolabr">
-        <a class="btn btn-primary" href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:post') }}}">New</a>
-    </div>
+@section('main_content')
+<script>
+    var addPost = function(btn)
+    {
+        var form = $('#post-form');
+
+        var title = $('#post-title-input');
+
+        if (!title.val().trim())
+        {
+            return;
+        }
+
+        var data = {post: {}};
+
+        data.post.title = title.val();
+
+        $.ajax({
+            url: '{{{ \Windwalker\Core\Router\Router::buildHttp('admin:post') }}}',
+            data: data,
+            type: "POST",
+            success: function (data)
+            {
+                if (data.success)
+                {
+                    window.location = '{{{ \Windwalker\Core\Router\Router::buildHttp('admin:post') }}}/' + data.item.id;
+                }
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
+    };
+</script>
+
+<form action="{{{ $uri['current'] }}}" method="post" id="adminForm">
 
     <table class="table table-striped">
         <tbody>
@@ -80,5 +115,25 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="modal post-modal" id="newModal">
+    	<div class="modal-dialog">
+            <div class="modal-content animated fadeInUp">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title">Add New Article</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="post-form" action="{{{ $uri['base.base'] . \Windwalker\Core\Router\Router::build('admin:category') }}}" class="" method="post">
+                        <input type="text" id="post-title-input" class="form-control input-lg" placeholder="Article Title..." name="post[title]"/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" data-dismiss="modal" class="btn">Close</a>
+                  <a href="#" class="btn btn-primary" onclick="addPost(this);">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 @stop

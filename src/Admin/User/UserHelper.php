@@ -28,7 +28,7 @@ abstract class UserHelper
 	{
 		if (User::get()->isNull())
 		{
-			Ioc::getApplication()->redirect(Router::build('user:login'));
+			Ioc::getApplication()->redirect(Router::buildHttp('user:login'));
 		}
 
 		return true;

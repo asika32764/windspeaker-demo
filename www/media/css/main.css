@@ -22,7 +22,76 @@ body {
   margin: 14px 5px 5px 20px;
   padding: 0;
 }
-/* Editor */
+.banner-toolbar button.btn,
+.banner-toolbar a.btn {
+  font-size: 30px;
+  padding: 0px 10px;
+  background: transparent;
+  color: #999;
+  margin-left: 15px;
+  transition: all 0.5s;
+}
+.banner-toolbar button.btn:hover,
+.banner-toolbar a.btn:hover {
+  color: #666;
+  transition: all 0.5s;
+}
+body.mini-navbar .navbar-default ul.nav.edit-menu > li > a {
+  font-size: 30px;
+  padding: 15px;
+}
+.edit-post-information-section {
+  width: 700px;
+}
+.edit-post-information-section .title-field {
+  margin-bottom: 10px;
+}
+.edit-post-information-section .alias-field {
+  margin-bottom: 0;
+}
+.edit-post-information-section .alias-field input {
+  border: none;
+  padding: 3px 12px;
+  line-height: 120%;
+  height: 20px;
+}
+.edit-post-information-section .alias-field input:focus {
+  background-color: #eee;
+}
+.article-save-button a.changed {
+  color: #faf1d9;
+  text-shadow: 0 0 4px rgba(250, 241, 217, 0.4);
+  -webkit-animation-name: blinker;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  -webkit-animation-duration: 1.7s;
+}
+@-webkit-keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.article-save-button a,
+.article-save-button:focus a,
+.article-save-button:hover a {
+  transition: all 0.2s;
+}
+.article-save-button a.light,
+.article-save-button:focus a.light,
+.article-save-button:hover a.light {
+  color: #d1fda7 !important;
+  text-shadow: 0 0 4px rgba(209, 253, 167, 0.7) !important;
+  transition: all 0.2s;
+}
+.article-setting .popover {
+  visibility: hidden;
+}
 .editor-toolbar {
   padding-bottom: 5px;
   padding-left: 10px;
@@ -94,4 +163,16 @@ body {
 #preview-container pre {
   border: none;
   padding: 15px 20px;
+}
+#preview-container hr.system-readmore {
+  background: #eee;
+  height: 20px;
+}
+#preview-container hr.system-readmore::after {
+  content: "READMORE";
+  display: block;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  color: #aaa;
 }

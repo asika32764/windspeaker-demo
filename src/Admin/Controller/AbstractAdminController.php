@@ -55,7 +55,7 @@ abstract class AbstractAdminController extends Controller
 		$data['activeMenu'] = $this->input->get('activeMenu', 'dashboard');
 		$data['hideMenu'] = $this->input->get('hideMenu', 0);
 		$data['widget'] = new Data;
-		$data['widget']['sidebar'] = (new SidebarController($this->input, $this->app))->execute();
+		// $data['widget']['sidebar'] = (new SidebarController($this->input, $this->app))->execute();
 
 		$data['blog'] = Blog::get();
 		$data['blogs'] = $model->getItems();
