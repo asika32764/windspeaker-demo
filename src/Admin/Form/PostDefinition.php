@@ -8,6 +8,7 @@
 
 namespace Admin\Form;
 
+use Admin\Form\Field\AuthorsField;
 use Admin\Form\Field\CategoriesField;
 use Windwalker\Data\Data;
 use Windwalker\Form\Field\ListField;
@@ -64,6 +65,12 @@ class PostDefinition implements FieldDefinitionInterface
 					new Option('Publish', 1),
 					new Option('Unpublish', 0)
 			))->set('class', 'form-control');
+
+		$form->addField(new AuthorsField('author', 'Author'))
+			->setOptions(array(
+				new Option('- Select Author -', '0')
+			))->set('class', 'form-control')
+			->setBlog($this->blog->id);
 	}
 }
  

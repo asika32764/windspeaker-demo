@@ -26,14 +26,19 @@ class GetController extends AbstractAdminController
 	 */
 	protected function doExecute()
 	{
+		$type = $this->input->get('type', 'post');
+		$type = $type == 'post' ? $type : 'static';
+
 		$view = new PostHtmlView($this->data);
 		$model = new PostModel;
+
+		$model['post.type'] = $type;
 
 		$id = $this->input->get('id');
 
 		$view['item'] = $model->getItem($id);
-		$view['type'] = $this->input->get('type', 'post');
-		$view['form'] = $model->getForm();
+		$view['type'] = $type;
+		$view['form'] = $model->getForm($view['item']);
 
 		return $view->setLayout('edit')->render();
 	}

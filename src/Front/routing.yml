@@ -16,8 +16,8 @@ post_default:
     requirements:
             id: \d+
 
-static:
-    pattern: page/(id)-(alias)
+static_default:
+    pattern: static/(id)-(alias)
     controller: 'Front\Controller\Static'
     variables:
         type: static

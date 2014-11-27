@@ -41,7 +41,14 @@ class PostModel extends DatabaseModel
 			return new Data;
 		}
 
-		return (new DataMapper('posts'))->findOne($pk);
+		$item = (new DataMapper('posts'))->findOne($pk);
+
+		if ($item->notNull())
+		{
+			$item->category = (new DataMapper('category_post_maps'))->findColumn('category', ['post' => $item->id]);
+		}
+
+		return $item;
 	}
 
 	/**
@@ -63,7 +70,22 @@ class PostModel extends DatabaseModel
 
 		$mapper = new DataMapper('posts');
 
-		return $mapper->saveOne($data);
+		$data = $mapper->saveOne($data);
+
+		// Save Categories
+		$categories = $data->category ? : [];
+
+		$dataSet = [];
+
+		foreach ($categories as $k => $cat)
+		{
+			$dataSet[$k]['category'] = $cat;
+			$dataSet[$k]['post'] = $data->id;
+		}
+
+		(new DataMapper('category_post_maps'))->flush($dataSet, ['post' => $data->id]);
+
+		return $data;
 	}
 
 	/**
@@ -80,6 +102,11 @@ class PostModel extends DatabaseModel
 		$form->defineFormFields(new PostDefinition(Blog::get()));
 
 		$form->bind($data);
+
+		if ($this['post.type'] == 'static')
+		{
+			$form->removeField('category');
+		}
 
 		return $form;
 	}

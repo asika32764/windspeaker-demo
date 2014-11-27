@@ -61,13 +61,21 @@
                 </ul>
             </div>
         </div>
-            <ul class="nav navbar-top-links navbar-right">
 
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="{{{ 'http://' . $blog->alias . '.windspeaker.co' }}}" target="_blank">
+                        <i class="fa fa-globe"></i> Preview Blog
+                    </a>
+                </li>
+
+ @if (!$hideMenu)
                 <li>
                     <a href="{{{ \Windwalker\Core\Router\Router::buildHtml('user:logout') }}}">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
+@endif
             </ul>
 
         </nav>
@@ -109,10 +117,10 @@
                 </div>
                 <div class="footer">
                     <div class="pull-right">
-                        10GB of <strong>250GB</strong> Free.
+
                     </div>
                     <div>
-                        <strong>Copyright</strong> Example Company &copy; 2014-2015
+                        <strong>Copyright</strong> Windspeaker &copy; {{ gmdate('Y') }}
                     </div>
                 </div>
             </div>

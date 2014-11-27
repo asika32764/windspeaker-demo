@@ -2,6 +2,10 @@
 
 @extends('admin-html')
 
+<?php
+$route = 'admin:' . $type;
+?>
+
 @section('page_title')
     @if ($type == 'static')
     Static Pages Manage
@@ -11,7 +15,7 @@
 @stop
 
 @section('toolbar')
-<a href="#" class="btn" data-toggle="modal" data-target="#newModal"><i class="fa fa-pencil-square-o"></i></a>
+<a href="#" class="btn" data-toggle="modal" data-target="#newModal"><i class="fa fa-pencil-square-o"></i> New</a>
 @stop
 
 @section('main_content')
@@ -32,14 +36,14 @@
         data.post.title = title.val();
 
         $.ajax({
-            url: '{{{ \Windwalker\Core\Router\Router::buildHttp('admin:post') }}}',
+            url: '{{{ \Windwalker\Core\Router\Router::buildHttp($route) }}}',
             data: data,
             type: "POST",
             success: function (data)
             {
                 if (data.success)
                 {
-                    window.location = '{{{ \Windwalker\Core\Router\Router::buildHttp('admin:post') }}}/' + data.item.id;
+                    window.location = '{{{ \Windwalker\Core\Router\Router::buildHttp($route) }}}/' + data.item.id;
                 }
             },
             error: function(data)
@@ -68,12 +72,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 @if ($item->state)
-                                <a onclick="Windspeaker.post('{{{ \Windwalker\Core\Router\Router::buildHtml('admin:post_state_down', ['id' => $item->id]) }}}', 'put')"
+                                <a onclick="Windspeaker.post('{{{ \Windwalker\Core\Router\Router::buildHtml($route . '_state_down', ['id' => $item->id]) }}}', 'put')"
                                     href="javascript:void(0);">
                                     <span class="fa fa-times"></span> Unpublish
                                 </a>
                                 @else
-                                <a onclick="Windspeaker.post('{{{ \Windwalker\Core\Router\Router::buildHtml('admin:post_state_up', ['id' => $item->id]) }}}', 'put')"
+                                <a onclick="Windspeaker.post('{{{ \Windwalker\Core\Router\Router::buildHtml($route . '_state_up', ['id' => $item->id]) }}}', 'put')"
                                     href="javascript:void(0);">
                                     <span class="fa fa-globe"></span> Publish
                                 </a>
@@ -82,7 +86,7 @@
                             <li class="divider"></li>
                             <li>
                                 <a type="button" href="javascript:void(0);"
-                                    onclick="Windspeaker.deleteItem('{{{ \Windwalker\Core\Router\Router::buildHtml('admin:post', ['id' => $item->id]) }}}')">
+                                    onclick="Windspeaker.deleteItem('{{{ \Windwalker\Core\Router\Router::buildHtml($route, ['id' => $item->id]) }}}')">
                                     <span class="fa fa-trash text-danger"></span> <span class="text-danger">Delete</span>
                                 </a>
                             </li>
@@ -91,7 +95,7 @@
                 </td>
                 <td>
                     <h4>
-                        <a href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:post', ['id' => $item->id]) }}}">
+                        <a href="{{{ \Windwalker\Core\Router\Router::buildHtml($route, ['id' => $item->id]) }}}">
                             {{{ $item->title  }}}
                         </a>
                     </h4>
@@ -107,7 +111,7 @@
                 </td>
                 <td>
                     <a target="_blank" class="btn btn-success"
-                        href="{{{ 'http://' . $blog->alias . '.windspeaker.co' . \Windwalker\Core\Router\Router::buildHtml($route, ['id' => $item->id, 'alias' => $item->alias]) }}}">
+                        href="{{{ 'http://' . $blog->alias . '.windspeaker.co' . \Windwalker\Core\Router\Router::buildHtml('front:' . $type . '_default', ['id' => $item->id, 'alias' => $item->alias]) }}}">
                         <span class="fa fa-eye"></span>
                     </a>
                 </td>

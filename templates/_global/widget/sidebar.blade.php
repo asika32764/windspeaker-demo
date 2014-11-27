@@ -12,21 +12,19 @@ $return = base64_encode($uri['current']);
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element"> <span>
-                    <img alt="image" class="img-circle" src="{{ $uri['media.path'] }}img/profile_small.jpg" />
+                    <img alt="image" class="img-circle" src="{{{ \Admin\User\UserHelper::getAvatar(null, 48) }}}" />
                      </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="{{ $uri['media.path'] }}#">
-                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                     </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{{ $user->fullname }}}</strong>
+                     </span> <span class="text-muted text-xs block">{{{ $user->username }}} <b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="{{ Router::buildHttp('admin:profile'); }}">Profile</a></li>
-                        <li><a href="{{ $uri['media.path'] }}contacts.html">Contacts</a></li>
-                        <li><a href="{{ $uri['media.path'] }}mailbox.html">Mailbox</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ $uri['media.path'] }}login.html">Logout</a></li>
+                        <li><a href="{{ Router::buildHttp('user:logout') }}">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
-                    IN+
+                    WS
                 </div>
             </li>
 

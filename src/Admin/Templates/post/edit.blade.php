@@ -49,7 +49,7 @@
 
     {{-- Save --}}
     <li class="article-save-button">
-        <a href="javascript:void(0);" onclick="WindspeakerEdit.save('{{{ \Windwalker\Core\Router\Router::buildHttp('admin:post') }}}');">
+        <a href="javascript:void(0);" onclick="WindspeakerEdit.save('{{{ \Windwalker\Core\Router\Router::buildHttp('admin:' . $type) }}}');">
             <i class="fa fa-save fa-fw"></i>
         </a>
     </li>
@@ -63,7 +63,7 @@
 
     {{-- Back --}}
     <li class="">
-        <a href="{{{ \Windwalker\Core\Router\Router::buildHttp('admin:dashboard') }}}">
+        <a href="{{{ \Windwalker\Core\Router\Router::buildHttp('admin:' . ($type == 'post' ? 'dashboard' : 'statics')) }}}">
             <i class="fa fa-sign-in fa-flip-horizontal fa-fw"></i>
         </a>
     </li>
@@ -137,7 +137,6 @@
                         <fieldset>
                             <!-- Editor -->
                             <div id="windspeaker-editor" class="" style="height: 500px;">{{{ $item->text }}}</div>
-                            <p align="center">Pull to resize</p>
                         </fieldset>
                     </div>
                     <div class="col-md-6 preview-col">
@@ -160,10 +159,15 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Author</label>
+                    {{ $form->getField('author')->renderInput() }}
+                </div>
+@if ($type != 'static')
+                <div class="form-group">
                     <label>Categories</label>
                     {{ $form->getField('category')->renderInput() }}
                 </div>
-
+@endif
                 <div class="form-group">
                     <label>Publish</label>
                     {{ $form->getField('state')->renderInput() }}
@@ -175,6 +179,10 @@
     <div class="hidden-inputs">
         <input id="post-id" name="id" type="hidden" value="{{{ $item->id }}}"/>
     </div>
+
+    <p align="center">
+        Powered by <a href="http://about.asika.tw/fongshen-editor/" target="_blank">FongShen Editor</a> & <a href="http://ace.c9.io/" target="_blank">ACE</a>
+    </p>
 @stop
 
 

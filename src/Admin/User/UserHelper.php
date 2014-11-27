@@ -45,4 +45,20 @@ abstract class UserHelper
 	{
 		return !User::get($user)->isNull();
 	}
+
+	/**
+	 * getAvatar
+	 *
+	 * @param int $pk
+	 *
+	 * @return  string
+	 */
+	public static function getAvatar($pk = null, $size = 48)
+	{
+		$user = User::get($pk);
+
+		$hash = md5( strtolower( trim( $user->email ) ) );
+
+		return 'http://www.gravatar.com/avatar/' . $hash . '?d=mm&s=' . $size;
+	}
 }

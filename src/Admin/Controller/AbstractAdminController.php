@@ -52,13 +52,14 @@ abstract class AbstractAdminController extends Controller
 
 		$model['user.id'] = User::get()->id;
 
-		$data['activeMenu'] = $this->input->get('activeMenu', 'dashboard');
+		$data['activeMenu'] = $this->input->get('activeMenu', 'none');
 		$data['hideMenu'] = $this->input->get('hideMenu', 0);
 		$data['widget'] = new Data;
 		// $data['widget']['sidebar'] = (new SidebarController($this->input, $this->app))->execute();
 
 		$data['blog'] = Blog::get();
 		$data['blogs'] = $model->getItems();
+		$data['user'] = User::get();
 
 		$data['profiler'] = WINDWALKER_DEBUG ? Ioc::getProfiler() : null;
 

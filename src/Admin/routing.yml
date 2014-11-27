@@ -34,12 +34,38 @@ post_state_down:
         state: 0
 
 # Statics
-static:
+statics:
     pattern: 'statics'
     controller: 'Admin\Controller\Posts'
     variables:
         type: static
         activeMenu: static
+
+static:
+    pattern: static(/id)
+    controller: 'Admin\Controller\Post'
+    variables:
+        type: static
+        activeMenu: static
+        hideMenu: 1
+
+static_state_up:
+    pattern: static/state/up/(id)
+    controller: 'Admin\Controller\Post'
+    action:
+        '*': StateController
+    variables:
+        type: static
+        state: 1
+
+static_state_down:
+    pattern: static/state/down/(id)
+    controller: 'Admin\Controller\Post'
+    action:
+        '*': StateController
+    variables:
+        type: static
+        state: 0
 
 # Categories
 categories:
@@ -66,6 +92,12 @@ author:
     controller: 'Admin\Controller\Author'
     variables:
         activeMenu: authors
+
+find_authors:
+    pattern: authors/find
+    controller: 'Admin\Controller\Authors'
+    action:
+        '*': FindController
 
 # Blogs
 blogs:

@@ -34,8 +34,24 @@ class AuthorsModel extends ListModel
 			->addTable('user', 'users', 'user.id = author.user')
 			->addTable('blog', 'blogs', 'blog.id = author.blog');
 
-		$query->select($queryHelper->getSelectFields())
-			->where($query->format('%n = %q', 'blog.id', $this['blog.id']));
+		$query->select($queryHelper->getSelectFields());
+
+		if ($this['blog.id'])
+		{
+			$query->where($query->format('%n = %q', 'blog.id', $this['blog.id']));
+		}
+
+		if ($this['find.query'])
+		{
+			$q = '%' . $this['find.query'] . '%';
+
+			$conditions[] = $query->format('%n LIKE %q', 'user.username', $q);
+			$conditions[] = $query->format('%n LIKE %q', 'user.fullname', $q);
+			$conditions[] = $query->format('%n LIKE %q', 'user.email', $q);
+			$conditions[] = $query->format('%n LIKE %q', 'author.name', $q);
+
+			$query->where(new QueryElement('()', $conditions, ' OR '));
+		}
 
 		$query = $queryHelper->registerQueryTables($query);
 

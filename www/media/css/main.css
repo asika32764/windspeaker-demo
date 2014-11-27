@@ -9,6 +9,9 @@ body {
   /*padding-top: 50px;*/
   /*padding-bottom: 20px;*/
 }
+.mini-navbar .pace .pace-progress {
+  left: 70px;
+}
 /* Table */
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -175,4 +178,27 @@ body.mini-navbar .navbar-default ul.nav.edit-menu > li > a {
   line-height: 20px;
   text-align: center;
   color: #aaa;
+}
+.autocomplete-suggestion {
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  padding: 5px 10px;
+}
+.autocomplete-suggestion small {
+  font-size: .7em;
+  color: #999;
+  display: inline-block;
+}
+.autocomplete-suggestion img {
+  margin-right: 10px;
+  border-radius: 100%;
+}
+.autocomplete-selected {
+  background-color: #1ab394;
+  color: white;
+}
+.autocomplete-selected small {
+  color: #eee;
 }

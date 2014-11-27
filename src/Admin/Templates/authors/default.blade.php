@@ -10,7 +10,7 @@ Authors & Team
 <div class="toolbar">
     <form action="{{{ $uri['base.path'] . 'author' }}}" method="post" name="adminForm">
         <div class="row">
-            <span class="col-md-3"><input type="text" name="username" class="form-control"/></span>
+            <span class="col-md-3"><input type="text" name="username" class="form-control" id="add-author"/></span>
             <button class="btn btn-default">Add This User</button>
 
             <a class="btn btn-primary" href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:author', ['id' => '']) }}}">
@@ -79,4 +79,21 @@ Authors & Team
         @endforeach
     </tbody>
 </table>
+@stop
+
+@section('script')
+<script src="{{{ $uri['media.path'] }}}js/autocomplete/jquery.autocomplete.js"></script>
+<script>
+$('#add-author').autocomplete({
+    serviceUrl: '{{{ \Windwalker\Core\Router\Router::buildHttp('admin:find_authors') }}}',
+    deferRequestBy: 500,
+    onSearchComplete: function(query, suggestions)
+    {
+        console.log(query, suggestions);
+    },
+    onSelect: function (suggestion) {
+        $('#adminForm').submit();
+    }
+});
+</script>
 @stop

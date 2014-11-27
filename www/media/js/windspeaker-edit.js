@@ -43,12 +43,13 @@
 			else
 			{
 				save.removeClass('changed');
-				save.addClass('light');
+				//save.addClass('light');
+				Pace.restart();
 
-				setTimeout(function()
-				{
-					save.removeClass('light');
-				}, 500);
+				//setTimeout(function()
+				//{
+				//	save.removeClass('light');
+				//}, 500);
 			}
 
 			this.change = state;
