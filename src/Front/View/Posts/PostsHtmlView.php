@@ -40,7 +40,7 @@ class PostsHtmlView extends BladeHtmlView
 
 		foreach ($data['statics'] as $post)
 		{
-			$post->link = Router::buildHtml('front:static', ['id' => $post->id, 'alias' => $post->alias]);
+			$post->link = Router::buildHtml('front:static_default', ['id' => $post->id, 'alias' => $post->alias]);
 		}
 
 		if ($data->type == 'home')

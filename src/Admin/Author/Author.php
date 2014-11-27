@@ -9,6 +9,7 @@
 namespace Admin\Author;
 
 use Admin\Blog\Blog;
+use Admin\User\UserHelper;
 use Windwalker\Cache\Cache;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Cache\CacheFactory;
@@ -97,6 +98,8 @@ class Author
 			$author->description = $user->description;
 			$author->image       = $user->image;
 			$author->website     = $user->website;
+
+			$author->image = $author->image ? : UserHelper::getGavatar($user->email, 200);
 		}
 
 		$cache->set('author.' . $id, $author);

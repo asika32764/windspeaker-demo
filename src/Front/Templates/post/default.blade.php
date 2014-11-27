@@ -23,6 +23,22 @@
         {{ $post->text }}
     </article>
 
+    <hr/>
+
+    <aside class="article-author-profile">
+        <h2>Author</h2>
+        <div class="uk-clearfix">
+            <img class="uk-align-medium-left uk-border-circle" src="{{{ $postAuthor->image }}}" width="150" height="250" alt="Avatar">
+            <p>{{{ $postAuthor->description }}}</p>
+            @if ($postAuthor->website)
+            <p>
+                <a class="profile-link" href="{{{ $postAuthor->website }}}">More About Me</a>
+            </p>
+            @endif
+        </div>
+
+    </aside>
+
     @if ($blog['disqus'])
 
     <div id="disqus_thread" class="comment-block uk-margin-large-top"></div>
