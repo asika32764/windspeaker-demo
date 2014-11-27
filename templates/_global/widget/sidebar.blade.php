@@ -12,7 +12,7 @@ $return = base64_encode($uri['current']);
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element"> <span>
-                    <img alt="image" class="img-circle" src="{{{ \Admin\User\UserHelper::getAvatar(null, 48) }}}" />
+                    <img alt="image" width="48" height="48" class="img-circle" src="{{{ \Admin\User\UserHelper::getAvatar($user->id, 48) }}}" />
                      </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="{{ $uri['media.path'] }}#">
                     <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{{ $user->fullname }}}</strong>

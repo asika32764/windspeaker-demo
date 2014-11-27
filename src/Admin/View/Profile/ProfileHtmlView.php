@@ -8,6 +8,8 @@
 
 namespace Admin\View\Profile;
 
+use Admin\User\UserHelper;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
@@ -17,5 +19,15 @@ use Windwalker\Core\View\BladeHtmlView;
  */
 class ProfileHtmlView extends BladeHtmlView
 {
-
+	/**
+	 * prepareData
+	 *
+	 * @param \Windwalker\Data\Data $data
+	 *
+	 * @return  void
+	 */
+	protected function prepareData($data)
+	{
+		$data['avatar'] = UserHelper::getAvatar(User::get()->id, 650);
+	}
 }

@@ -35,13 +35,6 @@
 @section('sidebar')
 <ul class="nav edit-menu" id="side-menu" data-uk-sticky>
     <li class="nav-header">
-        <div class="dropdown profile-element"> <span>
-            <img alt="image" class="img-circle" src="{{ $uri['media.path'] }}img/profile_small.jpg" />
-             </span>
-            <a data-toggle="dropdown" class="dropdown-toggle" href="{{ $uri['media.path'] }}#">
-            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong></span></span>
-            </a>
-        </div>
         <div class="logo-element">
             WS
         </div>

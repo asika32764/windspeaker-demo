@@ -10,8 +10,10 @@ namespace Admin;
 
 use Admin\Listener\ProfilerListener;
 use Admin\Listener\UserListener;
+use Admin\S3\S3Provider;
 use Windwalker\Core\Ioc;
 use Windwalker\Core\Package\AbstractPackage;
+use Windwalker\DI\Container;
 use Windwalker\Event\Dispatcher;
 
 /**
@@ -27,6 +29,18 @@ class AdminPackage extends AbstractPackage
 	 * @var  string
 	 */
 	protected $name = 'admin';
+
+	/**
+	 * registerProviders
+	 *
+	 * @param Container $container
+	 *
+	 * @return  void
+	 */
+	public function registerProviders(Container $container)
+	{
+		$container->registerServiceProvider(new S3Provider);
+	}
 
 	/**
 	 * registerListeners

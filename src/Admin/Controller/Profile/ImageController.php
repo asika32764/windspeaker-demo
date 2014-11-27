@@ -6,24 +6,21 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\Upload;
+namespace Admin\Controller\Profile;
 
-use Joomla\Date\Date;
+use Admin\S3\S3Helper;
 use Windwalker\Application\Web\Response;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
-use Windwalker\Filesystem\File;
-use Windwalker\Filesystem\Folder;
 use Windwalker\Filter\InputFilter;
 use Windwalker\Registry\Registry;
-use Windwalker\UUID\Uuid;
 
 /**
- * The SaveController class.
+ * The ImageController class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class SaveController extends Controller
+class ImageController extends Controller
 {
 	/**
 	 * Execute the controller.
@@ -37,7 +34,7 @@ class SaveController extends Controller
 	{
 		$files = $this->input->files;
 		$field = $this->input->get('field', 'file');
-		$type  = $this->input->get('type', 'post');
+		$user = User::get();
 
 		try
 		{
@@ -49,15 +46,11 @@ class SaveController extends Controller
 				throw new \Exception('File not upload');
 			}
 
-			$dest = $this->getDest($name, $type);
+			$ext = pathinfo($name, PATHINFO_EXTENSION);
 
-			$s3 = new \S3(
-				$this->app->get('amazon.access_key'),
-				$this->app->get('amazon.secret_key')
-			);
+			$dest = sprintf('user/%s/%s.%s', sha1('user-profile-' . $user->id), md5('user-profile-' . $user->id), $ext);
 
-
-			$result = $s3::putObject(\S3::inputFile($src, false), 'windspeaker', $dest, \S3::ACL_PUBLIC_READ);
+			$result = S3Helper::put($src, $dest);
 
 			if (!$result)
 			{
@@ -80,6 +73,10 @@ class SaveController extends Controller
 		$return['filename'] = 'https://windspeaker.s3.amazonaws.com/' . $dest;
 		$return['file'] = 'https://windspeaker.s3.amazonaws.com/' . $dest;
 
+		$user->image = $return['filename'];
+
+		User::save($user);
+
 		$response = new Response;
 		$response->setBody((string) $return);
 		$response->setMimeType('text/json');
@@ -88,37 +85,4 @@ class SaveController extends Controller
 
 		exit();
 	}
-
-	/**
-	 * getDest
-	 *
-	 * @param string $name
-	 * @param string $type
-	 *
-	 * @return  string
-	 */
-	protected function getDest($name, $type = 'post')
-	{
-		$user = User::get();
-
-		$date = new Date;
-
-		$year  = $date->year;
-		$month = $date->month;
-		$day   = $date->day;
-
-		$ext = pathinfo($name, PATHINFO_EXTENSION);
-
-		switch ($type)
-		{
-			case 'post':
-				return sprintf('post/%s/%s/%s/%s/%s.%s', $user->username, $year, $month, $day, uniqid(), $ext);
-				break;
-			case 'profile':
-				return sprintf('user/%s/%s.%s', sha1('user-profile-' . $user->id), md5('user-profile-' . $user->id), $ext);
-			default:
-				return sprintf('images/%s/%s/%s/%s/%s.%s', $user->username, $year, $month, $day, uniqid(), $ext);
-		}
-	}
 }
- 

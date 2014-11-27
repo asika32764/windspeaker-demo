@@ -57,7 +57,25 @@ abstract class UserHelper
 	{
 		$user = User::get($pk);
 
-		$hash = md5( strtolower( trim( $user->email ) ) );
+		if ($user->image)
+		{
+			return $user->image;
+		}
+
+		return static::getGavatar($user->email, $size);
+	}
+
+	/**
+	 * getGavatar
+	 *
+	 * @param string $email
+	 * @param int    $size
+	 *
+	 * @return  string
+	 */
+	public static function getGavatar($email, $size = 48)
+	{
+		$hash = md5(strtolower(trim($email)));
 
 		return 'http://www.gravatar.com/avatar/' . $hash . '?d=mm&s=' . $size;
 	}

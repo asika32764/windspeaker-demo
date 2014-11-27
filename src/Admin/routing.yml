@@ -128,6 +128,13 @@ profile:
     pattern: profile
     controller: 'Admin\Controller\Profile'
 
+profile_image:
+    pattern: profile/image
+    controller: 'Admin\Controller\Profile'
+    action:
+        post: ImageController
+        delete: DelimgController
+
 # Upload
 upload:
     pattern: upload
