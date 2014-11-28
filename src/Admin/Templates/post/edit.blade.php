@@ -285,6 +285,11 @@ jQuery(document).ready(function($)
     // the size again
     editor.getSession().on('change', heightUpdateFunction);
 
+    // ACE position fix
+    editor.getSelection().on('changeCursor', function(e) {
+        editor.textInput.getElement().style.top = $(window).scrollTop() + "px";
+    });
+
     // Attachment
     // -------------------------------------------------------------
     var attachOptions = {
