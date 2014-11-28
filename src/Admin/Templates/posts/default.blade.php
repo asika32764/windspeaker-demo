@@ -120,6 +120,8 @@ $route = 'admin:' . $type;
         </tbody>
     </table>
 
+    @include('widget.pagination-admin')
+
     <div class="modal post-modal" id="newModal">
     	<div class="modal-dialog">
             <div class="modal-content animated fadeInUp">

@@ -16,6 +16,7 @@ use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
+use Windwalker\UUID\Uuid;
 
 /**
  * The SaveController class.
@@ -42,7 +43,7 @@ class SaveController extends AbstractAdminController
 	{
 		try
 		{
-			// Create User
+			// If we add a user as an author
 			$username = $this->input->getUsername('username');
 
 			$username = trim($username);
@@ -54,7 +55,7 @@ class SaveController extends AbstractAdminController
 				return $this->createUser($username);
 			}
 
-			// Permission
+			// Change Permission
 			$permission = $this->input->get('permission');
 
 			$permission = trim($permission);
@@ -64,7 +65,7 @@ class SaveController extends AbstractAdminController
 				return $this->permission($permission);
 			}
 
-			// Save Author
+			// Save an manual Author
 			$data = $this->input->getVar('author');
 
 			$data = new Data($data);
@@ -147,6 +148,18 @@ class SaveController extends AbstractAdminController
 		if (!$data->name)
 		{
 			throw new ValidFailException('Name should not be empty.');
+		}
+
+		if (!$data->image)
+		{
+			unset($data->image);
+		}
+
+		$isNew = !$data->id;
+
+		if ($isNew)
+		{
+			$data->uuid = $data->uuid ? : Uuid::v4();
 		}
 
 		$data->blog = Blog::get()->id;

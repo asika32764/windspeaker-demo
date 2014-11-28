@@ -61,31 +61,4 @@ class PostsModel extends ListModel
 
 		return $query;
 	}
-
-	/**
-	 * getPagination
-	 *
-	 * @param integer $total
-	 *
-	 * @return  Pagination
-	 */
-	public function getPagination($total = null)
-	{
-		$total = $total ? : $this->getTotal();
-
-		return new Pagination($total, $this->get('list.page', 1), $this['list.limit']);
-	}
-
-	/**
-	 * getTotal
-	 *
-	 * @return  integer
-	 */
-	public function getTotal()
-	{
-		return $this->fetch('total', function()
-		{
-			return $this->db->setQuery('SELECT FOUND_ROWS();')->loadResult();
-		});
-	}
 }

@@ -93,6 +93,7 @@ class WindspeakerInit extends AbstractMigration
 
 		$this->db->getTable('authors')
 			->addColumn(new Primary('id'))
+			->addColumn(new Char('uuid', 37))
 			->addColumn(new Integer('user'))
 			->addColumn(new Integer('blog'))
 			->addColumn(new Tinyint('admin'))

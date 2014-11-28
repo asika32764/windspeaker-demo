@@ -5,7 +5,7 @@ dashboard:
         activeMenu: dashboard
 
 posts:
-    pattern: '/'
+    pattern: 'posts(/page)'
     controller: 'Admin\Controller\Posts'
     variables:
         activeMenu: dashboard
@@ -92,6 +92,16 @@ author:
     controller: 'Admin\Controller\Author'
     variables:
         activeMenu: authors
+    requirements:
+        id: \d+
+
+author_image:
+    pattern: author/image
+    controller: 'Admin\Controller\Author'
+    action:
+        post: ImageController
+        put: ImageController
+        delete: DelimgController
 
 find_authors:
     pattern: authors/find

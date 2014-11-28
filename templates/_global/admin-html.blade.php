@@ -135,6 +135,9 @@
     <script src="{{ $uri['media.path'] }}js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="{{ $uri['media.path'] }}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+    {{--<!-- Thumb -->--}}
+    {{--<script src="{{ $uri['media.path'] }}js/image/js-thumb.js"></script>--}}
+
     <!-- Flot -->
     {{--<script src="{{ $uri['media.path'] }}js/plugins/flot/jquery.flot.js"></script>--}}
     {{--<script src="{{ $uri['media.path'] }}js/plugins/flot/jquery.flot.tooltip.min.js"></script>--}}
@@ -174,7 +177,6 @@
 
     <script>
         $(document).ready(function() {
-
 
         });
     </script>

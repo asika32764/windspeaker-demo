@@ -9,6 +9,8 @@
 namespace Admin\Form;
 
 use Windwalker\Form\Field\CheckboxField;
+use Windwalker\Form\Field\HiddenField;
+use Windwalker\Form\Field\ListField;
 use Windwalker\Form\Field\RadioField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
@@ -42,13 +44,14 @@ class AuthorDefinition implements FieldDefinitionInterface
 			->set('rows', 5)
 			->set('labelClass', 'col-sm-3 control-label');
 
-//		$form->addField(new RadioField('admin', 'Is Admin'), 'author')
+//		$form->addField(new ListField('admin', 'Is Admin'), 'author')
 //			->setOptions([
 //				new Option('Yes', 1),
 //				new Option('No', 0)
 //			])
 //			->set('class', 'form-control')
 //			->set('labelClass', 'col-sm-3 control-label');
+
+		$form->addField(new HiddenField('uuid'), 'hidden');
 	}
 }
- 

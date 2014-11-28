@@ -6,16 +6,21 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Admin\Controller\Profile;
+namespace Admin\Controller\Author;
 
+use Admin\Author\Author;
+use Admin\Blog\Blog;
 use Admin\S3\S3Helper;
 use Windspeaker\Image\Thumb;
 use Windwalker\Application\Web\Response;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Model\Exception\ValidFailException;
+use Windwalker\DataMapper\DataMapper;
 use Windwalker\Filesystem\File;
 use Windwalker\Filter\InputFilter;
 use Windwalker\Registry\Registry;
+use Windwalker\UUID\Uuid;
 
 /**
  * The ImageController class.
@@ -34,12 +39,20 @@ class ImageController extends Controller
 	 */
 	public function execute()
 	{
-		$files = $this->input->files;
-		$field = $this->input->get('field', 'file');
-		$user = User::get();
+		$files  = $this->input->files;
+		$field  = $this->input->get('field', 'file');
+		$id     = $this->input->get('id');
+		$author = Author::getAuthor($id);
+		$user   = User::get();
+		$blog   = Blog::get();
 
 		try
 		{
+			if (!Author::isAdmin($blog, $user))
+			{
+				throw new ValidFailException('You cannot edit this author.');
+			}
+
 			$src  = $files->getByPath($field . '.tmp_name', null, InputFilter::STRING);
 			$name = $files->getByPath($field . '.name', null, InputFilter::STRING);
 
@@ -50,8 +63,10 @@ class ImageController extends Controller
 
 			$ext = pathinfo($name, PATHINFO_EXTENSION);
 
+			$uuid = $author->uuid ? : Uuid::v4();
+
 			$src  = Thumb::createThumb($src);
-			$dest = sprintf('user/%s/%s.%s', sha1('user-profile-' . $user->id), md5('user-profile-' . $user->id), $ext);
+			$dest = sprintf('author/%s/%s.%s', sha1($uuid), md5($uuid), $ext);
 
 			$result = S3Helper::put($src, $dest);
 
@@ -73,14 +88,20 @@ class ImageController extends Controller
 			exit();
 		}
 
+
+
 		$return = new Registry;
 
 		$return['filename'] = 'https://windspeaker.s3.amazonaws.com/' . $dest;
 		$return['file'] = 'https://windspeaker.s3.amazonaws.com/' . $dest;
+		$return['uuid'] = $uuid;
 
-		$user->image = $return['filename'];
+		if ($author->id)
+		{
+			$author->image = $return['filename'];
 
-		User::save($user);
+			(new DataMapper('authors'))->updateOne($author);
+		}
 
 		$response = new Response;
 		$response->setBody((string) $return);

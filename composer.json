@@ -17,11 +17,12 @@
 		"filp/whoops": "1.*@stable",
 		"robmorgan/phinx": "*@stable",
 		"fzaninotto/faker": "~1.0@stable",
-		"michelf/php-markdown": "1.*",
-		"kilte/pagination": "1.1.1",
+		"michelf/php-markdown": "1.*@stable",
+		"kilte/pagination": "1.1.1@stable",
 		"tpyo/amazon-s3-php-class" : "*",
+		"joomla/image" : "~1.0@stable",
 
-		"illuminate/view" : "4.*"
+		"illuminate/view" : "4.*@stable"
 	},
 	"require-dev": {
 	},

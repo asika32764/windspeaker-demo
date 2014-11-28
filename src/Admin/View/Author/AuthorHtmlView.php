@@ -8,6 +8,7 @@
 
 namespace Admin\View\Author;
 
+use Admin\Author\Author;
 use Windwalker\Core\View\BladeHtmlView;
 
 /**
@@ -17,6 +18,16 @@ use Windwalker\Core\View\BladeHtmlView;
  */
 class AuthorHtmlView extends BladeHtmlView
 {
-
+	/**
+	 * prepareData
+	 *
+	 * @param \Windwalker\Data\Data $data
+	 *
+	 * @return  void
+	 */
+	protected function prepareData($data)
+	{
+		$data['avatar'] = Author::getAvatar($data['item']->id ? : -1, 650);
+	}
 }
  

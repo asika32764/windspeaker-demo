@@ -55,7 +55,7 @@ Authors & Team
                 @endif
             </td>
             <td style="width: 40px">
-                <img alt="image" width="32" class="img-circle" src="{{{ \Admin\Author\Author::getAvatar($item->id) }}}">
+                <img alt="image" width="32" class="img-circle avatar-thumb" src="{{{ \Admin\Author\Author::getAvatar($item->id) }}}">
             </td>
             <td>
                 <h4>

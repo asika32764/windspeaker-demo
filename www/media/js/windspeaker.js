@@ -42,5 +42,20 @@
 
 			return this.post(url, 'delete');
 		}
+		/*
+		,
+
+		thumbAvatar: function(selector, size)
+		{
+			size = size || 48;
+
+			$('.selector').each(function()
+			{
+				var img = window.jsthumb.resize(this, {maxWidth: size, maxHeight: size});
+
+				$(this).attr('src', img);
+			});
+		}
+		*/
 	};
 })(jQuery);
