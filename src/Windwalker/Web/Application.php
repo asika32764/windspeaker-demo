@@ -11,6 +11,7 @@ namespace Windwalker\Web;
 use Admin\AdminPackage;
 use Front\FrontPackage;
 use Windwalker\Core\Application\WebApplication;
+use Windwalker\Core\Error\SimpleErrorHandler;
 use Windwalker\Core\Package\PackageHelper;
 use Windwalker\Core\Provider\AuthenticateProvider;
 use Windwalker\Core\Provider\CacheProvider;
@@ -45,6 +46,11 @@ class Application extends WebApplication
 		Windwalker::prepareSystemPath($this->config);
 
 		parent::initialise();
+
+		if (!$this->config->get('system.debug'))
+		{
+			SimpleErrorHandler::registerErrorHandler();
+		}
 
 		// Start session
 		Ioc::getSession();
