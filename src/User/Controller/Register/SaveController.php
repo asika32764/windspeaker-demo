@@ -190,7 +190,7 @@ class SaveController extends Controller
 	{
 		if (!$data->tos)
 		{
-			throw new ValidFailException('You must agree terms and policy');
+			// throw new ValidFailException('You must agree terms and policy');
 		}
 
 		if (!$data->username)
