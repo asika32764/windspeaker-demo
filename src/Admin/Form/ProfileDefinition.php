@@ -10,6 +10,7 @@ namespace Admin\Form;
 
 use Windwalker\Form\Field\EmailField;
 use Windwalker\Form\Field\HiddenField;
+use Windwalker\Form\Field\PasswordField;
 use Windwalker\Form\Field\TextareaField;
 use Windwalker\Form\Field\TextField;
 use Windwalker\Form\Field\TimezoneField;
@@ -64,6 +65,16 @@ class ProfileDefinition implements FieldDefinitionInterface
 		$form->addField(new TextField('website', 'Website'))
 			->set('class', 'form-control')
 			->set('labelClass', 'col-sm-3 control-label');
+
+		$form->addField(new PasswordField('password', 'Password'))
+			->set('class', 'form-control')
+			->set('labelClass', 'col-sm-3 control-label')
+			->set('autocomplete', 'off');
+
+		$form->addField(new PasswordField('password2', 'Verify Password'))
+			->set('class', 'form-control')
+			->set('labelClass', 'col-sm-3 control-label')
+			->set('autocomplete', 'off');
 	}
 }
  

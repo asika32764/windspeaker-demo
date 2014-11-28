@@ -97,17 +97,41 @@ body.mini-navbar .navbar-default ul.nav.edit-menu {
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: cubic-bezier(.5, 0, .5, 1);
 	-webkit-animation-duration: 1.7s;
+
+	-moz-animation-name: blinker;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+	-moz-animation-duration: 1.7s;
+
+	-o-animation-name: blinker;
+	-o-animation-iteration-count: infinite;
+	-o-animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+	-o-animation-duration: 1.7s;
+
+	-ms-animation-name: blinker;
+	-ms-animation-iteration-count: infinite;
+	-ms-animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+	-ms-animation-duration: 1.7s;
 }
 @-webkit-keyframes blinker {
-	0% {
-		opacity: 1;
-	}
-	50% {
-		opacity: .7;
-	}
-	100% {
-		opacity: 1;
-	}
+	0% { opacity: 1; }
+	50% { opacity: .7; }
+	100% { opacity: 1; }
+}
+@-moz-keyframes blinker {
+	0% { opacity: 1; }
+	50% { opacity: .7; }
+	100% { opacity: 1; }
+}
+@-ms-keyframes blinker {
+	0% { opacity: 1; }
+	50% { opacity: .7; }
+	100% { opacity: 1; }
+}
+@-o-keyframes blinker {
+	0% { opacity: 1; }
+	50% { opacity: .7; }
+	100% { opacity: 1; }
 }
 
 .article-save-button {

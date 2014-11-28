@@ -119,6 +119,12 @@
                     </div>
 
                     <div class="btn-group">
+                        <button id="button-readmore" class="btn btn-default btn-white  btn-sm">
+                            <i class="fa fa-minus icon-eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="btn-group">
                         <button id="button-preview" class="btn btn-success btn-sm">
                             <i class="fa fa-eye icon-eye"></i>
                         </button>
@@ -447,6 +453,13 @@ jQuery(document).ready(function($)
         closeWith:'`',
         multiline: true,
         className: "code-inline"
+    });
+
+    Fongshen.registerButton($('#button-readmore'), {
+        name:'Readmore',
+        openWith:"\n<!-- {READMORE} -->\n",
+        closeWith:'',
+        className: "readmore"
     });
 
     Fongshen.registerButton($('#button-preview'), {

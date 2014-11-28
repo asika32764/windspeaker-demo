@@ -73,6 +73,31 @@ class Author
 	}
 
 	/**
+	 * getAuthor
+	 *
+	 * @param int $pk
+	 *
+	 * @return  mixed|Data
+	 */
+	public static function getAuthor($pk = null)
+	{
+		if (!$pk)
+		{
+			$user = User::get();
+			$blog = Blog::get();
+
+			return static::get($user->id, $blog->id);
+		}
+
+		$cache = CacheFactory::getCache('authors');
+
+		return $cache->call('author.' . $pk, function() use ($pk)
+		{
+			return (new DataMapper('authors'))->findOne($pk);
+		});
+	}
+
+	/**
 	 * get
 	 *
 	 * @param int $id
@@ -81,7 +106,7 @@ class Author
 	 */
 	public static function getPostAuthor($id)
 	{
-		$cache = CacheFactory::getCache('author');
+		$cache = CacheFactory::getCache('authors');
 
 		if ($cache->exists('author.' . $id))
 		{
@@ -106,6 +131,33 @@ class Author
 		$cache->set('author.' . $author->user . '.' . $author->blog, $author);
 
 		return $author;
+	}
+
+	/**
+	 * getAvatar
+	 *
+	 * @param integer $pk
+	 * @param integer $size
+	 *
+	 * @return  string
+	 */
+	public static function getAvatar($pk, $size = 48)
+	{
+		if ($pk instanceof Data)
+		{
+			$author = $pk;
+		}
+		else
+		{
+			$author = static::getAuthor($pk);
+		}
+
+		if (!$author->user)
+		{
+			return $author->image ? : UserHelper::getGavatar('fake@fake.com', $size);
+		}
+
+		return UserHelper::getAvatar($author->user);
 	}
 
 	/**

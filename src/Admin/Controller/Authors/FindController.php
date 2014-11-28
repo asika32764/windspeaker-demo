@@ -71,8 +71,8 @@ class FindController extends Controller
 
 		$tmpl = <<<VALUE
 <div>
-	<img class="find-author-avatar pull-left" src="%s" alt=""/>
-	<div class="find-author-name">%s</div>
+	<img width="48" height="48" class="find-author-avatar pull-left" src="%s" alt=""/>
+	<div class="find-author-name">%s <small>%s</small></div>
 	<small>%s</small>
 	<div class="clearfix"></div>
 </div>
@@ -81,7 +81,7 @@ VALUE;
 		foreach ($users as $user)
 		{
 			$suggestions[] = [
-				'value' => sprintf($tmpl, UserHelper::getAvatar($user->id), $user->fullname, $user->username),
+				'value' => sprintf($tmpl, UserHelper::getAvatar($user->id), $user->fullname, $user->username, $user->email),
 				'data'  => $user->username
 			];
 		}

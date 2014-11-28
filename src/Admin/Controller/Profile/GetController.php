@@ -12,6 +12,7 @@ use Admin\Controller\AbstractAdminController;
 use Admin\Model\ProfileModel;
 use Admin\View\Profile\ProfileHtmlView;
 use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Ioc;
 
 /**
  * The GetController class.
@@ -27,9 +28,10 @@ class GetController extends AbstractAdminController
 	 */
 	protected function doExecute()
 	{
-		$view = new ProfileHtmlView($this->data);
-		$model = new ProfileModel;
-		$user = User::get();
+		$view    = new ProfileHtmlView($this->data);
+		$model   = new ProfileModel;
+		$session = Ioc::getSession();
+		$user    = $session->get('profile.edit.data') ? : User::get();
 
 		$view['item'] = $user;
 		$view['form'] = $model->getForm($user);

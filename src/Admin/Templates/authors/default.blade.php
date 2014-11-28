@@ -10,7 +10,7 @@ Authors & Team
 <div class="toolbar">
     <form action="{{{ $uri['base.path'] . 'author' }}}" method="post" name="adminForm">
         <div class="row">
-            <span class="col-md-3"><input type="text" name="username" class="form-control" id="add-author"/></span>
+            <span class="col-md-5"><input type="text" name="username" class="form-control" id="add-author" placeholder="Find user to add"/></span>
             <button class="btn btn-default">Add This User</button>
 
             <a class="btn btn-primary" href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:author', ['id' => '']) }}}">
@@ -55,7 +55,7 @@ Authors & Team
                 @endif
             </td>
             <td style="width: 40px">
-                <img alt="image" width="32" class="img-circle" src="{{{ $uri['media.path'] . 'img/a' . rand(1, 8) . '.jpg' }}}">
+                <img alt="image" width="32" class="img-circle" src="{{{ \Admin\Author\Author::getAvatar($item->id) }}}">
             </td>
             <td>
                 <h4>

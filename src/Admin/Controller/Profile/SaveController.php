@@ -11,7 +11,9 @@ namespace Admin\Controller\Profile;
 use Admin\Model\ProfileModel;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
+use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
+use Windwalker\Crypt\Password;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Ioc;
@@ -31,21 +33,35 @@ class SaveController extends Controller
 	 */
 	public function execute()
 	{
-		$user = $this->input->getVar('user', array());
+		$session = Ioc::getSession();
 
+		$user = $this->input->getVar('user', array());
 		$user = new Data($user);
 
 		$user->id = User::get()->id;
 		$user->username = User::get()->username;
 
-		if (!$this->validate($user))
-		{
-			return false;
-		}
+		// Store Session
+		$temp = clone $user;
+		unset($temp->password);
+		unset($temp->password2);
+
+		$session->set('profile.edit.data', $temp);
 
 		try
 		{
+			if (!$this->validate($user))
+			{
+				return false;
+			}
+
 			$user = (new DataMapper('users'))->saveOne($user, 'id');
+		}
+		catch (ValidFailException $e)
+		{
+			$this->setRedirect(Router::buildHttp('admin:profile', ['id' => $user->id ? : '']), $e->getMessage(), 'danger');
+
+			return true;
 		}
 		catch (\Exception $e)
 		{
@@ -60,9 +76,10 @@ class SaveController extends Controller
 		}
 
 		// Save success, reset user session
-		$session = Ioc::getSession();
-
+		unset($user->password);
+		unset($user->password2);
 		$session->set('user', $user);
+		$session->remove('profile.edit.data');
 
 		$this->setRedirect(Router::buildHttp('admin:profile'), 'Save Success', 'success');
 
@@ -74,6 +91,7 @@ class SaveController extends Controller
 	 *
 	 * @param Data $data
 	 *
+	 * @throws  ValidFailException
 	 * @return  boolean
 	 */
 	protected function validate($data)
@@ -94,6 +112,18 @@ class SaveController extends Controller
 			$this->setRedirect(Router::buildHttp('admin:profile', ['id' => $data->id ? : '']));
 
 			return false;
+		}
+
+		if ($data->password)
+		{
+			if ($data->password2 != $data->password)
+			{
+				throw new ValidFailException('Password not match');
+			}
+
+			$password = new Password;
+
+			$data->password = $password->create($data->password);
 		}
 
 		return true;

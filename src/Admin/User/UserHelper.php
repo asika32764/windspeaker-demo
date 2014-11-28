@@ -9,6 +9,7 @@
 namespace Admin\User;
 
 use Windwalker\Core\Authenticate\User;
+use Windwalker\Core\Cache\CacheFactory;
 use Windwalker\Core\Router\Router;
 use Windwalker\Ioc;
 
@@ -47,6 +48,36 @@ abstract class UserHelper
 	}
 
 	/**
+	 * get
+	 *
+	 * @param int $pk
+	 *
+	 * @return  \Windwalker\Data\Data
+	 */
+	public static function get($pk = null)
+	{
+		if (!$pk)
+		{
+			return User::get();
+		}
+
+		$cache = CacheFactory::getCache('user');
+
+		$key = 'user.' . $pk;
+
+		if ($cache->exists($key))
+		{
+			return $cache->get($key);
+		}
+
+		$user = User::get($pk);
+
+		$cache->set($key, $user);
+
+		return $user;
+	}
+
+	/**
 	 * getAvatar
 	 *
 	 * @param int $pk
@@ -55,7 +86,7 @@ abstract class UserHelper
 	 */
 	public static function getAvatar($pk = null, $size = 48)
 	{
-		$user = User::get($pk);
+		$user = UserHelper::get($pk);
 
 		if ($user->image)
 		{
