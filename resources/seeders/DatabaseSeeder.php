@@ -8,6 +8,9 @@
 
 use Windwalker\Core\Seeder\AbstractSeeder;
 
+error_reporting(0);
+date_default_timezone_set('UTC');
+
 /**
  * The DatabaseSeeder class.
  * 

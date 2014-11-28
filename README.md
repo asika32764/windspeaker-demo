@@ -1,64 +1,35 @@
-# Windwalker Starter
+# WindSpeaker
 
-This is [Windwlaker Framework](https://github.com/ventoviro/windwalker) starter package.
+## Apache Setting
 
-## Installation Via Composer
-
-``` bash
-$ php composer.phar create-project windwalker/starter windwalker ~2.0 -s beta
-```
-
-## Getting Started
-
-Copy `etc/config.dist.yml` to `etc/config.yml` and fill database information.
-
-Open `http://{Your project root}/www`, you will see sample page.
-
-## Using Console
-
-Type this command in your terminal:
-
-``` bash
-php bin/console
-```
-
-You will see console usage:
+In Server
 
 ```
-Windwalker Console - version: 2.0
-------------------------------------------------------------
-
-[console Help]
-
-The default application command
-
-Usage:
-  console <command> [option]
-
-
-Options:
-
-  -h | --help       Display this help message.
-  -q | --quiet      Do not output any message.
-  -v | --verbose    Increase the verbosity of messages.
-  --no-ansi         Suppress ANSI colors on unsupported terminals.
-                    Use --no-ansi=false to force using color.
-
-Available commands:
-
-  help     List all arguments and show usage & manual.
-
-  build    Some useful tools for building system.
-
-  phinx    Migration system by Phinx
+<VirtualHost *:80>
+DocumentRoot /var/www/windspeaker/www
+ServerName windspeaker.co
+ServerAlias *.windspeaker.co
+</VirtualHost>
 ```
 
-### Import Sample Schema
+In localhsot
 
-``` bash
-php bin/console phinx migrate
+``` http
+<VirtualHost *:80>
+DocumentRoot /var/www/windspeaker/www
+ServerName windspeaker.co
+ServerAlias *.windspeaker.co
+</VirtualHost>
+
+# Asika
+<VirtualHost *:80>
+DocumentRoot /var/www
+ServerName localhost
+</VirtualHost>
 ```
 
-## How To Use Windwalker
+## Hosts Setting
 
-Please see README in every [Windwalker packages](https://github.com/ventoviro) first.
+```
+127.0.0.1 windspeaker.co asika.windspeaker.co simon.windspeaker.co
+```

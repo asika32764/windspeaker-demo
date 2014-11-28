@@ -1,6 +1,6 @@
 # System
 .*
-!.gitignore
+!/.gitignore
 !.gitkeep
 !/www/.htaccess
 
