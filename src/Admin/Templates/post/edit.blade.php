@@ -228,7 +228,9 @@ jQuery(document).ready(function($)
 
         string = string.replace(/(\<\!--\s*\{READMORE\}\s*--\>)/, '<hr class="system-readmore">');
 
-        $(this.previewContainer).html(marked(string));
+        string = marked(string);
+
+        $(this.previewContainer).html(string);
     };
 
     var options = {
