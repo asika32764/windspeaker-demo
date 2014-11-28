@@ -33,9 +33,9 @@ var Category = {
         <tbody>
             @foreach ($items as $k => $item)
             <tr>
-                <td>
-                    <input type="checkbox">
-                </td>
+                {{--<td>--}}
+                    {{--<input type="checkbox">--}}
+                {{--</td>--}}
                 <td>
                     <h4>
                         <a href="javascript:void(0);" onclick="Category.edit('{{{ $item->title }}}', {{{ $item->id }}});">

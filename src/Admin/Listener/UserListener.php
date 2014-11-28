@@ -30,10 +30,9 @@ class UserListener
 	 */
 	public function onAfterRouting(Event $event)
 	{
-		/** @var Controller $controller */
-		$controller = Ioc::get('main.controller');
+		$app = Ioc::getApplication();
 
-		if ($controller->getPackage() instanceof AdminPackage)
+		if ($app->get('client') == 'admin')
 		{
 			// Check is logged-in or redirect to login page
 			UserHelper::checkLogin();

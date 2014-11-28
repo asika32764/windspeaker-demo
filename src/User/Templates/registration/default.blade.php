@@ -9,10 +9,14 @@ Registration
     <div>
         <div>
 
-            <h1 class="logo-name">REGISTRATION</h1>
+            <a href="{{{ Windwalker\Core\Router\Router::buildHtml('site:home') }}}">
+                <h1 class="logo-name">
+                WS
+                </h1>
+            </a>
 
         </div>
-        <h3>Register to WindSpaker</h3>
+        <h3>Register to WindSpeaker</h3>
         <p>Create account to blogging.</p>
 
         {{\Windwalker\Core\View\Helper\PageHelper::showFlash($flashes)}}
@@ -30,19 +34,19 @@ Registration
             <div class="form-group">
                 <input type="password" name="registration[password2]" class="form-control" placeholder="Password again">
             </div>
-            <div class="form-group">
-                    <div class="checkbox i-checks">
-                        <label>
-                            <input type="checkbox" name="registration[tos]" value="1"><i></i> Agree the <a href="#" target="_blank">terms and policy</a>
-                        </label>
-                    </div>
-            </div>
+            {{--<div class="form-group">--}}
+                    {{--<div class="checkbox i-checks">--}}
+                        {{--<label>--}}
+                            {{--<input type="checkbox" name="registration[tos]" value="1"><i></i> Agree the <a href="#" target="_blank">terms and policy</a>--}}
+                        {{--</label>--}}
+                    {{--</div>--}}
+            {{--</div>--}}
             <button type="submit" class="btn btn-primary block full-width m-b">Register</button>
 
             <p class="text-muted text-center"><small>Already have an account?</small></p>
             <a class="btn btn-sm btn-white btn-block" href="{{{ \Windwalker\Core\Router\Router::buildHtml('user:login') }}}">Login</a>
         </form>
-        <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+        <p class="m-t"> <small>WindSpeaker &copy; 2014</small> </p>
     </div>
 </div>
 @stop

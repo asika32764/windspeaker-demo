@@ -10,6 +10,7 @@ namespace Windwalker;
 
 use Admin\AdminPackage;
 use Front\FrontPackage;
+use Site\SitePackage;
 use Symfony\Component\Yaml\Yaml;
 use Windwalker\Registry\Registry;
 use Windwalker\SystemPackage\SystemPackage;
@@ -32,6 +33,7 @@ class Windwalker
 			'system' => new SystemPackage,
 			'admin'  => new AdminPackage,
 			'front'  => new FrontPackage,
+			'site'   => new SitePackage,
 		);
 	}
 

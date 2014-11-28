@@ -6,41 +6,24 @@
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Front;
+namespace Site;
 
-use Front\Listener\DispatcherListener;
-use Front\Listener\SiteListener;
 use Windwalker\Core\Package\AbstractPackage;
-use Windwalker\Event\Dispatcher;
 use Windwalker\Ioc;
 
 /**
- * The FrontPackage class.
+ * The SitePackage class.
  * 
  * @since  {DEPLOY_VERSION}
  */
-class FrontPackage extends AbstractPackage
+class SitePackage extends AbstractPackage
 {
 	/**
 	 * Property name.
 	 *
 	 * @var  string
 	 */
-	protected $name = 'front';
-
-	/**
-	 * registerListeners
-	 *
-	 * @param Dispatcher $dispatcher
-	 *
-	 * @return  void
-	 */
-	public function registerListeners(Dispatcher $dispatcher)
-	{
-		parent::registerListeners($dispatcher);
-
-		$dispatcher->addListener(new DispatcherListener);
-	}
+	protected $name = 'site';
 
 	/**
 	 * loadRouting
@@ -51,7 +34,7 @@ class FrontPackage extends AbstractPackage
 	{
 		$app = Ioc::getApplication();
 
-		if ($app->get('client') == 'front')
+		if ($app->get('client') == 'site')
 		{
 			return parent::loadRouting();
 		}
@@ -59,4 +42,3 @@ class FrontPackage extends AbstractPackage
 		return [];
 	}
 }
- 

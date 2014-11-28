@@ -8,6 +8,7 @@
 
 namespace Front\Listener;
 
+use Admin\User\UserHelper;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Event\Event;
 use Windwalker\Ioc;
@@ -42,26 +43,61 @@ class DispatcherListener
 		array_pop($host);
 		array_pop($host);
 
-		if (!count($host))
+		$alias = implode('.', $host);
+		$alias = trim(str_replace('.', '', $alias));
+
+		// If is main domain but logged in, go to admin
+		if (!$alias && UserHelper::isLogin())
 		{
 			$app->set('client', 'admin');
 
 			return;
 		}
 
-		$alias = array_shift($host);
-
-		$blogMapper = new DataMapper('blogs');
-
-		$blog = $blogMapper->findOne(['alias' => $alias]);
-
-		if ($blog->isNull())
+		// Has subdomain, means it is users' blog
+		if ($alias)
 		{
-			throw new \Exception('Blog not found');
+			$blogMapper = new DataMapper('blogs');
+
+			$blog = $blogMapper->findOne(['alias' => $alias]);
+
+			if ($blog->isNull())
+			{
+				throw new \Exception('Blog not found', 404);
+			}
+
+			Ioc::getContainer('front')->set('current.blog', $blog);
+
+			$app->set('client', 'front');
+
+			return;
 		}
 
-		Ioc::getContainer('front')->set('current.blog', $blog);
+		// Main domain, got to site
+		$app->set('client', 'site');
+	}
 
-		$app->set('client', 'front');
+	/**
+	 * onBeforeRouting
+	 *
+	 * @param Event $event
+	 *
+	 * @return  void
+	 *
+	 * @throws \Exception
+	 */
+	public function onAfterRouting(Event $event)
+	{
+		$app = Ioc::getApplication();
+		$controller = Ioc::get('main.controller');
+
+		$route = $app->get('uri.route');
+
+		if (trim($route, '/'))
+		{
+			return;
+		}
+
+		Ioc::getContainer()->share('main.controller', $controller);
 	}
 }

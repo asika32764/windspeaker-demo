@@ -60,9 +60,9 @@ $route = 'admin:' . $type;
         <tbody>
             @foreach ($items as $k => $item)
             <tr>
-                <td>
-                    <input type="checkbox">
-                </td>
+                {{--<td>--}}
+                    {{--<input type="checkbox">--}}
+                {{--</td>--}}
                 <td width="5%">
                     <div class="btn-group">
                         <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" aria-expanded="false">

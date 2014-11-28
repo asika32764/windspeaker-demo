@@ -9,8 +9,9 @@ $root = $uri['base.path'];
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
         <div>
-
-            <h1 class="logo-name">LOGIN</h1>
+            <a href="{{{ Windwalker\Core\Router\Router::buildHtml('site:home') }}}">
+                <h1 class="logo-name">WS</h1>
+            </a>
 
         </div>
         <h3>Welcome to WindSpeaker</h3>

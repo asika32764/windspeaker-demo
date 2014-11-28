@@ -25,9 +25,9 @@ Authors & Team
     <tbody>
         @foreach ($items as $k => $item)
         <tr>
-            <td width="5%" class="text-center">
-                <input type="checkbox">
-            </td>
+            {{--<td width="5%" class="text-center">--}}
+                {{--<input type="checkbox">--}}
+            {{--</td>--}}
             <td style="width: 5%" class="text-center">
                 @if ($item->user)
                     @if ($item->admin && $item->owner)

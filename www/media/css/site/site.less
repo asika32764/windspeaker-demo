@@ -1,0 +1,332 @@
+// @import url(http://fonts.googleapis.com/css?family=Oswald:300,400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+// Mixins
+// ----------------------------------
+.transition(@dur) {
+	transition: all @dur;
+}
+
+.body-font() {
+	font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.title-font() {
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.sub-title-font() {
+	font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+// Global
+// ----------------------------------
+html, body {
+	.body-font();
+	font-size: 17px;
+	line-height: 175%;
+}
+
+body {
+	// padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	.title-font();
+	margin-bottom: 1em;
+	line-height: 120%;
+}
+
+a {
+	.transition(.5s);
+}
+
+a:hover {
+	.transition(.5s);
+}
+
+// Justfont
+/*
+.jf-loading body {
+	opacity: 0;
+	// visibility: hidden;
+	.transition(.2s);
+}
+.jf-active body {
+	opacity: 1;
+	// visibility: visible;
+	.transition(.2s);
+}
+.jf-inactive body {
+	opacity: 1;
+	// visibility: visible;
+	.transition(.2s);
+}
+*/
+
+// Uikit
+.uk-button {
+	border-radius: 3px;
+}
+
+.uk-button-hero {
+	padding: 10px 20px;
+	line-height: 40px;
+	font-size: 24px;
+}
+
+.uk-button-primary {
+	box-shadow: 0 4px 0 #0091cc;
+
+	&:hover {
+		box-shadow: 0 4px 0 #009fde;
+	}
+}
+
+h1, h2, h3, h4 ,h5, h6 {
+	a {
+		color: #444;
+
+		&:hover {
+			color: #666;
+			text-decoration: none;
+		}
+	}
+}
+
+// Typo
+// -----------------------------------
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.round {
+	border-radius: 5px;
+}
+
+.uk-table td, .uk-table th {
+	padding: 8px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+dl {
+	dt {
+		min-width: 130px;
+		//display: inline-block;
+		float: left;
+	}
+
+	dd {
+		//display: inline-block;
+	}
+
+	dt, dd {
+		padding-bottom: 7px;
+		margin-bottom: 7px;
+		border-bottom: 1px solid #e5e5e5;
+	}
+}
+
+
+// Header
+#header {
+	height: 70px;
+	position: relative;
+	z-index: 1000;
+
+	&.uk-navbar {
+		background-color: transparent;
+		color: white;
+	}
+
+	h1#blog-title {
+		margin: 0;
+		.title-font();
+		text-transform: uppercase;
+		font-weight: 700;
+		display: inline;
+
+		a {
+			font-size: .7em;
+		}
+
+		small.ul-text-mute {
+			font-size: 16px;
+			font-weight: normal;
+			color: #ccc;
+			margin-top: 12px;
+			display: inline-block;
+			text-transform: none;
+			float: left;
+		}
+	}
+
+	.uk-navbar-brand {
+		height: 70px;
+	}
+
+	.uk-navbar-brand img {
+		max-height: 100%;
+		padding: 10px;
+	}
+
+	.uk-navbar-nav > li > a {
+		.title-font();
+		height: 70px;
+		font-size: 14px;
+		text-transform: uppercase;
+		padding-top: 15px;
+		font-weight: 600;
+	}
+
+	span.menu-item-title {
+		display: block;
+		line-height: 140%;
+	}
+
+	span.menu-item-sub-title {
+		font-size: 80%;
+		text-transform: uppercase;
+		color: #A0A0A0;
+		display: block;
+		line-height: 140%;
+	}
+
+	//&.home {
+		background: transparent;
+		position: absolute;
+		top: 0px;
+		width: 100%;
+		color: #fff;
+
+		a {
+			color: #fff;
+			opacity: .8;
+
+			&:hover {
+				background: transparent;
+				opacity: 1;
+			}
+		}
+
+		span.menu-item-sub-title {
+			color: #715E49;
+			opacity: .84;
+			.transition(.5s);
+		}
+	//}
+
+	.uk-navbar-toggle {
+		margin-top: 15px;
+	}
+
+	#mainmenu {
+		@media (max-width: 767px) {
+			position: absolute;
+			width: 100%;
+			margin: 0;
+			left: 0;
+			background-color: #fff;
+			border-top: 1px solid #eee;
+			border-bottom: 1px solid #eee;
+
+			&.uk-hidden-small {
+				.transition(.5s);
+			}
+
+			li {
+				width: 100%;
+				float: none;
+
+				a:hover {
+					background: #eee;
+				}
+			}
+		}
+	}
+}
+html, body, #banner, .banner-cover, .banner-trans {
+	height: 100%;
+	min-height: 100%;
+}
+
+body {
+	background: url(https://windspeaker.s3.amazonaws.com/banners/banner-1.jpg) center center no-repeat;
+	background-attachment: fixed;
+}
+
+#banner {
+	background: url(https://windspeaker.s3.amazonaws.com/banners/banner-1.jpg) center center no-repeat;
+	background-attachment: fixed;
+}
+
+.banner-cover {
+	background-color: #000;
+	opacity: .4;
+}
+
+.banner-trans {
+	// background-color: red;
+
+}
+
+//@media (max-width: 767px) {
+//	.home + #banner {
+//		background-image: url(../media/img/banner/banner-mobile.jpg) !important;
+//		background-size: auto 100%;
+//	}
+//}
+
+.banner-inner {
+	color: #fff;
+	width: 800px;
+	height: 400px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -400px;
+	margin-top: -200px;
+	text-align: center;
+	z-index: 1000;
+
+	h1, h2, h3 {
+		color: #fff;
+	}
+
+	h1 {
+		font-size: 70px;
+		text-transform: uppercase;
+		.title-font();
+		font-weight: 800;
+		margin-bottom: .5em;
+	}
+
+	a {
+		color: #fff;
+	}
+
+	.start-button {
+		.title-font();
+		font-size: 35px;
+		border: 2px solid #fff;
+		padding: 20px 35px;
+		display: inline-block;
+		margin-top: 45px;
+		text-transform: uppercase;
+
+		&:hover {
+			text-decoration: none;
+			color: #333;
+			background-color: #fff;
+		}
+	}
+}

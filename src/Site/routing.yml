@@ -1,0 +1,13 @@
+home:
+    pattern: '/'
+    controller: 'Site\Controller\Page'
+    action:
+        '*': GetController
+    variables:
+        layout: home
+
+page:
+    pattern: '/(layout)'
+    controller: 'Site\Controller\Page'
+    action:
+        '*': GetController

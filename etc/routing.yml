@@ -1,3 +1,11 @@
+user:
+    pattern: '/'
+    package: user
+
+site:
+    pattern: '/'
+    package: site
+
 admin:
     pattern: '/'
     package: admin
@@ -5,10 +13,6 @@ admin:
 front:
     pattern: '/'
     package: front
-
-user:
-    pattern: '/'
-    package: user
 
 page:
     pattern: 'page'
