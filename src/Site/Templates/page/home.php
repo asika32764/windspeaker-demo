@@ -7,8 +7,9 @@
  */
 use Windwalker\Core\Router\Router;
 
-$i = 4;
-$banners = \Site\Banner\Banner::getBanners($i+1);
+$num = 6;
+$banners = \Site\Banner\Banner::getBanners($num);
+shuffle($banners);
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,29 +26,34 @@ $banners = \Site\Banner\Banner::getBanners($i+1);
 	<script src="<?php echo $data->uri['media.path'] ?>js/uikit.min.js"></script>
 	<script>
 		var banners = <?php echo json_encode($banners); ?>;
+		var i = 1;
+		var max = <?php echo $num; ?>;
 
 		var changeBanner = function()
 		{
 			var main  = $('body');
 			var tran  = $('#banner');
-			var index = getRandomInt(0, <?php echo $i;?>);
 
 			tran.css('background-image', main.css('background-image'));
 			tran.css('display', 'block');
-			main.css('background-image', 'url(' + banners[index] + ')');
+			main.css('background-image', 'url(' + banners[i - 1] + ')');
 			tran.fadeOut();
+
+			i = (i == max) ? 1 : i + 1;
 
 			setTimeout(changeBanner, 10000);
 		};
 
-		function getRandomInt(min, max) {
+		function getRandomInt(min, max)
+		{
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 
 		setTimeout(changeBanner, 10000);
 	</script>
 </head>
-<body>
+<body style="background-image: url(<?php echo $banners[0]; ?>);">
+
 	<nav id="header" class="uk-navbar uk-navbar-attached ">
 		<div class="uk-container uk-container-center">
 
@@ -76,20 +82,22 @@ $banners = \Site\Banner\Banner::getBanners($i+1);
 			</ul>
 		</div>
 	</nav>
-	<section id="banner">
 
-	</section>
+	<div class="banner-cover">
+		<section id="banner" style="background-image: url(<?php echo $banners[0]; ?>);">
+			<div class="banner-cover"></div>
+		</section>
+	</div>
 
 	<section class="banner-inner middle-box">
 		<h1>Simple Platform For Team Blogging</h1>
 		<h2>
-			Share interesting things in you or your friends' life.
+			Share interesting things in you and your friends' life.
 		</h2>
 		<p>
 			<a class="btn start-button" href="<?php echo Router::buildHtml('user:registration') ?>">Start</a>
 		</p>
 	</section>
-
 
 </body>
 </html>

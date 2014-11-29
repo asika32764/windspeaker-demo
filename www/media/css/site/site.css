@@ -207,8 +207,7 @@ body {
   background-attachment: fixed;
 }
 .banner-cover {
-  background-color: #000;
-  opacity: .4;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .banner-inner {
   color: #fff;

@@ -8,11 +8,13 @@
 
 namespace User\Controller\Register;
 
+use Admin\User\UserHelper;
 use Windwalker\Core\Controller\Controller;
 use User\Model\LoginModel;
 use User\Model\RegistrationModel;
 use User\View\Registration\RegistrationHtmlView;
 use Windwalker\Core\Ioc;
+use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 
 /**
@@ -32,6 +34,11 @@ class GetController extends Controller
 	 */
 	public function execute()
 	{
+		if (UserHelper::isLogin())
+		{
+			Ioc::getApplication()->redirect(Router::build('admin:dashboard'));
+		}
+
 		$model = new RegistrationModel;
 
 		$view = new RegistrationHtmlView;

@@ -8,8 +8,10 @@
 
 namespace User\Controller\Login;
 
+use Admin\User\UserHelper;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Language\Language;
+use Windwalker\Core\Router\Router;
 use Windwalker\Core\View\BladeHtmlView;
 use Windwalker\Ioc;
 use Windwalker\Uri\Uri;
@@ -33,6 +35,11 @@ class LoginController extends Controller
 	 */
 	public function execute()
 	{
+		if (UserHelper::isLogin())
+		{
+			Ioc::getApplication()->redirect(Router::build('admin:dashboard'));
+		}
+
 		$model = new LoginModel;
 
 		$user = $this->input->getVar('user');
