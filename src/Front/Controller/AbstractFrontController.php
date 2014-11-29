@@ -63,6 +63,7 @@ abstract class AbstractFrontController extends Controller
 		$this->data['statics'] = $model->getItems();
 		$this->data['blog']->link = 'http://' . $this->data['blog']->alias . '.windspeaker.co';
 		$this->data['blog']->params = new Registry($this->data['blog']->params);
+		$this->data['meta'] = new Data;
 
 		return $this->doExecute();
 	}

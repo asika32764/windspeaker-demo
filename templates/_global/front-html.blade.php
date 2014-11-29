@@ -7,6 +7,13 @@
     <title>@yield('page_title')</title>
 
     <link href="{{{ $uri['media.path'] }}}images/favicon.ico" rel="shortcut icon"/>
+    {{--<meta property="og:image" content="">--}}
+
+    <meta property="og:title" content="@yield('page_title')">
+    <meta property="og:site_name" content="{{{ $blog->title }}}">
+@if ($meta->desc)
+    <meta property="og:description" content="{{{ $meta->desc }}}">
+@endif
 
 @if ($blog['webmaster'])
     <meta name="google-site-verification" content="{{{ $blog['webmaster'] }}}" />

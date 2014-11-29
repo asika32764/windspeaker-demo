@@ -121,7 +121,7 @@ dl dd {
   font-weight: 300;
 }
 #header .uk-navbar-brand {
-  height: auto;
+  height: 70px;
 }
 #header .uk-navbar-brand img {
   max-height: 100%;
@@ -205,6 +205,9 @@ dl dd {
   width: 100%;
   color: #fff;
   text-align: center;
+}
+.home #header .uk-navbar-brand {
+  height: auto;
 }
 .home #header #blog-title {
   display: block;
@@ -408,6 +411,9 @@ dl dd {
 }
 .article-author-profile {
   margin-top: 70px;
+}
+.article-author-profile .profile-link:hover {
+  text-decoration: none;
 }
 #control-tools h4 {
   display: none;

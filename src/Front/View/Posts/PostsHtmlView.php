@@ -13,6 +13,8 @@ use Joomla\Date\Date;
 use Michelf\MarkdownExtra;
 use Windwalker\Core\Router\Router;
 use Windwalker\Core\View\BladeHtmlView;
+use Windwalker\Filter\OutputFilter;
+use Windwalker\String\Utf8String;
 
 /**
  * The PostsHtmlView class.
@@ -47,6 +49,7 @@ class PostsHtmlView extends BladeHtmlView
 			$post->link = Router::buildHtml('front:static_default', ['id' => $post->id, 'alias' => $post->alias]);
 		}
 
+		// Title
 		if ($data->type == 'home')
 		{
 			$title = $data->blog->title;
@@ -63,6 +66,13 @@ class PostsHtmlView extends BladeHtmlView
 		$data->pageTitle =  $title;
 		$data->pageTitle .= $data->page > 1 ? ' - Page ' . $data->page : '';
 		$data->pageTitle .= $suffix ? '|' . $suffix : '';
+
+		// Meta
+		$desc = $data->blog->description;
+		$desc = OutputFilter::cleanText($desc);
+		$desc = Utf8String::substr($desc, 0, 200);
+
+		$data->meta->desc = $desc;
 	}
 }
  

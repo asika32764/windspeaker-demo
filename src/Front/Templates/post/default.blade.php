@@ -31,12 +31,14 @@
         <aside class="article-author-profile">
             <div class="uk-clearfix">
                 <img class="uk-align-medium-left uk-border-circle" src="{{{ $avatar }}}" width="150" height="250" alt="Avatar">
-                <p>{{{ $postAuthor->description }}}</p>
-                @if ($postAuthor->website)
+                <h4>{{{ $postAuthor->name }}}</h4>
                 <p>
-                    <a class="profile-link" href="{{{ $postAuthor->website }}}">More About Me</a>
+                    {{{ $postAuthor->description }}}
+                    @if ($postAuthor->website)
+                      - <a class="profile-link" href="{{{ $postAuthor->website }}}" target="_blank">More</a>
+                    @endif
                 </p>
-                @endif
+
             </div>
         </aside>
 

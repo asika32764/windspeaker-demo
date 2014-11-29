@@ -12,6 +12,8 @@ use Joomla\Date\Date;
 use Michelf\MarkdownExtra;
 use Windwalker\Core\Router\Router;
 use Windwalker\Core\View\BladeHtmlView;
+use Windwalker\Filter\OutputFilter;
+use Windwalker\String\Utf8String;
 
 /**
  * The PostHtmlView class.
@@ -45,5 +47,12 @@ class PostHtmlView extends BladeHtmlView
 		}
 
 		$data->bodyClass = $data['type'] ? : 'post';
+
+		// Meta
+		$text = $data['post']->text;
+		$desc = trim($data['post']->metadesc);
+		$desc = $desc ? : Utf8String::substr(OutputFilter::cleanText($text), 0, 200);
+
+		$data->meta->desc = $desc;
 	}
 }
