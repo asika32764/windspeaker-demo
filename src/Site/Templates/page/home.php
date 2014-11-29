@@ -79,7 +79,7 @@ shuffle($banners);
 					<a href="<?php echo Router::buildHtml('user:registration') ?>">Register</a>
 				</li>
 				<li class="">
-					<a href="mailto:asika32764@gmail.com">Contact</a>
+					<a href="http://windspeaker.uservoice.com/" target="_blank">Contact</a>
 				</li>
 			</ul>
 		</div>

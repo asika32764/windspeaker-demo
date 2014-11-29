@@ -19,6 +19,7 @@ $return = base64_encode($uri['current']);
                      </span> <span class="text-muted text-xs block">{{{ $user->username }}} <b class="caret"></b></span> </span> </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="{{ Router::buildHttp('admin:profile'); }}">Profile</a></li>
+                        <li><a href="http://windspeaker.uservoice.com/" target="_blank">Support</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ Router::buildHttp('user:logout') }}">Logout</a></li>
                     </ul>

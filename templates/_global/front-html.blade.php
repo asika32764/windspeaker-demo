@@ -121,7 +121,7 @@
     <div id="control-tools">
         <h4>Control Tools</h4>
         <a class="dashboard-button" href="http://windspeaker.co" target="_blank">
-            <span class="btn-text">WS</span>
+            <img width="26" src="{{{ $uri['media.path'] }}}images/logo/windspeaker-logo-200.png" alt="WS-logo"/>
         </a>
     </div>
 
@@ -130,7 +130,7 @@
 
     		<div class="footer-logo">
     			<a href="#" data-uk-smooth-scroll>
-    				<img src="http://asukademy.com/media/img/asukademy-logo-hex.png" width="150" alt="Footer LOGO"></a>
+    				<img src="{{{ $uri['media.path'] }}}images/logo/windspeaker-logo-200.png" width="150" alt="Footer LOGO"></a>
     		</div>
 
     		{{--<p class="uk-text-center social-buttons">--}}
