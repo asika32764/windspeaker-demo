@@ -17,6 +17,7 @@ use Windwalker\Crypt\Password;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Ioc;
+use Windwalker\Record\Record;
 
 /**
  * The SaveController class.
@@ -55,7 +56,12 @@ class SaveController extends Controller
 				return false;
 			}
 
-			$user = (new DataMapper('users'))->saveOne($user, 'id');
+			$record = new Record('users');
+
+			$record->load($user->id);
+			$record->bind($user)
+				->check()
+				->store(true);
 		}
 		catch (ValidFailException $e)
 		{
