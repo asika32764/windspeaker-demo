@@ -63,6 +63,11 @@ class PostsModel extends ListModel
 			$query->where(new QueryElement('()', $search, ' OR '));
 		}
 
+		if ($this['list.ordering'])
+		{
+			$query->order($this['list.ordering']);
+		}
+
 		return $query;
 	}
 }

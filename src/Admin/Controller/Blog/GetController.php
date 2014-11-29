@@ -33,6 +33,8 @@ class GetController extends AbstractAdminController
 
 		$blog = $id ? (new DataMapper('blogs'))->findOne($id) : new Data;
 
+		$blog->params = json_decode($blog->params);
+
 		$view = new SettingsHtmlView($this->data);
 
 		$form = new Form('blog');

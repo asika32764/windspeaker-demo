@@ -40,19 +40,19 @@ class LoginController extends Controller
 			Ioc::getApplication()->redirect(Router::build('admin:dashboard'));
 		}
 
-		$model = new LoginModel;
+		$model   = new LoginModel;
+		$session = Ioc::getSession();
 
-		$user = $this->input->getVar('user');
-
-		$result = $model->login($user['username'], $user['password']);
-
-		$package = $this->getPackage();
+		$user     = $this->input->getVar('user');
+		$result   = $model->login($user['username'], $user['password']);
+		$package  = $this->getPackage();
+		$redirect = $session->get('login.redirect.url');
 
 		if ($result)
 		{
-			$url = $package->get('redirect.login');
+			$url = $redirect ? base64_decode($redirect) : $package->get('redirect.login');
 
-			$msg = Language::translate('pkg.user.login.success');
+			$msg = Language::translate('Login Success');
 		}
 		else
 		{
@@ -60,7 +60,7 @@ class LoginController extends Controller
 
 			$url = $router->build($this->package->getRoutingPrefix() . ':login');
 
-			$msg = Language::translate('pkg.user.login.fail');
+			$msg = Language::translate('Login Fail');
 		}
 
 		$uri = new Uri($url);
@@ -69,6 +69,8 @@ class LoginController extends Controller
 		{
 			$url = $this->app->get('uri.base.full') . $url;
 		}
+
+		$session->remove('login.redirect.url');
 
 		$this->setRedirect($url, $msg);
 

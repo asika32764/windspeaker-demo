@@ -44,11 +44,15 @@ Authors & Team
             <td style="width: 5%" class="text-center">
                 @if (!$item->owner && $item->user)
                     @if ($item->admin)
-                    <a class="btn btn-default btn-xs" href="{{{ \Windwalker\Core\Router\Router::build('admin:author', ['id' => $item->id, 'permission' => 'member', '_method' => 'post']) }}}">
+                    <a class="btn btn-default btn-xs"
+                        data-toggle="tooltip" data-placement="top" title="Set to Member"
+                        href="{{{ \Windwalker\Core\Router\Router::build('admin:author', ['id' => $item->id, 'permission' => 'member', '_method' => 'post']) }}}">
                         <span class="fa fa-arrow-down"></span>
                     </a>
                     @else
-                    <a class="btn btn-default btn-xs" href="{{{ \Windwalker\Core\Router\Router::build('admin:author', ['id' => $item->id, 'permission' => 'admin', '_method' => 'post']) }}}">
+                    <a class="btn btn-default btn-xs"
+                        data-toggle="tooltip" data-placement="top" title="Set to Admin"
+                        href="{{{ \Windwalker\Core\Router\Router::build('admin:author', ['id' => $item->id, 'permission' => 'admin', '_method' => 'post']) }}}">
                         <span class="fa fa-arrow-up"></span>
                     </a>
                     @endif

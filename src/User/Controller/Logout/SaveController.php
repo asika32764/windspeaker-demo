@@ -11,6 +11,8 @@ namespace User\Controller\Logout;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use User\Model\LoginModel;
+use Windwalker\Core\Ioc;
+use Windwalker\Core\Router\Router;
 
 /**
  * The SaveController class.
@@ -40,7 +42,11 @@ class SaveController extends Controller
 
 		$model->logout($user->username);
 
-		$this->setRedirect('login', 'Logout success', 'success');
+		// Session
+		$session = Ioc::getSession();
+		$session->remove('current.blog');
+
+		$this->setRedirect(Router::buildHttp('front:home'), 'Logout success', 'success');
 
 		return true;
 	}

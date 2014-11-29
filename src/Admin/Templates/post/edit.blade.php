@@ -464,7 +464,7 @@ jQuery(document).ready(function($)
 
     Fongshen.registerButton($('#button-readmore'), {
         name:'Readmore',
-        openWith:"\n<!-- {READMORE} -->\n",
+        openWith:"\n\<!-- {READMORE} --\>\n",
         closeWith:'',
         className: "readmore"
     });
@@ -504,6 +504,15 @@ jQuery(document).ready(function($)
 
     // Push editor to WindspeakerEdit
     WindspeakerEdit.editor = editor;
+
+    // Keeplive
+    window.keepAlive = function() {
+        request = new XMLHttpRequest();
+        request.open('GET', "{{{ \Windwalker\Core\Router\Router::buildHtml('admin:dashboard') }}}");
+        request.send(null);
+    };
+
+    setInterval( window.keepAlive, 30000);
 });
 
 </script>

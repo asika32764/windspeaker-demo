@@ -54,6 +54,8 @@ class Blog
 
 		$blog = $blogModel->getCurrentBlog($user->id, $blogId);
 
+		$blog->params = json_decode($blog->params);
+
 		$session->set('current.blog', $blog->id);
 
 		return static::$blog = $blog;

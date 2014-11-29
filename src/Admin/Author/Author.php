@@ -157,7 +157,7 @@ class Author
 			return $author->image ? : UserHelper::getGavatar('fake@fake.com', $size);
 		}
 
-		return UserHelper::getAvatar($author->user);
+		return UserHelper::getAvatar($author->user, $size);
 	}
 
 	/**

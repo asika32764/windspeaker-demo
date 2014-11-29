@@ -8,6 +8,7 @@
 
 namespace Front\View\Post;
 
+use Joomla\Date\Date;
 use Michelf\MarkdownExtra;
 use Windwalker\Core\Router\Router;
 use Windwalker\Core\View\BladeHtmlView;
@@ -34,5 +35,15 @@ class PostHtmlView extends BladeHtmlView
 
 		$data['post']['text'] = $markdown->defaultTransform($text);
 		$data['post']['link'] = Router::buildHttp('front:post_default', ['id' => $data['post']['id'], 'alias' => $data['post']['alias']]);
+
+		$data['post']->created = new Date($data['post']->created);
+		$data['post']->created = $data['post']->created->format('F j, Y');
+
+		foreach ($data['statics'] as $post)
+		{
+			$post->link = Router::buildHtml('front:static_default', ['id' => $post->id, 'alias' => $post->alias]);
+		}
+
+		$data->bodyClass = $data['type'] ? : 'post';
 	}
 }

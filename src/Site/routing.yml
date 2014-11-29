@@ -6,8 +6,8 @@ home:
     variables:
         layout: home
 
-page:
-    pattern: '/(layout)'
-    controller: 'Site\Controller\Page'
-    action:
-        '*': GetController
+#page:
+#    pattern: '/(layout)'
+#    controller: 'Site\Controller\Page'
+#    action:
+#        '*': GetController

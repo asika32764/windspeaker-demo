@@ -67,7 +67,7 @@ class AdminPackage extends AbstractPackage
 	{
 		$app = Ioc::getApplication();
 
-		if ($app->get('client') == 'admin')
+		if ($app->get('client') == 'admin' || $app->get('client') == 'site')
 		{
 			return parent::loadRouting();
 		}

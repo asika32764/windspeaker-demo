@@ -127,9 +127,14 @@
 
 						self.changed(false);
 					}
+					else
+					{
+						alert(data.msg);
+					}
 				},
 				error: function(data)
 				{
+					alert(data.responseJSON.msg);
 					console.log(data);
 				}
 			});

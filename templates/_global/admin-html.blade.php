@@ -57,7 +57,11 @@
                         @endforeach
                         <li class="divider"></li>
                     @endif
-                    <li><a href="#">Add New Blog</a></li>
+                    <li>
+                        <a href="{{{ \Windwalker\Core\Router\Router::buildHtml('admin:blog') }}}">
+                            <i class="fa fa-plus"></i> Add New Blog
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -153,16 +157,16 @@
     <script src="{{ $uri['media.path'] }}js/inspinia.js"></script>
     <script src="{{ $uri['media.path'] }}js/plugins/pace/pace.min.js"></script>
 
-    <!-- jQuery UI -->
-    <script src="{{ $uri['media.path'] }}js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    {{--<!-- jQuery UI -->--}}
+    {{--<script src="{{ $uri['media.path'] }}js/plugins/jquery-ui/jquery-ui.min.js"></script>--}}
 
-    <!-- GITTER -->
+    {{--<!-- GITTER -->--}}
     {{--<script src="{{ $uri['media.path'] }}js/plugins/gritter/jquery.gritter.min.js"></script>--}}
 
     <!-- EayPIE -->
     {{--<script src="{{ $uri['media.path'] }}js/plugins/easypiechart/jquery.easypiechart.js"></script>--}}
 
-    <!-- Sparkline -->
+    {{--<!-- Sparkline -->--}}
     {{--<script src="{{ $uri['media.path'] }}js/plugins/sparkline/jquery.sparkline.min.js"></script>--}}
 
     {{--<!-- Sparkline demo data  -->--}}
@@ -177,7 +181,10 @@
 
     <script>
         $(document).ready(function() {
-
+            $('body').tooltip({
+                selector: "[data-toggle=tooltip]",
+                container: "body"
+            })
         });
     </script>
 </body>

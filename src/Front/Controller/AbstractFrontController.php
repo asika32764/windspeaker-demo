@@ -15,6 +15,7 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Ioc;
+use Windwalker\Registry\Registry;
 
 /**
  * The AbstractFrontController class.
@@ -61,6 +62,7 @@ abstract class AbstractFrontController extends Controller
 
 		$this->data['statics'] = $model->getItems();
 		$this->data['blog']->link = 'http://' . $this->data['blog']->alias . '.windspeaker.co';
+		$this->data['blog']->params = new Registry($this->data['blog']->params);
 
 		return $this->doExecute();
 	}

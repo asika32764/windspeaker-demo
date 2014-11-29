@@ -34,9 +34,12 @@ class GetController extends AbstractFrontController
 		$model = new PostModel;
 		$id    = $this->input->get('id');
 		$alias = $this->input->get('alias');
+		$type  = $this->input->get('type');
 
+		$view['type'] = $type;
 		$view['post'] = $post = $model->getItem($id);
 		$view['postAuthor'] = Author::getPostAuthor($post->author);
+		$view['avatar'] = Author::getAvatar($view['postAuthor']->id, 200);
 
 		if ($post->isNull())
 		{

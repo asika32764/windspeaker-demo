@@ -51,12 +51,12 @@ class FrontPackage extends AbstractPackage
 	{
 		$app = Ioc::getApplication();
 
-		if ($app->get('client') == 'front')
+		// if ($app->get('client') == 'front')
 		{
 			return parent::loadRouting();
 		}
 
-		return [];
+		// return [];
 	}
 }
  

@@ -224,6 +224,53 @@ body.mini-navbar .navbar-default ul.nav.edit-menu > li > a {
   text-align: center;
   color: #aaa;
 }
+#preview-container table {
+  background-color: transparent;
+}
+#preview-container caption {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #777;
+  text-align: left;
+}
+#preview-container th {
+  text-align: left;
+}
+#preview-container table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+#preview-container table > thead > tr > th,
+#preview-container table > tbody > tr > th,
+#preview-container table > tfoot > tr > th,
+#preview-container table > thead > tr > td,
+#preview-container table > tbody > tr > td,
+#preview-container table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+#preview-container table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+#preview-container table {
+  border: 1px solid #ddd;
+}
+#preview-container table > thead > tr > th,
+#preview-container table > tbody > tr > th,
+#preview-container table > tfoot > tr > th,
+#preview-container table > thead > tr > td,
+#preview-container table > tbody > tr > td,
+#preview-container table > tfoot > tr > td {
+  border: 1px solid #ddd;
+}
+#preview-container table > thead > tr > th,
+#preview-container table > thead > tr > td {
+  border-bottom-width: 2px;
+}
 .autocomplete-suggestion {
   background-color: white;
   border-bottom: 1px solid #eee;

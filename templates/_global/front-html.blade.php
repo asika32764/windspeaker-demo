@@ -2,16 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+
     <title>@yield('page_title')</title>
+
+    <link href="{{{ $uri['media.path'] }}}images/favicon.ico" rel="shortcut icon"/>
 
 @if ($blog['webmaster'])
     <meta name="google-site-verification" content="{{{ $blog['webmaster'] }}}" />
 @endif
+    <link href="{{{ \Windwalker\Core\Router\Router::buildHtml('front:feed') }}}" rel="alternate" title="{{{ $blog->title }}}" type="application/rss+xml">
 
-    <link rel="stylesheet" href="{{{ $uri['media.path'] . 'css/uikit.min.css' }}}"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/2.12.0/css/uikit.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/rainbow.min.css"/>
     <link rel="stylesheet" href="{{{ $uri['media.path'] . 'css/front/default.css' }}}"/>
 
-    <script src="{{{ $uri['media.path'] . 'js/uikit.min.js' }}}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/uikit/2.12.0/js/uikit.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 
 @if ($blog['disqus'])
     <script>
@@ -25,6 +33,18 @@
     </script>
 @endif
 
+@if ($blog->params['css'])
+<style>
+{{ \Windwalker\Filter\OutputFilter::stripScript($blog->params['css']) }}
+</style>
+@endif
+    <script>
+    $(document).ready(function() {
+        $('.article-content pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+    </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -39,25 +59,27 @@
 
     </script>
 </head>
-<body>
+<body class="{{{ $bodyClass }}} @yield('body_class')">
+    @section('banner')
     {{-- NAV --}}
     <nav id="header" class="uk-navbar uk-navbar-attached ">
     	<div class="uk-container uk-container-center">
 
     		<h1 id="blog-title">
-    		    <a id="big-logo" class="uk-navbar-brand uk-hidden-small" href="{{{ $blog->link }}}">
+    		    <a id="big-logo" class="uk-navbar-brand" href="{{{ $blog->link }}}">
                     {{{ $blog->title }}}
                 </a>
-                <small class="ul-text-mute">
-                {{{ $blog->sub_title }}}
-                </small>
     		</h1>
 
-    		<a href="#" class="uk-navbar-toggle uk-visible-small" data-uk-toggle="{target:'#mainmenu', cls: 'uk-hidden-small'}"></a>
+    		@if ($blog->sub_title)
+    		<div id="blog-sub-title">
+                <small>
+                {{{ $blog->sub_title }}}
+                </small>
+    		</div>
+    		@endif
 
-    		<a id="small-logo" class="uk-navbar-brand uk-navbar-center uk-visible-small" href="{{{ $blog->link }}}">
-    			{{{ $blog->title }}}
-    	    </a>
+    		<a href="#" class="mobile-button uk-navbar-toggle uk-visible-small" data-uk-toggle="{target:'#mainmenu', cls: 'uk-hidden-small'}"></a>
 
     		<ul id="mainmenu" class="uk-navbar-nav uk-float-right uk-hidden-small">
     			@foreach($statics as $k => $static)
@@ -68,6 +90,13 @@
     		</ul>
     	</div>
     </nav>
+
+    <section id="banner">
+        <div class="banner-inner">
+
+        </div>
+    </section>
+    @show
 
     {{-- BODY --}}
     <div id="main-body" class="basic-layout">
@@ -80,6 +109,13 @@
     			</div>
     		</div>
     	</section>
+    </div>
+
+    <div id="control-tools">
+        <h4>Control Tools</h4>
+        <a class="dashboard-button" href="http://windspeaker.co" target="_blank">
+            <span class="btn-text">WS</span>
+        </a>
     </div>
 
     <footer id="footer">

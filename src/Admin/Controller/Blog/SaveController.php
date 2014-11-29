@@ -14,6 +14,7 @@ use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Router\Router;
 use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
+use Windwalker\Filter\InputFilter;
 use Windwalker\Filter\OutputFilter;
 use Windwalker\Form\Form;
 use Windwalker\Ioc;
@@ -50,13 +51,19 @@ class SaveController extends Controller
 		$user = User::get($this->input->get('user_id'));
 
 		$blog = $this->input->getVar('blog');
-
 		$blog = new Data($blog);
+
+		$blog->params = $this->input->getByPath('blog.params', array(), null);
 
 		$isNew = !$blog->id;
 
 		$blog->state = 1;
 		$blog->alias = OutputFilter::stringURLSafe($blog->alias);
+
+		if ($isNew)
+		{
+			$blog->params['css'] = $this->getDefaultCss();
+		}
 
 		if (!$this->validate($blog))
 		{
@@ -67,6 +74,8 @@ class SaveController extends Controller
 
 		try
 		{
+			$blog->params = json_encode($blog->params);
+
 			$this->blog = (new DataMapper('blogs'))->saveOne($blog, 'id');
 
 			if ($isNew)
@@ -166,6 +175,29 @@ class SaveController extends Controller
 	public function getAuthor()
 	{
 		return $this->author;
+	}
+
+	/**
+	 * getDefaultCss
+	 *
+	 * @return  string
+	 */
+	protected function getDefaultCss()
+	{
+		return <<<CSS
+/* Homepage banner */
+.home #banner {
+    background-image: url(http://windspeaker.s3.amazonaws.com/banners/city.jpg);
+}
+
+/* Post page banner */
+.post #banner,
+.static #banner {
+    background-image: url(http://windspeaker.s3.amazonaws.com/banners/city.jpg);
+    background-position: center -490px;
+}
+
+CSS;
 	}
 }
  

@@ -27,10 +27,18 @@ abstract class UserHelper
 	 */
 	public static function checkLogin()
 	{
-		if (User::get()->isNull())
+		if (User::get()->notNull())
 		{
-			Ioc::getApplication()->redirect(Router::buildHttp('user:login'));
+			return true;
 		}
+
+		$session = Ioc::getSession();
+		$current = Ioc::getConfig()->get('uri.current');
+		$current = base64_encode($current);
+
+		$session->set('login.redirect.url', $current);
+
+		Ioc::getApplication()->redirect(Router::buildHttp('user:login'));
 
 		return true;
 	}

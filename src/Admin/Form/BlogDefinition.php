@@ -54,6 +54,7 @@ class BlogDefinition implements FieldDefinitionInterface
 		$form->addField(new TimezoneField('timezone', 'Timezone'), 'other')
 			->set('class', 'form-control')
 			->set('labelClass', 'col-sm-3 control-label')
+			->set('default', 'UTC')
 			->required();
 
 		$form->addField(new TextField('disqus', 'Disqus Shortname'), 'other')
@@ -65,6 +66,10 @@ class BlogDefinition implements FieldDefinitionInterface
 			->set('labelClass', 'col-sm-3 control-label');
 
 		$form->addField(new TextField('analytics', 'Analytics'), 'other')
+			->set('class', 'form-control')
+			->set('labelClass', 'col-sm-3 control-label');
+
+		$form->addField(new TextareaField('css', 'Custom CSS'), 'style', 'params')
 			->set('class', 'form-control')
 			->set('labelClass', 'col-sm-3 control-label');
 	}

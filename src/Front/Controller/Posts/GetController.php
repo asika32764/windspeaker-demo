@@ -11,6 +11,7 @@ namespace Front\Controller\Posts;
 use Admin\Author\Author;
 use Front\Controller\AbstractFrontController;
 use Front\Model\PostsModel;
+use Front\View\Posts\PostsFeedView;
 use Front\View\Posts\PostsHtmlView;
 use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
@@ -34,14 +35,28 @@ class GetController extends AbstractFrontController
 	 */
 	public function doExecute()
 	{
+		$format = $this->input->get('format', 'html');
+
 		$model = new PostsModel;
-		$view  = new PostsHtmlView($this->data);
+
+		if ($format == 'feed')
+		{
+			$this->app->response->setMimeType('application/rss+xml');
+			$view  = new PostsFeedView($this->data);
+			$limit = 50;
+		}
+		else
+		{
+			$view  = new PostsHtmlView($this->data);
+			$limit = 10;
+		}
 
 		$model['blog.id']        = $view['blog']->id;
 		$model['blog.published'] = $view['user']->isNull();
 		$model['list.page']      = $page = $this->input->getInt('page', 1);
-		$model['list.limit']     = 10;
+		$model['list.limit']     = $limit;
 		$model['list.start']     = ($model['list.page'] - 1) * $model['list.limit'];
+		$model['list.ordering']  = 'id desc';
 
 		$view['posts']      = $model->getItems();
 		$view['pagination'] = $model->getPagination()->build();

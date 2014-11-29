@@ -145,6 +145,8 @@ class SaveController extends AbstractAdminController
 	 */
 	protected function saveAuthor($data)
 	{
+		$authorMapper = new DataMapper('authors');
+
 		if (!$data->name)
 		{
 			throw new ValidFailException('Name should not be empty.');
@@ -156,17 +158,22 @@ class SaveController extends AbstractAdminController
 		}
 
 		$isNew = !$data->id;
+		$author = new Data;
 
 		if ($isNew)
 		{
 			$data->uuid = $data->uuid ? : Uuid::v4();
 		}
+		else
+		{
+			$author = $authorMapper->findOne($data->id);
 
-		$data->blog = Blog::get()->id;
+			$author->bind($data);
+		}
 
-		$authorMapper = new DataMapper('authors');
+		$author->blog = Blog::get()->id;
 
-		$authorMapper->saveOne($data, 'id');
+		$authorMapper->saveOne($author, 'id');
 
 		$this->setRedirect(Router::buildHttp('admin:authors'), 'Save success', 'success');
 

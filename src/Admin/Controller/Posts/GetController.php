@@ -38,6 +38,7 @@ class GetController extends AbstractAdminController
 		$model['list.limit']  = 10;
 		$model['list.start']  = ($model['list.page'] - 1) * $model['list.limit'];
 		$model['list.search'] = $this->input->getString('q');
+		$model['list.ordering'] = 'post.id desc';
 
 		$view->set('items', $model->getItems());
 		$view->set('pagination', $model->getPagination()->build());

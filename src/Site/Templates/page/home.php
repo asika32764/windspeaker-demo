@@ -19,6 +19,8 @@ shuffle($banners);
 
 	<title>WindSpeaker - A Markdown Blog For Your Team</title>
 
+	<link href="<?php echo $data->uri['media.path'] ?>images/favicon.ico" rel="shortcut icon"/>
+
 	<link rel="stylesheet" href="<?php echo $data->uri['media.path'] ?>css/uikit.min.css" />
 	<link rel="stylesheet" href="<?php echo $data->uri['media.path'] ?>css/site/site.css" />
 
@@ -52,13 +54,13 @@ shuffle($banners);
 		setTimeout(changeBanner, 10000);
 	</script>
 </head>
-<body style="background-image: url(<?php echo $banners[0]; ?>);">
+<body style="background-image: url(<?php echo $banners[$num - 1]; ?>);">
 
 	<nav id="header" class="uk-navbar uk-navbar-attached ">
 		<div class="uk-container uk-container-center">
 
 			<h1 id="blog-title">
-				<a id="big-logo" class="uk-navbar-brand uk-hidden-small" href="<?php echo Router::buildHtml('site:home') ?>">
+				<a id="big-logo" class="uk-navbar-brand" href="<?php echo Router::buildHtml('site:home') ?>">
 					WindSpeaker
 				</a>
 			</h1>
@@ -84,7 +86,7 @@ shuffle($banners);
 	</nav>
 
 	<div class="banner-cover">
-		<section id="banner" style="background-image: url(<?php echo $banners[0]; ?>);">
+		<section id="banner" style="background-image: url(<?php echo $banners[$num - 1]; ?>);">
 			<div class="banner-cover"></div>
 		</section>
 	</div>

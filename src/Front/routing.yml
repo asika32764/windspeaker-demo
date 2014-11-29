@@ -18,8 +18,14 @@ post_default:
 
 static_default:
     pattern: static/(id)-(alias)
-    controller: 'Front\Controller\Static'
+    controller: 'Front\Controller\Post'
     variables:
         type: static
     requirements:
             id: \d+
+
+feed:
+    pattern: feed
+    controller: 'Front\Controller\Posts'
+    variables:
+        format: feed

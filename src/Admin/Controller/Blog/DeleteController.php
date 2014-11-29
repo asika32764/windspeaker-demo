@@ -33,6 +33,9 @@ class DeleteController extends Controller
 		$id = $this->input->get('id');
 
 		$blogMapper = new DataMapper('blogs');
+		$authorMapper = new DataMapper('authors');
+		$catMapper = new DataMapper('categories');
+		$postMapper = new DataMapper('posts');
 
 		try
 		{
@@ -41,7 +44,7 @@ class DeleteController extends Controller
 				throw new \Exception('Delete fail');
 			}
 
-			$author = (new DataMapper('authors'))->findOne(['blog' => $id, 'user' => User::get()->id]);
+			$author = $authorMapper->findOne(['blog' => $id, 'user' => User::get()->id]);
 
 			if (!$author->owner)
 			{
@@ -49,6 +52,9 @@ class DeleteController extends Controller
 			}
 
 			$blogMapper->delete(['id' => $id]);
+			$authorMapper->delete(['blog' => $id]);
+			$catMapper->delete(['blog' => $id]);
+			$postMapper->delete(['blog' => $id]);
 		}
 		catch (ValidFailException $e)
 		{

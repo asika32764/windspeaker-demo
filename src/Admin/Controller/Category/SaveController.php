@@ -16,6 +16,7 @@ use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Filter\OutputFilter;
 use Windwalker\Ioc;
+use Windwalker\Record\Record;
 
 /**
  * The SaveController class.
@@ -57,7 +58,18 @@ class SaveController extends AbstractAdminController
 
 		try
 		{
-			(new DataMapper('categories'))->saveOne($data);
+			$category = new Record('categories');
+
+			if ($data['id'])
+			{
+				$category->load($data['id']);
+			}
+
+			$category->bind($data);
+
+			$category->check();
+
+			$category->store(true);
 		}
 		catch (\Exception $e)
 		{

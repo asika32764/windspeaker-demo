@@ -10,6 +10,7 @@ namespace User\Controller\Register;
 
 use Admin\Model\BlogModel;
 use Joomla\Date\Date;
+use Windwalker\Core\Authenticate\User;
 use Windwalker\Core\Controller\Controller;
 use Windwalker\Core\Model\Exception\ValidFailException;
 use Windwalker\Core\Router\Router;
@@ -82,7 +83,10 @@ class SaveController extends Controller
 
 		$trans->commit();
 
-		$session['register.form.data'] = null;
+		$session->remove('register.form.data');
+
+		// OK let's login
+		User::makeUserLogin($user->id);
 
 		$this->setRedirect(Router::buildHttp('user:login'), 'Register success.', 'success');
 
@@ -94,11 +98,27 @@ class SaveController extends Controller
 	 *
 	 * @param Data $user
 	 *
+	 * @throws  ValidFailException
 	 * @return  Data
 	 */
 	protected function createUser(Data $user)
 	{
 		$model   = new RegistrationModel;
+
+		// Check exists
+		$oldUser = (new DataMapper('users'))->findOne(['username' => $user->username]);
+
+		if ($oldUser->notNull())
+		{
+			throw new ValidFailException('Username has exists.');
+		}
+
+		$oldUser = (new DataMapper('users'))->findOne(['email' => $user->email]);
+
+		if ($oldUser->notNull())
+		{
+			throw new ValidFailException('Email has been used.');
+		}
 
 		$user->fullname      = $user->username;
 		$user->register_date = (new Date)->format('Y-m-d H:i:s', true);
@@ -132,7 +152,14 @@ class SaveController extends Controller
 
 		$blogCtrl = new \Admin\Controller\Blog\SaveController($this->input, $this->app);
 
-		$blogCtrl->execute();
+		try
+		{
+			$blogCtrl->execute();
+		}
+		catch (\OutOfRangeException $e)
+		{
+			// Nothing have to do...
+		}
 
 		return $blogCtrl;
 	}
@@ -245,6 +272,29 @@ class SaveController extends Controller
 		}
 
 		return $alias;
+	}
+
+	/**
+	 * getDefaultCss
+	 *
+	 * @return  string
+	 */
+	protected function getDefaultCss()
+	{
+		return <<<CSS
+/* Homepage banner */
+.home #banner {
+    background-image: url(http://windspeaker.s3.amazonaws.com/banners/city.jpg);
+}
+
+/* Post page banner */
+.post #banner,
+.static #banner {
+    background-image: url(http://windspeaker.s3.amazonaws.com/banners/city.jpg);
+    background-position: center -490px;
+}
+
+CSS;
 	}
 }
  

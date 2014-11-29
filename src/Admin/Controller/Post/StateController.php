@@ -56,7 +56,9 @@ class StateController extends Controller
 				throw new ValidFailException('You cannot update post of other blog.');
 			}
 
-			$postMapper->updateOne(['state' => $this->input->get('state', 1), 'id' => $id]);
+			$post['state'] = $this->input->get('state', 1);
+
+			$postMapper->updateOne($post);
 		}
 		catch (ValidFailException $e)
 		{

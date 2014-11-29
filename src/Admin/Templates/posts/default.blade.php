@@ -19,45 +19,11 @@ $route = 'admin:' . $type;
 @stop
 
 @section('main_content')
-<script>
-    var addPost = function(btn)
-    {
-        var form = $('#post-form');
-
-        var title = $('#post-title-input');
-
-        if (!title.val().trim())
-        {
-            return;
-        }
-
-        var data = {post: {}};
-
-        data.post.title = title.val();
-
-        $.ajax({
-            url: '{{{ \Windwalker\Core\Router\Router::buildHttp($route) }}}',
-            data: data,
-            type: "POST",
-            success: function (data)
-            {
-                if (data.success)
-                {
-                    window.location = '{{{ \Windwalker\Core\Router\Router::buildHttp($route) }}}/' + data.item.id;
-                }
-            },
-            error: function(data)
-            {
-                console.log(data);
-            }
-        });
-    };
-</script>
-
 <form action="{{{ $uri['current'] }}}" method="post" id="adminForm">
 
     <table class="table table-striped">
         <tbody>
+        @if (count($items))
             @foreach ($items as $k => $item)
             <tr>
                 {{--<td>--}}
@@ -117,6 +83,17 @@ $route = 'admin:' . $type;
                 </td>
             </tr>
             @endforeach
+        @else
+            <div class="text-center animated fadeInRightBig" style="margin-top: 150px; margin-bottom: 150px;">
+                <h3 class="font-bold">You don't have any article</h3>
+
+                <div class="error-desc">
+                    Click here to create one.
+                    <br>
+                    <a href="#" class="btn btn-primary m-t" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus"></i> Add New Article</a>
+                </div>
+            </div>
+        @endif
         </tbody>
     </table>
 
@@ -142,4 +119,52 @@ $route = 'admin:' . $type;
         </div>
     </div>
 </form>
+@stop
+
+@section('script')
+<script>
+var addPost = function(btn)
+{
+    var form = $('#post-form');
+
+    var title = $('#post-title-input');
+
+    if (!title.val().trim())
+    {
+        return;
+    }
+
+    var data = {post: {}};
+
+    data.post.title = title.val();
+
+    $.ajax({
+        url: '{{{ \Windwalker\Core\Router\Router::buildHttp($route) }}}',
+        data: data,
+        type: "POST",
+        success: function (data)
+        {
+            if (data.success)
+            {
+                window.location = '{{{ \Windwalker\Core\Router\Router::buildHttp($route) }}}/' + data.item.id;
+            }
+        },
+        error: function(data)
+        {
+            console.log(data);
+        }
+    });
+};
+
+$(document).ready(function($)
+{
+    $('#post-title-input').on('keydown', function(e)
+    {
+        if (e.which == 13)
+        {
+            addPost();
+        }
+    });
+});
+</script>
 @stop

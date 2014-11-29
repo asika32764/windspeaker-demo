@@ -17,6 +17,7 @@ use Windwalker\Data\Data;
 use Windwalker\DataMapper\DataMapper;
 use Windwalker\Filter\OutputFilter;
 use Windwalker\Form\Form;
+use Windwalker\String\String;
 
 /**
  * The PostModel class.
@@ -69,6 +70,16 @@ class PostModel extends DatabaseModel
 		}
 
 		$mapper = new DataMapper('posts');
+
+		// Increment alias
+		$conditions = ['alias' => $data->alias, 'blog' => $data->blog];
+
+		$conditions[] = 'id != ' . $data->id;
+
+		while ($mapper->findOne($conditions)->notNull())
+		{
+			$conditions['alias'] = $data->alias = String::increment($data->alias, String::INCREMENT_STYLE_DASH);
+		}
 
 		$data = $mapper->saveOne($data);
 

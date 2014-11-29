@@ -21,6 +21,7 @@
 		"kilte/pagination": "1.1.1@stable",
 		"tpyo/amazon-s3-php-class" : "*",
 		"joomla/image" : "~1.0@stable",
+		"suin/php-rss-writer": "1.*@stable",
 
 		"illuminate/view" : "4.*@stable"
 	},
