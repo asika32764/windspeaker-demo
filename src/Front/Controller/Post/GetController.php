@@ -33,7 +33,7 @@ class GetController extends AbstractFrontController
 		$view  = new PostHtmlView($this->data);
 		$model = new PostModel;
 		$id    = $this->input->get('id');
-		$alias = $this->input->get('alias');
+		$alias = $this->input->getString('alias');
 		$type  = $this->input->get('type');
 
 		$view['type'] = $type;
@@ -51,7 +51,7 @@ class GetController extends AbstractFrontController
 			throw new \Exception('Post not found', 404);
 		}
 
-		if ($alias != $view['post']->alias)
+		if (urldecode($alias) != $view['post']->alias)
 		{
 			$get = $this->input->get;
 
