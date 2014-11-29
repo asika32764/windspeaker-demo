@@ -56,7 +56,12 @@ class UserHandler implements UserHandlerInterface
 	{
 		if ($data->id)
 		{
-			$this->getDataMapper()->updateOne($data);
+			$mapper = $this->getDataMapper();
+			$user = $mapper->findOne($data->id);
+
+			$user->bind($data);
+
+			$mapper->updateOne($data);
 		}
 		else
 		{

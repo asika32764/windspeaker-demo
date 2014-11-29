@@ -59,8 +59,8 @@ class SaveController extends Controller
 			$record = new Record('users');
 
 			$record->load($user->id);
-			$record->bind($user)
-				->check()
+			$record->bind($user);
+			$record->check()
 				->store(true);
 		}
 		catch (ValidFailException $e)
@@ -130,6 +130,10 @@ class SaveController extends Controller
 			$password = new Password;
 
 			$data->password = $password->create($data->password);
+		}
+		else
+		{
+			unset($data->password);
 		}
 
 		return true;
