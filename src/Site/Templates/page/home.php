@@ -79,6 +79,9 @@ shuffle($banners);
 					<a href="<?php echo Router::buildHtml('user:registration') ?>">Register</a>
 				</li>
 				<li class="">
+					<a href="http://demo.windspeaker.co" target="_blank">Demo</a>
+				</li>
+				<li class="">
 					<a href="http://windspeaker.uservoice.com/" target="_blank">Contact</a>
 				</li>
 			</ul>
