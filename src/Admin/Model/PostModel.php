@@ -74,7 +74,7 @@ class PostModel extends DatabaseModel
 		// Increment alias
 		$conditions = ['alias' => $data->alias, 'blog' => $data->blog];
 
-		$conditions[] = 'id != ' . $data->id;
+		$conditions[] = 'id != ' . ($data->id ? : -1);
 
 		while ($mapper->findOne($conditions)->notNull())
 		{
