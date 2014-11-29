@@ -34,6 +34,8 @@ class StateController extends Controller
 		$id = $this->input->get('id');
 		$user = User::get();
 		$blog = Blog::get();
+		$type = $this->input->get('type');
+		$route = ($type == 'static') ? 'statics' : 'posts';
 
 		try
 		{
@@ -53,7 +55,7 @@ class StateController extends Controller
 
 			if ($post->blog != $blog->id)
 			{
-				throw new ValidFailException('You cannot update post of other blog.');
+				throw new ValidFailException('You cannot change post of other blog.');
 			}
 
 			$post['state'] = $this->input->get('state', 1);
@@ -62,7 +64,7 @@ class StateController extends Controller
 		}
 		catch (ValidFailException $e)
 		{
-			$this->setRedirect(Router::buildHttp('admin:posts'), $e->getMessage(), 'danger');
+			$this->setRedirect(Router::buildHttp('admin:' . $route), $e->getMessage(), 'danger');
 
 			return false;
 		}
@@ -73,12 +75,12 @@ class StateController extends Controller
 				throw $e;
 			}
 
-			$this->setRedirect(Router::buildHttp('admin:posts'), 'Delete fail', 'danger');
+			$this->setRedirect(Router::buildHttp('admin:' . $route), 'Fail', 'danger');
 
 			return false;
 		}
 
-		$this->setRedirect(Router::buildHttp('admin:posts'), 'Delete success', 'success');
+		$this->setRedirect(Router::buildHttp('admin:' . $route), 'Success', 'success');
 
 		return true;
 	}

@@ -415,6 +415,9 @@ dl dd {
 .article-author-profile .profile-link:hover {
   text-decoration: none;
 }
+.article-author-profile h4 {
+  margin-top: 10px;
+}
 #control-tools h4 {
   display: none;
 }

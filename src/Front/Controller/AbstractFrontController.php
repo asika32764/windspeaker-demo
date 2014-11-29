@@ -59,6 +59,7 @@ abstract class AbstractFrontController extends Controller
 		$model['list.limit']     = null;
 		$model['blog.published'] = true;
 		$model['post.type']      = 'static';
+		$model['post.ordering']  = 'id asc';
 
 		$this->data['statics'] = $model->getItems();
 		$this->data['blog']->link = 'http://' . $this->data['blog']->alias . '.windspeaker.co';

@@ -11,6 +11,8 @@ namespace Admin\Controller\Posts;
 use Admin\Controller\AbstractAdminController;
 use Admin\Model\PostsModel;
 use Admin\View\Posts\PostsHtmlView;
+use Windwalker\Core\Router\Router;
+use Windwalker\Ioc;
 
 /**
  * The GetController class.
@@ -28,8 +30,17 @@ class GetController extends AbstractAdminController
 	{
 		$type = $this->input->get('type', 'post');
 
-		$view = new PostsHtmlView($this->data);
+		$session = Ioc::getSession();
+		$currentPage = $session->get($type . '.current.page', 1);
 
+		if ($currentPage != 1 && !$this->input->getInt('page'))
+		{
+			$this->setRedirect(Router::buildHttp('admin:' . $type . 's', ['page' => $currentPage]));
+
+			return true;
+		}
+
+		$view  = new PostsHtmlView($this->data);
 		$model = new PostsModel;
 
 		$model['blog.id']     = $this->data['blog']->id;
@@ -43,6 +54,8 @@ class GetController extends AbstractAdminController
 		$view->set('items', $model->getItems());
 		$view->set('pagination', $model->getPagination()->build());
 		$view->set('type', $type);
+
+		$session->set($type . '.current.page', $page);
 
 		return $view->render();
 	}
