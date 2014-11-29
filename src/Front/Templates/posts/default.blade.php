@@ -28,7 +28,7 @@
         <div class="article-footer">
             @if ($blog['disqus'])
                 <div class="post-comment uk-float-right">
-                    <a href="{{{ $post->link }}}#disqus_thread">0 Comments</a>
+                    <a href="{{{ $uri['base.host'] . $post->link }}}#disqus_thread">0 Comments</a>
                 </div>
             @endif
 
