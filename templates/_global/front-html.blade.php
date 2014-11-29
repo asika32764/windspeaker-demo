@@ -7,8 +7,10 @@
     <title>@yield('page_title')</title>
 
     <link href="{{{ $uri['media.path'] }}}images/favicon.ico" rel="shortcut icon"/>
-    {{--<meta property="og:image" content="">--}}
 
+@if ($type == 'home')
+    <meta property="og:image" content="http://windspeaker.s3.amazonaws.com/logo/WindSpeaker-logo-sq-big.png">
+@endif
     <meta property="og:title" content="@yield('page_title')">
     <meta property="og:site_name" content="{{{ $blog->title }}}">
 @if ($meta->desc)
