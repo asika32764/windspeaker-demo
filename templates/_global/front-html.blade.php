@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+    <meta name="generator" content="The Time Machine">
+@if ($meta->desc)
+    <meta name="description" content="{{{ $meta->desc }}}">
+@endif
 
     <title>@yield('page_title')</title>
 
