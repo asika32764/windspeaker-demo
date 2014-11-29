@@ -1,12 +1,12 @@
 <?php
 /**
- * Part of starter project. 
+ * Part of starter project.
  *
  * @copyright  Copyright (C) 2014 {ORGANIZATION}. All rights reserved.
  * @license    GNU General Public License version 2 or later;
  */
 
-namespace Windwalker\User\User;
+namespace User\User;
 
 use Windwalker\Core\Authenticate\UserHandlerInterface;
 use Windwalker\Data\Data;
@@ -14,7 +14,7 @@ use Windwalker\DataMapper\DataMapper;
 
 /**
  * The UserHandler class.
- * 
+ *
  * @since  {DEPLOY_VERSION}
  */
 class UserHandler implements UserHandlerInterface
@@ -56,7 +56,12 @@ class UserHandler implements UserHandlerInterface
 	{
 		if ($data->id)
 		{
-			$this->getDataMapper()->updateOne($data);
+			$mapper = $this->getDataMapper();
+			$user = $mapper->findOne($data->id);
+
+			$user->bind($data);
+
+			$mapper->updateOne($data);
 		}
 		else
 		{
