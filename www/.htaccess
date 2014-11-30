@@ -36,10 +36,6 @@ Options +FollowSymLinks
     # If you need to redirect some pages, or set a canonical non-www to
     # www redirect (or vice versa), place that code here. Ensure those
     # redirects use the correct RewriteRule syntax and the [R=301,L] flags.
-    
-RewriteCond %{HTTP_HOST} ^landing.windspeaker.co [NC]
-
-RewriteRule ^(.*)$ http://windspeaker.co/$1 [L,R=301]
 
     ## End - Custom redirects
 
