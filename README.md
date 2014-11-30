@@ -1,5 +1,42 @@
 # WindSpeaker
 
+## Create Project
+
+Clone project file
+
+``` bash
+$ git clone {PROJECT URL}
+$ cd {PROJECT}
+$ composer update
+```
+
+Add SQL account
+
+```
+cp etc/config.dist.yml etc/config.yml
+vim config.yml
+```
+
+Import SQL
+
+```
+php bin/console migration status
+php bin/console migration migrate
+```
+
+Import test data
+
+```
+php bin/console seed import
+```
+
+Clean test data
+
+```
+php bin/console seed clean
+```
+
+
 ## Apache Setting
 
 ### In Server
