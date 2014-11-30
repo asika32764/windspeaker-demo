@@ -2,7 +2,7 @@
 
 ## Apache Setting
 
-In Server
+### In Server
 
 ```
 <VirtualHost *:80>
@@ -12,7 +12,9 @@ ServerAlias *.windspeaker.co
 </VirtualHost>
 ```
 
-In localhsot
+### In localhsot
+
+We need a `localhost` VirtualHost to keep localhost still work, otherwise the windspeaker VirtalHost will override localhost.
 
 ``` http
 <VirtualHost *:80>
@@ -29,6 +31,8 @@ ServerName localhost
 ```
 
 ## Hosts Setting
+
+`hosts` file dose not support wildcards (`*`), so we create a record per account.
 
 ```
 127.0.0.1 windspeaker.co asika.windspeaker.co simon.windspeaker.co
